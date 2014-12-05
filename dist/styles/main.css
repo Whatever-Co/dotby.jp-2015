@@ -1,0 +1,47 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  color: #333333;
+  font: normal 400 17px/30px "Noto Sans Japanese", serif;
+  letter-spacing: 0.04em; }
+
+iframe {
+  border: none; }
+
+#container {
+  width: 960px;
+  margin: 60px auto; }
+
+#logo {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px; }
+  #logo img {
+    display: block;
+    margin: 0 auto; }
+
+.entry a {
+  padding: 5px 3px;
+  color: #333333;
+  text-decoration: none;
+  border-bottom: 1px solid #333333; }
+  .entry a:hover, .entry a:visited, .entry a:link, .entry a:active {
+    color: #333333; }
+.entry .line {
+  margin: 30px 0; }
+.entry h1.title {
+  margin: 30px auto 0;
+  font-weight: 400;
+  font-size: 22px;
+  text-align: center; }
+.entry .date {
+  display: block;
+  font-size: 15px;
+  text-align: center; }
+.entry .body {
+  width: 768px;
+  margin: 30px auto 0;
+  font-weight: 300; }
