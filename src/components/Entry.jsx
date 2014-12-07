@@ -49,7 +49,7 @@ module.exports = React.createClass({
                         <div className="border"/>
                     </div>
                     <div className="inner" ref="inner">
-                        <h1 className="title" dangerouslySetInnerHTML={{__html: entry.job_title}}/>
+                        <h1 className="title" dangerouslySetInnerHTML={{__html: entry.title}}/>
                         <span className="date">{`${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`}</span>
                         <div className="body" ref="body" dangerouslySetInnerHTML={{__html: entry.content}}></div>
                     </div>
@@ -59,7 +59,7 @@ module.exports = React.createClass({
             return (
                 <div className="entry" ref="entry" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
                     <div className="inner" ref="inner">
-                        <h1 className="title" dangerouslySetInnerHTML={{__html: entry.job_title}}/>
+                        <h1 className="title" dangerouslySetInnerHTML={{__html: entry.title}}/>
                         <span className="date">{`${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`}</span>
                         <div className="body" ref="body" dangerouslySetInnerHTML={{__html: entry.content}}></div>
                     </div>
