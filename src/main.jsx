@@ -184,6 +184,10 @@ var routes = (
     <Route path="/" handler={Application}>
         <DefaultRoute handler={EntryList}/>
         <Route path="/about" handler={Page}/>
+        <Route path="/members" handler={Page}/>
+        <Route path="/category/works" handler={EntryList}/>
+        <Route path="/category/news" handler={EntryList}/>
+        <Route path="/awards" handler={Page}/>
         <NotFoundRoute handler={NotFound}/>
     </Route>
 );
@@ -192,12 +196,18 @@ var routes = (
 Router.run(routes, Router.HistoryLocation, (Handler, state) => {
     console.log(state);
     var apiPath = 'posts';
-    var data = {lang: 'ja'};
+    var data = {};
     switch (state.path) {
         case '/about':
+        case '/members':
+        case '/awards':
             apiPath = 'pages';
-            data['filter[name]'] = 'about';
-            break
+            data['filter[name]'] = state.path.substr(1);
+            break;
+        case '/category/works':
+        case '/category/news':
+            data['filter[category_name]'] = state.path.substr(10);
+            break;
     }
     $.getJSON(`http://dotby.jp/wp-json/${apiPath}`, data).done((result) => {
         console.log(result);
