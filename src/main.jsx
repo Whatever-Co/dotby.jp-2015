@@ -137,7 +137,7 @@ var Page = React.createClass({
         return {data: []};
     },
     render() {
-        if (this.props.data.length == 0) return <div/>;
+        if (this.props.data.length == 0) return <h1 className="notfound">PAGE NOT FOUND!</h1>;
         var entry = this.props.data[0];
         return (
             <div>
@@ -183,11 +183,8 @@ var Application = React.createClass({
 var routes = (
     <Route path="/" handler={Application}>
         <DefaultRoute handler={EntryList}/>
-        <Route path="/about" handler={Page}/>
-        <Route path="/members" handler={Page}/>
-        <Route path="/category/works" handler={EntryList}/>
-        <Route path="/category/news" handler={EntryList}/>
-        <Route path="/awards" handler={Page}/>
+        <Route path="/category/:category" handler={EntryList}/>
+        <Route path="/:page" handler={Page}/>
         <NotFoundRoute handler={NotFound}/>
     </Route>
 );
@@ -197,20 +194,14 @@ Router.run(routes, Router.HistoryLocation, (Handler, state) => {
     console.log(state);
     var apiPath = 'posts';
     var data = {};
-    switch (state.path) {
-        case '/about':
-        case '/members':
-        case '/awards':
-            apiPath = 'pages';
-            data['filter[name]'] = state.path.substr(1);
-            break;
-        case '/category/works':
-        case '/category/news':
-            data['filter[category_name]'] = state.path.substr(10);
-            break;
+    if (state.params.category) {
+        data['filter[category_name]'] = state.params.category;
+    } else if (state.params.page) {
+        apiPath = 'pages';
+        data['filter[name]'] = state.params.page;
     }
     $.getJSON(`http://dotby.jp/wp-json/${apiPath}`, data).done((result) => {
-        console.log(result);
+        //console.log(result);
         React.render(<Handler data={result}/>, document.body);
     });
 });
