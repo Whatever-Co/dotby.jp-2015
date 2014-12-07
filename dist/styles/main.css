@@ -1,9 +1,10 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+* {
+  box-sizing: border-box; }
+
 html, body {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
   color: #333333;
   font: normal 400 17px/30px "Noto Sans Japanese", serif;
   letter-spacing: 0.04em; }
@@ -11,9 +12,25 @@ html, body {
 iframe {
   border: none; }
 
+#dots {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-image: url(/_tmp/dots.png);
+  z-index: 1000;
+  pointer-events: none; }
+
 #container {
+  position: relative;
   width: 960px;
   margin: 60px auto; }
+
+#header {
+  position: relative;
+  z-index: 2000; }
 
 #logo {
   display: block;
@@ -23,25 +40,93 @@ iframe {
     display: block;
     margin: 0 auto; }
 
-.entry a {
-  padding: 5px 3px;
-  color: #333333;
-  text-decoration: none;
-  border-bottom: 1px solid #333333; }
-  .entry a:hover, .entry a:visited, .entry a:link, .entry a:active {
-    color: #333333; }
-.entry .line {
-  margin: 30px 0; }
-.entry h1.title {
-  margin: 30px auto 0;
-  font-weight: 400;
-  font-size: 22px;
-  text-align: center; }
-.entry .date {
+#menu {
   display: block;
-  font-size: 15px;
+  margin: 50px 0;
+  padding: 0;
   text-align: center; }
-.entry .body {
-  width: 768px;
-  margin: 30px auto 0;
-  font-weight: 300; }
+  #menu li {
+    display: inline-block;
+    list-style: none;
+    font: bold 20px "Netto OT";
+    margin: 0 30px; }
+    #menu li a {
+      text-decoration: none;
+      color: #333333; }
+
+hr.line {
+  margin: 30px 0;
+  border: none;
+  width: 100%;
+  height: 2px;
+  background-image: url(/images/line.png); }
+
+.entry {
+  position: relative;
+  z-index: auto;
+  margin: 30px; }
+  .entry a {
+    padding: 3px 0;
+    color: #333333;
+    text-decoration: none;
+    border-bottom: 1px solid #333333; }
+    .entry a:hover, .entry a:visited, .entry a:link, .entry a:active {
+      color: #333333; }
+  .entry .featured-image {
+    position: relative;
+    z-index: 100;
+    height: 430px;
+    background-size: cover;
+    overflow: hidden;
+    margin: 0 -30px -30px; }
+    .entry .featured-image .border {
+      height: 100%;
+      margin: 30px 30px 0;
+      border: 4px solid transparent;
+      border-radius: 10px; }
+  .entry .inner {
+    position: relative;
+    z-index: auto;
+    padding: 30px 0;
+    background-color: transparent;
+    border: 4px solid transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0); }
+    .entry .inner h1.title {
+      margin: 30px auto 0;
+      font-weight: 400;
+      font-size: 22px;
+      text-align: center; }
+    .entry .inner .date {
+      display: block;
+      margin-bottom: 20px;
+      font-size: 15px;
+      text-align: center; }
+    .entry .inner .body {
+      width: 768px;
+      margin: 0 auto;
+      padding: 0;
+      font-weight: 300; }
+      .entry .inner .body p {
+        margin: 20px 0; }
+  .entry:hover {
+    z-index: 2000; }
+    .entry:hover .featured-image .border {
+      border-color: #333333;
+      -webkit-transition: all 0.1s ease-out;
+              transition: all 0.1s ease-out; }
+    .entry:hover .inner {
+      background-color: white;
+      border-color: #333333;
+      -webkit-transition: all 0.1s ease-out;
+              transition: all 0.1s ease-out; }
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table; }
+
+.clearfix:after {
+  clear: both; }
