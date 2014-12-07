@@ -137,7 +137,7 @@ var Page = React.createClass({
         return {data: []};
     },
     render() {
-        if (this.props.data.length == 0) return <h1 className="notfound">PAGE NOT FOUND!</h1>;
+        if (this.props.data.length == 0) return <NotFound/>;
         var entry = this.props.data[0];
         return (
             <div>
@@ -163,9 +163,6 @@ var NotFound = React.createClass({
 
 
 var Application = React.createClass({
-    getInitialState() {
-        return {entries: []};
-    },
     render() {
         return (
             <div>
