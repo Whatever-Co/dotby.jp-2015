@@ -1,6 +1,6 @@
 var React = require('react');
 var Router = require('react-router');
-var {Route, DefaultRoute, RouteHandler, Link} = Router;
+var {Route, DefaultRoute, NotFoundRoute, RouteHandler, Link} = Router;
 var $ = require('jquery');
 require('jquery.transit');
 
@@ -26,16 +26,13 @@ var Header = React.createClass({
                         <Link to="/about">ABOUT</Link>
                     </li>
                     <li>
-                        <a href="#">MEMBERS</a>
+                        <Link to="/members">MEMBERS</Link>
                     </li>
                     <li>
-                        <a href="#">WORKS</a>
+                        <Link to="/category/works">WORKS</Link>
                     </li>
                     <li>
-                        <a href="#">NEWS</a>
-                    </li>
-                    <li>
-                        <a href="#">AWARDS</a>
+                        <Link to="/category/news">NEWS</Link>
                     </li>
                 </ul>
             </div>
@@ -48,40 +45,40 @@ var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July
 
 var Entry = React.createClass({
     _originalHeight: 0,
-    _onMouseEnter() {
-        return;
-        $(this.refs.entry.getDOMNode()).addClass('over');
-        return;
-        inner = $(this.refs.inner.getDOMNode());
-        this._originalHeight = height = parseInt(inner.css('height'));
-        inner.css({height: height});
-        body = $(this.refs.body.getDOMNode()).css({opacity: 0}).show().transition({opacity: 1});
-        inner.transition({
-            height: height + body.outerHeight() + 40,
-            complete() {
-                inner.attr('style', null);
-            }
-        });
-    },
-    _onMouseLeave() {
-        return;
-        $(this.refs.entry.getDOMNode()).removeClass('over');
-        return;
-        inner = $(this.refs.inner.getDOMNode());
-        inner.css({height: inner.css('height')});
-        inner.transition({
-            height: this._originalHeight,
-            complete() {
-                inner.attr('style', null);
-            }
-        });
-        body = $(this.refs.body.getDOMNode()).transition({
-            opacity: 0,
-            complete() {
-                body.hide();
-            }
-        });
-    },
+    //_onMouseEnter() {
+    //    return;
+    //    $(this.refs.entry.getDOMNode()).addClass('over');
+    //    return;
+    //    inner = $(this.refs.inner.getDOMNode());
+    //    this._originalHeight = height = parseInt(inner.css('height'));
+    //    inner.css({height: height});
+    //    body = $(this.refs.body.getDOMNode()).css({opacity: 0}).show().transition({opacity: 1});
+    //    inner.transition({
+    //        height: height + body.outerHeight() + 40,
+    //        complete() {
+    //            inner.attr('style', null);
+    //        }
+    //    });
+    //},
+    //_onMouseLeave() {
+    //    return;
+    //    $(this.refs.entry.getDOMNode()).removeClass('over');
+    //    return;
+    //    inner = $(this.refs.inner.getDOMNode());
+    //    inner.css({height: inner.css('height')});
+    //    inner.transition({
+    //        height: this._originalHeight,
+    //        complete() {
+    //            inner.attr('style', null);
+    //        }
+    //    });
+    //    body = $(this.refs.body.getDOMNode()).transition({
+    //        opacity: 0,
+    //        complete() {
+    //            body.hide();
+    //        }
+    //    });
+    //},
     render() {
         var entry = this.props.entry;
         console.log(entry);
@@ -93,7 +90,7 @@ var Entry = React.createClass({
                         <div className="border"/>
                     </div>
                     <div className="inner" ref="inner">
-                        <h1 className="title">{entry.title}</h1>
+                        <h1 className="title" dangerouslySetInnerHTML={{__html: entry.title}}/>
                         <span className="date">{`${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`}</span>
                         <div className="body" ref="body" dangerouslySetInnerHTML={{__html: entry.content}}></div>
                     </div>
@@ -103,7 +100,7 @@ var Entry = React.createClass({
             return (
                 <div className="entry" ref="entry" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
                     <div className="inner" ref="inner">
-                        <h1 className="title">{entry.title}</h1>
+                        <h1 className="title" dangerouslySetInnerHTML={{__html: entry.title}}/>
                         <span className="date">{`${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`}</span>
                         <div className="body" ref="body" dangerouslySetInnerHTML={{__html: entry.content}}></div>
                     </div>
@@ -116,12 +113,12 @@ var Entry = React.createClass({
 
 var EntryList = React.createClass({
     getDefaultProps() {
-        return {entries: []};
+        return {data: []};
     },
     render() {
         return (
             <div>
-                {this.props.entries.map((entry) => {
+                {this.props.data.map((entry) => {
                     return (
                         <div key={entry.guid}>
                             <hr className="line"/>
@@ -135,9 +132,32 @@ var EntryList = React.createClass({
 });
 
 
-var About = React.createClass({
+var Page = React.createClass({
+    getDefaultProps() {
+        return {data: []};
+    },
     render() {
-        return (<div>aboutttttt</div>);
+        if (this.props.data.length == 0) return <div/>;
+        var entry = this.props.data[0];
+        return (
+            <div>
+                <div key={entry.guid}>
+                    <hr className="line"/>
+                    <div className="entry">
+                        <div className="inner" ref="inner">
+                            <div className="body" ref="body" dangerouslySetInnerHTML={{__html: entry.content}}></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+});
+
+
+var NotFound = React.createClass({
+    render() {
+        return <h1 className="notfound">PAGE NOT FOUND!</h1>;
     }
 });
 
@@ -146,11 +166,6 @@ var Application = React.createClass({
     getInitialState() {
         return {entries: []};
     },
-    //componentDidMount() {
-    //    $.getJSON('http://dotby.jp/wp-json/posts?lang=ja').done((result) => {
-    //        this.setState({entries: result});
-    //    });
-    //},
     render() {
         return (
             <div>
@@ -168,19 +183,24 @@ var Application = React.createClass({
 var routes = (
     <Route path="/" handler={Application}>
         <DefaultRoute handler={EntryList}/>
-        <Route path="/about" handler={About}/>
+        <Route path="/about" handler={Page}/>
+        <NotFoundRoute handler={NotFound}/>
     </Route>
 );
 
 
-//React.render(
-//    <Application/>,
-//    document.body
-//);
-
 Router.run(routes, Router.HistoryLocation, (Handler, state) => {
     console.log(state);
-    $.getJSON('http://dotby.jp/wp-json/posts?lang=ja').done((result) => {
-        React.render(<Handler entries={result}/>, document.body);
+    var apiPath = 'posts';
+    var data = {lang: 'ja'};
+    switch (state.path) {
+        case '/about':
+            apiPath = 'pages';
+            data['filter[name]'] = 'about';
+            break
+    }
+    $.getJSON(`http://dotby.jp/wp-json/${apiPath}`, data).done((result) => {
+        console.log(result);
+        React.render(<Handler data={result}/>, document.body);
     });
 });
