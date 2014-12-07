@@ -3,11 +3,11 @@ var NotFound = require('./NotFound');
 
 module.exports = React.createClass({
     getDefaultProps() {
-        return {data: []};
+        return {data: {}};
     },
     render() {
-        if (this.props.data.length == 0) return <NotFound/>;
-        var entry = this.props.data[0];
+        if (this.props.data.length) return <NotFound/>;
+        var entry = this.props.data;
         return (
             <div>
                 <div key={entry.guid}>

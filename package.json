@@ -12,6 +12,7 @@
     "jquery.transit": "~0.9.12",
     "grunt-express": "~1.4.1",
     "express": "~4.10.4",
-    "grunt-contrib-uglify": "~0.6.0"
+    "grunt-contrib-uglify": "~0.6.0",
+    "object-assign": "~2.0.0"
   }
 }
