@@ -13,6 +13,16 @@
     "grunt-express": "~1.4.1",
     "express": "~4.10.4",
     "grunt-contrib-uglify": "~0.6.0",
-    "object-assign": "~2.0.0"
+    "object-assign": "~2.0.0",
+    "tween.js": "~0.14.0",
+    "underscore": "~1.7.0",
+    "three": "~0.69.0",
+    "snapsvg": "~0.3.0",
+    "browserify": "~7.0.0",
+    "browserify-shim": "~3.8.1",
+    "gl-matrix": "~2.1.0"
+  },
+  "browserify-shim": {
+    "./src/components/Dots/quadtree.js": "QUAD"
   }
 }

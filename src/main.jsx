@@ -25,7 +25,7 @@ var routes = (
 Router.run(routes, Router.HistoryLocation, (Handler, state) => {
     if (state.path == '/members') {
         var members = ['yusuke', 'saqoosha', 'heri', 'sfman', 'seki'].map((name) => {
-            return $.getJSON(`http://dotby.jp/wp-json/pages/members/${name}`);
+            return $.getJSON(`http://new.dev.dotby.jp/wp-json/pages/members/${name}`);
         });
         $.when.apply(null, members).done(()=> {
             var result = Array.prototype.map.call(arguments, (result) => result[0]);
@@ -39,7 +39,7 @@ Router.run(routes, Router.HistoryLocation, (Handler, state) => {
         } else if (state.params.page) {
             apiPath = 'pages/' + state.params.page;
         }
-        $.getJSON(`http://dotby.jp/wp-json/${apiPath}`, data).done((result) => {
+        $.getJSON(`http://new.dev.dotby.jp/wp-json/${apiPath}`, data).done((result) => {
             React.render(<Handler data={result}/>, document.body);
         });
     }

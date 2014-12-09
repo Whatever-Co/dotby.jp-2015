@@ -19,7 +19,7 @@ iframe {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-image: url(/_tmp/dots.png);
+  opacity: 0.8;
   z-index: 1000;
   pointer-events: none; }
 
