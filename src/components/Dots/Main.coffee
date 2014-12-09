@@ -40,7 +40,7 @@ class Dots
 
 
   constructor: (container) ->
-    # @renderer = new SVGRenderer()
+#    @renderer = new SVGRenderer(container)
     @renderer = new WebGLRenderer(container)
     @quadtree = QUAD.init(x: 0, y: 0, w: window.innerWidth, h: innerHeight)
     @currentDots = []

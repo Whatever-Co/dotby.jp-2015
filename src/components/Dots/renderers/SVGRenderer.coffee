@@ -1,4 +1,5 @@
 _ = require('underscore')
+Snap = require('snapsvg')
 
 
 class Background
@@ -12,7 +13,7 @@ class Background
   resize: =>
     @pat?.remove()
 
-    g = @paper.g().attr(class: 'base')
+    g = @paper.g().attr(class: 'base', stroke: 'none', fill: 'rgba(0, 0, 0, 0.05)')
     w = Math.max(innerWidth, innerHeight) / 14
     @step = w
     hw = w * 0.5
@@ -34,11 +35,11 @@ class Background
 class SVGRenderer
 
 
-  constructor: ->
-    @paper = Snap(window.innerWidth, window.innerHeight).attr(class: 'dots')
+  constructor: (container) ->
+    @paper = Snap(window.innerWidth, window.innerHeight)
+    container.appendChild(@paper.node)
     @currentColor = Snap.color('#E62172')
     @dotsLayer = @paper.g().attr(stroke: 'none', fill: @currentColor.toString())
-    # @dotsLayer = @paper.g().attr(stroke: 'none', fill: 'rgba(0, 0, 255, 0.25)')
     @elements = {}
     @background = new Background(@paper)
     @epoch = Date.now()
