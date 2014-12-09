@@ -1,6 +1,6 @@
 var React = require('react');
 var Router = require('react-router');
-var {Link} = Router;
+var {Link, RouteHandler, Navigation} = Router;
 var $ = require('jquery');
 var assign = require('object-assign');
 
@@ -30,8 +30,9 @@ var MEMBER_DATA = {
 
 
 var Member = React.createClass({
+    mixins: [Navigation],
     _onClick() {
-        console.log(this);
+        this.transitionTo('/members/' + this.props.member.slug);
     },
     render() {
         var member = this.props.member;
@@ -42,7 +43,7 @@ var Member = React.createClass({
                         <div>
                             <span className="title">● {member.job_title}</span>
                             <span className="name-ja">{member.title}</span>
-                            { member.name_en ? <span className="name-en">{member.name_en}</span> : ''}
+                            {member.name_en ? <span className="name-en">{member.name_en}</span> : ''}
                         </div>
                     </div>
                 </div>
@@ -56,11 +57,24 @@ var Member = React.createClass({
 
 
 module.exports = React.createClass({
+    getInitialState() {
+        return {members: []};
+    },
+    componentDidMount() {
+        var members = ['yusuke', 'saqoosha', 'heri', 'sfman', 'seki'].map((name) => {
+            return $.getJSON(`/wp-json/pages/members/${name}`);
+        });
+        $.when.apply(null, members).done(()=> {
+            var result = Array.prototype.map.call(arguments, (result) => result[0]);
+            this.setState({members: result});
+        });
+    },
     render() {
         return (
             <div>
                 <hr className="line"/>
-                {this.props.data.map((member) => <Member key={member.guid} member={assign(member, MEMBER_DATA[member.slug])}/>)}
+                {this.state.members.map((member) => <Member key={member.guid} member={assign(member, MEMBER_DATA[member.slug])}/>)}
+                <RouteHandler/>
             </div>
         );
     }

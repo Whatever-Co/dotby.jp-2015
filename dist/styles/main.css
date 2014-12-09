@@ -178,7 +178,7 @@ hr.line {
   .member:hover {
     z-index: 2000; }
     .member:hover .inner {
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.95);
       border-color: #333333;
       -webkit-transition: all 0.1s ease-out;
               transition: all 0.1s ease-out; }
