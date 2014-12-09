@@ -8,7 +8,7 @@ module.exports = React.createClass({
         return (
             <div id="header">
                 <Link to="/" id="logo">
-                    <img src="/images/logo.svg" width="190"/>
+                    <img src="/assets/logo.svg" width="190"/>
                 </Link>
                 <ul id="menu">
                     <li>
