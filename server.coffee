@@ -9,6 +9,6 @@ app.get /^\/wp-json.*$/, (req, res) ->
   request('http://new.dev.dotby.jp' + req.originalUrl).pipe(res)
 
 app.get /^[\w\-\/]*$/, (req, res) ->
-  res.sendFile(path.resolve(__dirname, 'dist/index.html'))
+  res.sendFile(path.resolve(__dirname, 'dist/index.php'))
 
 module.exports = app

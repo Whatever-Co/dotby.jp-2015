@@ -1,6 +1,6 @@
 var React = require('react');
 var Router = require('react-router');
-var {Link, RouteHandler, Navigation} = Router;
+var {Link, RouteHandler, Navigation, State} = Router;
 var $ = require('jquery');
 var assign = require('object-assign');
 
@@ -57,6 +57,7 @@ var Member = React.createClass({
 
 
 module.exports = React.createClass({
+    mixins: [State],
     getInitialState() {
         return {members: []};
     },
@@ -68,6 +69,9 @@ module.exports = React.createClass({
             var result = Array.prototype.map.call(arguments, (result) => result[0]);
             this.setState({members: result});
         });
+    },
+    componentWillReceiveProps() {
+        console.log('componentWillReceiveProps', this.getPathname(), this.getParams());
     },
     render() {
         return (
