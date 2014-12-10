@@ -22,7 +22,7 @@ var Member = React.createClass({
                 <div className="inner">
                     <div className="name-title">
                         <div>
-                            <span className="title">● {member.job_title}</span>
+                            <span className="title"><span style={{color: member.color}}>●</span> {member.job_title}</span>
                             <span className="name-ja">{member.title}</span>
                             {member.name_en ? <span className="name-en">{member.name_en}</span> : ''}
                         </div>
