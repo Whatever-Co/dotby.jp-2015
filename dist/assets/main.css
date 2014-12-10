@@ -104,6 +104,8 @@ hr.line {
       margin-bottom: 20px;
       font-size: 15px;
       text-align: center; }
+      .entry .inner .date a {
+        border: none; }
     .entry .inner .body {
       width: 768px;
       margin: 0 auto;
@@ -118,22 +120,25 @@ hr.line {
       -webkit-transition: all 0.1s ease-out;
               transition: all 0.1s ease-out; }
     .entry:hover .inner {
-      background-color: rgba(255, 255, 255, 0.95);
+      background-color: rgba(255, 255, 255, 0.97);
       border-color: #333333;
       -webkit-transition: all 0.1s ease-out;
               transition: all 0.1s ease-out; }
 
 .member {
+  display: none;
   position: relative;
   z-index: auto;
   margin: 30px;
-  margin-bottom: 90px;
-  cursor: pointer; }
+  margin-bottom: 90px; }
+  .member.list {
+    display: block;
+    cursor: pointer; }
   .member .inner {
     position: relative;
     z-index: auto;
     margin: 60px 0;
-    padding: 30px 0;
+    padding: 30px 60px;
     background-color: transparent;
     border: 4px solid transparent;
     border-radius: 10px;
@@ -156,9 +161,33 @@ hr.line {
       .member .inner .name-title .name-ja {
         font-size: 26px; }
       .member .inner .name-title .name-en {
-        font-family: "Netto OT";
+        font-family: "Netto OT", sans-serif;
         font-size: 15px;
         margin-left: 10px; }
+    .member .inner .more {
+      display: none; }
+      .member .inner .more.detailed {
+        display: block; }
+    .member .inner hr.line {
+      margin-left: 316px;
+      width: 452px; }
+    .member .inner .body {
+      margin-top: 80px; }
+    .member .inner .links {
+      padding: 0; }
+      .member .inner .links li {
+        list-style: none;
+        display: inline-block;
+        font-size: 15px; }
+        .member .inner .links li a {
+          padding: 3px 0;
+          color: #333333;
+          text-decoration: none;
+          border-bottom: 1px solid #333333; }
+        .member .inner .links li:after {
+          content: url(/assets/link.png);
+          vertical-align: 2px;
+          margin: 0 25px 0 10px; }
   .member .portrait {
     position: absolute;
     left: -30px;
@@ -175,10 +204,12 @@ hr.line {
       height: 200px;
       border: 4px solid transparent;
       border-radius: 10px; }
+      .member .portrait .border.focusing {
+        height: 300px; }
   .member:hover {
     z-index: 2000; }
     .member:hover .inner {
-      background-color: rgba(255, 255, 255, 0.95);
+      background-color: rgba(255, 255, 255, 0.97);
       border-color: #333333;
       -webkit-transition: all 0.1s ease-out;
               transition: all 0.1s ease-out; }
@@ -220,7 +251,7 @@ hr.line {
       padding: 122px 10px 15px;
       border: 4px solid transparent;
       border-radius: 10px;
-      background-color: rgba(255, 255, 255, 0.95); }
+      background-color: rgba(255, 255, 255, 0.97); }
     .member-detail .works-list .work-item .title {
       font-size: 15px;
       line-height: 1.5em;
@@ -247,7 +278,7 @@ hr.line {
     margin-bottom: 10px;
     padding: 20px;
     vertical-align: baseline;
-    background-color: rgba(255, 255, 255, 0.95); }
+    background-color: rgba(255, 255, 255, 0.97); }
     .member-detail .news-list tr:hover {
       z-index: 2000;
       border-color: #333333; }

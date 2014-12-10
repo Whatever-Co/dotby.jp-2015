@@ -12,16 +12,16 @@ module.exports = React.createClass({
                 </Link>
                 <ul id="menu">
                     <li>
-                        <Link to="/about">ABOUT</Link>
+                        <Link to="/about/">ABOUT</Link>
                     </li>
                     <li>
-                        <Link to="/members">MEMBERS</Link>
+                        <Link to="/members/">MEMBERS</Link>
                     </li>
                     <li>
-                        <Link to="/category/works">WORKS</Link>
+                        <Link to="/category/works/">WORKS</Link>
                     </li>
                     <li>
-                        <Link to="/category/news">NEWS</Link>
+                        <Link to="/category/news/">NEWS</Link>
                     </li>
                 </ul>
             </div>

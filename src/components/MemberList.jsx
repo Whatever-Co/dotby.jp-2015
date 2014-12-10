@@ -1,43 +1,24 @@
-var React = require('react');
+var React = require('react/addons');
+var cx = React.addons.classSet;
 var Router = require('react-router');
 var {Link, RouteHandler, Navigation, State} = Router;
 var $ = require('jquery');
+var _ = require('underscore');
 var assign = require('object-assign');
 
-
-var MEMBER_DATA = {
-    yusuke: {
-        job_title: 'Planner / CEO',
-        name_en: 'Yusuke Tominaga'
-    },
-    saqoosha: {
-        job_title: 'Programmer / CTO',
-        name_en: ''
-    },
-    heri: {
-        job_title: 'Creative Director / CCO',
-        name_en: 'Kyosuke Taniguchi'
-    },
-    sfman: {
-        job_title: 'Planner',
-        name_en: 'Shinnya Fujiwara'
-    },
-    seki: {
-        job_title: 'Producer',
-        name_en: 'Kenichi Seki'
-    }
-};
+var MEMBER_DATA = require('../data');
 
 
 var Member = React.createClass({
-    mixins: [Navigation],
+    mixins: [Navigation, State],
     _onClick() {
-        this.transitionTo('/members/' + this.props.member.slug);
+        this.transitionTo(`/members/${this.props.member.slug}/`);
     },
     render() {
         var member = this.props.member;
+        var content = $(member.content);
         return (
-            <div className="member" onClick={this._onClick}>
+            <div className={cx({member: true, list: member.isListMode | member.isFocusing})} onClick={!member.isFocusing ? this._onClick : null}>
                 <div className="inner">
                     <div className="name-title">
                         <div>
@@ -46,9 +27,14 @@ var Member = React.createClass({
                             {member.name_en ? <span className="name-en">{member.name_en}</span> : ''}
                         </div>
                     </div>
+                    <div className={cx({more: true, detailed: member.isFocusing})}>
+                        <hr className="line"/>
+                        <div className="body" dangerouslySetInnerHTML={{__html: content.filter('.body').html()}}></div>
+                        <ul className="links" dangerouslySetInnerHTML={{__html: content.filter('.links').html()}}/>
+                    </div>
                 </div>
                 <div className="portrait" style={{backgroundImage: `url(${member.featured_image.source})`}}>
-                    <div className="border"/>
+                    <div className={cx({border: true, focusing: member.isFocusing})}/>
                 </div>
             </div>
         );
@@ -61,17 +47,25 @@ module.exports = React.createClass({
     getInitialState() {
         return {members: []};
     },
+    _setFlags(state) {
+        var current= this.getParams().member;
+        state.members.map((member) => {
+            member.isListMode = !current;
+            member.isFocusing = member.slug == current;
+        });
+        return state;
+    },
     componentDidMount() {
-        var members = ['yusuke', 'saqoosha', 'heri', 'sfman', 'seki'].map((name) => {
+        var members = _.keys(MEMBER_DATA).map((name) => {
             return $.getJSON(`/wp-json/pages/members/${name}`);
         });
         $.when.apply(null, members).done(()=> {
             var result = Array.prototype.map.call(arguments, (result) => result[0]);
-            this.setState({members: result});
+            this.setState(this._setFlags({members: result}));
         });
     },
     componentWillReceiveProps() {
-        console.log('componentWillReceiveProps', this.getPathname(), this.getParams());
+        this.setState(this._setFlags(this.state));
     },
     render() {
         return (

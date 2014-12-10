@@ -18,7 +18,6 @@ module.exports = React.createClass({
             result.map((entry) => {
                 state[entry.terms.category[0].slug].push(entry);
             });
-            console.log(state);
             this.setState(state);
         });
     },
@@ -32,7 +31,7 @@ module.exports = React.createClass({
         var works = this.state.works.map((work) => {
             var date = new Date(work.date_gmt);
             return (
-                <div className="work-item">
+                <div className="work-item" key={work.guid}>
                     <div className="image" style={{backgroundImage: `url(${work.featured_image.source})`}}>
                         <div className="border"/>
                     </div>
@@ -46,7 +45,7 @@ module.exports = React.createClass({
         var news = this.state.news.map((news) => {
             var date = new Date(news.date_gmt);
             return (
-                <tr>
+                <tr key={news.guid}>
                     <th>{`${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`}</th>
                     <td>{news.title}</td>
                 </tr>
