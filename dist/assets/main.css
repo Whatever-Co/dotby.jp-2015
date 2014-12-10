@@ -187,6 +187,78 @@ hr.line {
       -webkit-transition: all 0.1s ease-out;
               transition: all 0.1s ease-out; }
 
+.member-detail h2 {
+  font: bold 20px "Netto OT";
+  text-align: center;
+  margin-bottom: 0; }
+.member-detail .works-list {
+  margin: 0 -30px; }
+  .member-detail .works-list .work-item {
+    position: relative;
+    width: 280px;
+    height: 202px;
+    margin: 0 30px 30px;
+    float: left;
+    text-align: center; }
+    .member-detail .works-list .work-item .image {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 280px;
+      height: 126px;
+      background-size: cover;
+      overflow: hidden; }
+      .member-detail .works-list .work-item .image .border {
+        display: none;
+        position: relative;
+        margin: 10px;
+        height: 100%;
+        border: 4px solid #333333;
+        border-radius: 10px; }
+    .member-detail .works-list .work-item .inner {
+      margin: 10px;
+      padding: 122px 10px 15px;
+      border: 4px solid transparent;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.95); }
+    .member-detail .works-list .work-item .title {
+      font-size: 15px;
+      line-height: 1.5em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+    .member-detail .works-list .work-item .date {
+      font: bold 12px "Netto OT"; }
+    .member-detail .works-list .work-item:hover {
+      z-index: 2000; }
+      .member-detail .works-list .work-item:hover .image .border {
+        display: block; }
+      .member-detail .works-list .work-item:hover .inner {
+        border-color: #333333; }
+.member-detail .news-list {
+  padding: 0 30px;
+  border: none;
+  width: 100%; }
+  .member-detail .news-list tr {
+    position: relative;
+    display: block;
+    border: 4px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 20px;
+    vertical-align: baseline;
+    background-color: rgba(255, 255, 255, 0.95); }
+    .member-detail .news-list tr:hover {
+      z-index: 2000;
+      border-color: #333333; }
+  .member-detail .news-list th {
+    width: 150px;
+    padding-right: 30px;
+    font: bold 12px "Netto OT";
+    white-space: nowrap;
+    text-align: right;
+    vertical-align: baseline; }
+
 .notfound {
   display: block;
   text-align: center;
