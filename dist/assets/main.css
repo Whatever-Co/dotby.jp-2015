@@ -10,7 +10,8 @@
   font-weight: bold;
   src: url(/assets/NettoWeb.woff) format("woff"); }
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  outline: none; }
 
 html, body {
   margin: 0;
@@ -21,6 +22,13 @@ html, body {
 
 iframe {
   border: none; }
+
+hr.line {
+  margin: 30px 0;
+  border: none;
+  width: 100%;
+  height: 2px;
+  background-image: url(/assets/line.png); }
 
 #dots {
   position: fixed;
@@ -54,7 +62,9 @@ iframe {
   display: block;
   margin: 45px 0;
   padding: 0;
-  text-align: center; }
+  text-align: center;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0); }
   #menu li {
     display: inline-block;
     list-style: none;
@@ -70,12 +80,52 @@ iframe {
       text-decoration: none;
       color: #333333; }
 
-hr.line {
-  margin: 30px 0;
-  border: none;
-  width: 100%;
-  height: 2px;
-  background-image: url(/assets/line.png); }
+#footer .copyright {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  -webkit-transform-origin: left bottom;
+      -ms-transform-origin: left bottom;
+          transform-origin: left bottom;
+  -webkit-transform: scale(0.5, 0.5);
+      -ms-transform: scale(0.5, 0.5);
+          transform: scale(0.5, 0.5); }
+#footer .buttons {
+  position: fixed;
+  z-index: auto;
+  right: 20px;
+  bottom: 20px;
+  text-align: right;
+  font-size: 0;
+  -webkit-transform-origin: right bottom;
+      -ms-transform-origin: right bottom;
+          transform-origin: right bottom;
+  -webkit-transform: scale(0.5, 0.5);
+      -ms-transform: scale(0.5, 0.5);
+          transform: scale(0.5, 0.5); }
+  #footer .buttons:hover {
+    z-index: 2000; }
+  #footer .buttons button {
+    display: block;
+    width: 68px;
+    height: 68px;
+    background: none;
+    border: none;
+    cursor: pointer; }
+  #footer .buttons .facebook {
+    margin-bottom: 20px;
+    background-image: url(/assets/facebook.png); }
+    #footer .buttons .facebook:hover {
+      background-image: url(/assets/facebook-hover.png); }
+  #footer .buttons .twitter {
+    margin-bottom: 100px;
+    background-image: url(/assets/twitter.png); }
+    #footer .buttons .twitter:hover {
+      background-image: url(/assets/twitter-hover.png); }
+  #footer .buttons .top {
+    background-image: url(/assets/top.png); }
+    #footer .buttons .top:hover {
+      background-image: url(/assets/top-hover.png); }
 
 .entry {
   position: relative;
@@ -245,7 +295,9 @@ hr.line {
     height: 202px;
     margin: 0 30px 30px;
     float: left;
-    text-align: center; }
+    text-align: center;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0); }
     .member-detail .works-list .work-item .image {
       position: absolute;
       left: 0;
@@ -293,7 +345,9 @@ hr.line {
     margin-bottom: 10px;
     padding: 20px;
     vertical-align: baseline;
-    background-color: rgba(255, 255, 255, 0.97); }
+    background-color: rgba(255, 255, 255, 0.97);
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0); }
     .member-detail .news-list tr:hover {
       z-index: 2000;
       border-color: #333333; }
