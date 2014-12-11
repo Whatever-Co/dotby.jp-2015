@@ -1,8 +1,9 @@
 var React = require('react');
 var Router = require('react-router');
 var {Link} = Router;
+var moment = require('moment');
+moment.locale('en');
 
-var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 module.exports = React.createClass({
     _originalHeight: 0,
@@ -42,7 +43,6 @@ module.exports = React.createClass({
     //},
     render() {
         var entry = this.props.entry;
-        var date = new Date(entry.date_gmt);
         if (entry.featured_image) {
             return (
                 <div className="entry" ref="entry" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
@@ -51,7 +51,7 @@ module.exports = React.createClass({
                     </div>
                     <div className="inner" ref="inner">
                         <h1 className="title" dangerouslySetInnerHTML={{__html: entry.title}}/>
-                        <span className="date"><Link to={`/post/${entry.slug}/`}>{`${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`}</Link></span>
+                        <span className="date"><Link to={`/post/${entry.slug}/`}>{moment(entry.date_gmt).format('LL')}</Link></span>
                         <div className="body" ref="body" dangerouslySetInnerHTML={{__html: entry.content}}></div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@ module.exports = React.createClass({
                 <div className="entry" ref="entry" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
                     <div className="inner" ref="inner">
                         <h1 className="title" dangerouslySetInnerHTML={{__html: entry.title}}/>
-                        <span className="date"><Link to={`/post/${entry.slug}/`}>{`${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`}</Link></span>
+                        <span className="date"><Link to={`/post/${entry.slug}/`}>{moment(entry.date_gmt).format('LL')}</Link></span>
                         <div className="body" ref="body" dangerouslySetInnerHTML={{__html: entry.content}}></div>
                     </div>
                 </div>

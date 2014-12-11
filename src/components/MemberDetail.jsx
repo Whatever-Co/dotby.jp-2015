@@ -2,9 +2,8 @@ var React = require('react');
 var Router = require('react-router');
 var {State, Link} = Router;
 var $ = require('jquery');
-
-
-var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var moment = require('moment');
+moment.lang('en');
 
 
 module.exports = React.createClass({
@@ -29,7 +28,6 @@ module.exports = React.createClass({
     },
     render() {
         var works = this.state.works.map((work) => {
-            var date = new Date(work.date_gmt);
             return (
                 <div className="work-item" key={work.guid}>
                     <div className="image" style={{backgroundImage: `url(${work.featured_image.source})`}}>
@@ -37,16 +35,15 @@ module.exports = React.createClass({
                     </div>
                     <div className="inner">
                         <div className="title">{work.title}</div>
-                        <div className="date">{`${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`}</div>
+                        <div className="date">{moment(work.date).format('LL')}</div>
                     </div>
                 </div>
             );
         });
         var news = this.state.news.map((news) => {
-            var date = new Date(news.date_gmt);
             return (
                 <tr key={news.guid}>
-                    <th>{`${MONTH_NAMES[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`}</th>
+                    <th>{moment(news.date).format('LL')}</th>
                     <td>{news.title}</td>
                 </tr>
             );
