@@ -17,8 +17,8 @@ module.exports = React.createClass({
         var opts = {
             width: width,
             height: height,
-            left: window.screenLeft + (window.outerWidth  - width)  / 2,
-            top: window.screenTop + (window.outerHeight - height) / 2
+            left: (window.screenLeft || window.screenX) + (window.outerWidth  - width)  / 2,
+            top: (window.screenTop || window.screenY)+ (window.outerHeight - height) / 2
         };
         opts = _.keys(opts).map(key => key + '=' + opts[key]).join(',');
         window.open(url, 'twitter', opts);
