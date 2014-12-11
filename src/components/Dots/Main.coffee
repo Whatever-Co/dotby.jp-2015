@@ -9,6 +9,8 @@ TWEEN = require('tween.js')
 SVGRenderer = require('./renderers/SVGRenderer')
 WebGLRenderer = require('./renderers/WebGLRenderer')
 
+DotEvents = require('./Events')
+
 Dot = require('./Dot')
 Yusuke = require('./patterns/Yusuke')
 Heri = require('./patterns/Heri')
@@ -165,6 +167,7 @@ class Dots
     nextColor = Snap.color('#' + nextColor)
     new TWEEN.Tween(@currentColor).to(r: nextColor.r, g: nextColor.g, b: nextColor.b, duration).easing(TWEEN.Easing.Cubic.InOut).onUpdate(=>
       @renderer.setColor(@currentColor.r, @currentColor.g, @currentColor.b)
+      DotEvents.emit('colorChanged', Snap.rgb(@currentColor.r, @currentColor.g, @currentColor.b))
       ).start()
 
     return deferred.promise()

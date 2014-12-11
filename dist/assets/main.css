@@ -62,7 +62,10 @@ iframe {
     margin: 0 30px; }
     #menu li .dot {
       vertical-align: 13px;
-      font-size: 14px; }
+      font-size: 14px;
+      opacity: 0.8; }
+      #menu li .dot.inactive {
+        visibility: hidden; }
     #menu li a {
       text-decoration: none;
       color: #333333; }

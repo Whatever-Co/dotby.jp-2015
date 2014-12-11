@@ -3,7 +3,7 @@ var Router = require('react-router');
 var {State, Link} = Router;
 var $ = require('jquery');
 var moment = require('moment');
-moment.lang('en');
+moment.locale('en');
 
 
 module.exports = React.createClass({
