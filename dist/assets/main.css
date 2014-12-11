@@ -6,7 +6,7 @@ html, body {
   margin: 0;
   padding: 0;
   color: #333333;
-  font: normal 400 17px/30px "Noto Sans Japanese", serif;
+  font: normal 300 17px/30px "Noto Sans Japanese", sans-serif;
   letter-spacing: 0.04em; }
 
 iframe {
@@ -42,7 +42,7 @@ iframe {
 
 #menu {
   display: block;
-  margin: 50px 0;
+  margin: 45px 0;
   padding: 0;
   text-align: center; }
   #menu li {
@@ -50,6 +50,9 @@ iframe {
     list-style: none;
     font: bold 20px "Netto OT";
     margin: 0 30px; }
+    #menu li .dot {
+      vertical-align: 13px;
+      font-size: 14px; }
     #menu li a {
       text-decoration: none;
       color: #333333; }
@@ -102,6 +105,7 @@ hr.line {
     .entry .inner .date {
       display: block;
       margin-bottom: 20px;
+      font-weight: normal;
       font-size: 15px;
       text-align: center; }
       .entry .inner .date a {
@@ -156,13 +160,12 @@ hr.line {
         vertical-align: middle; }
       .member .inner .name-title .title {
         display: block;
-        font: bold 18px "Netto OT";
+        font: bold normal 18px "Netto OT";
         margin-bottom: 10px; }
       .member .inner .name-title .name-ja {
         font-size: 26px; }
       .member .inner .name-title .name-en {
-        font-family: "Netto OT", sans-serif;
-        font-size: 15px;
+        font: normal normal 15px "Netto OT", sans-serif;
         margin-left: 10px; }
     .member .inner .more {
       display: none; }
@@ -259,7 +262,7 @@ hr.line {
       overflow: hidden;
       text-overflow: ellipsis; }
     .member-detail .works-list .work-item .date {
-      font: bold 12px "Netto OT"; }
+      font: bold normal 12px "Netto OT"; }
     .member-detail .works-list .work-item:hover {
       z-index: 2000; }
       .member-detail .works-list .work-item:hover .image .border {
