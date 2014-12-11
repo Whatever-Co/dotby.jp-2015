@@ -45,7 +45,6 @@ module.exports = React.createClass({
     //},
     _onClickMember(e) {
         e.preventDefault();
-        //console.log($(e.currentTarget).attr('href'));
         this.transitionTo($(e.currentTarget).attr('href'));
     },
     componentDidMount() {

@@ -188,10 +188,10 @@ hr.line {
       font-weight: 300; }
       .entry .inner .body p {
         margin: 20px 0; }
-      .entry .inner .body table, .entry .inner .body th, .entry .inner .body td {
+      .entry .inner .body .award th, .entry .inner .body .award td, .entry .inner .body .credit th, .entry .inner .body .credit td {
         font-size: 15px;
         vertical-align: baseline; }
-      .entry .inner .body th {
+      .entry .inner .body .award th, .entry .inner .body .credit th {
         padding-right: 25px;
         font: bold 15px "Netto OT"; }
       .entry .inner .body .award th, .entry .inner .body .award td {
