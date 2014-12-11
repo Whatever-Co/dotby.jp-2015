@@ -1,4 +1,14 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+@font-face {
+  font-family: "Netto OT";
+  font-style: normal;
+  font-weight: normal;
+  src: url(/assets/NettoWeb.woff); }
+@font-face {
+  font-family: "Netto OT";
+  font-style: normal;
+  font-weight: bold;
+  src: url(/assets/NettoWeb.woff); }
 * {
   box-sizing: border-box; }
 
@@ -98,15 +108,14 @@ hr.line {
     -webkit-transform: translateZ(0);
             transform: translateZ(0); }
     .entry .inner h1.title {
-      margin: 30px auto 0;
+      margin: 30px auto 6px;
       font-weight: 400;
       font-size: 22px;
       text-align: center; }
     .entry .inner .date {
       display: block;
       margin-bottom: 20px;
-      font-weight: normal;
-      font-size: 15px;
+      font: bold 15px "Netto OT";
       text-align: center; }
       .entry .inner .date a {
         border: none; }
@@ -160,12 +169,12 @@ hr.line {
         vertical-align: middle; }
       .member .inner .name-title .title {
         display: block;
-        font: bold normal 18px "Netto OT";
+        font: bold 18px "Netto OT";
         margin-bottom: 10px; }
       .member .inner .name-title .name-ja {
         font-size: 26px; }
       .member .inner .name-title .name-en {
-        font: normal normal 15px "Netto OT", sans-serif;
+        font: normal 15px "Netto OT";
         margin-left: 10px; }
     .member .inner .more {
       display: none; }
@@ -262,7 +271,7 @@ hr.line {
       overflow: hidden;
       text-overflow: ellipsis; }
     .member-detail .works-list .work-item .date {
-      font: bold normal 12px "Netto OT"; }
+      font: bold 12px "Netto OT"; }
     .member-detail .works-list .work-item:hover {
       z-index: 2000; }
       .member-detail .works-list .work-item:hover .image .border {
