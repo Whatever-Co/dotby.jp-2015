@@ -1,13 +1,13 @@
 var React = require('react');
 var Router = require('react-router');
-var {State, Link} = Router;
+var {State, Navigation, Link} = Router;
 var $ = require('jquery');
 var moment = require('moment');
 moment.locale('en');
 
 
 module.exports = React.createClass({
-    mixins: [State],
+    mixins: [State, Navigation],
     getInitialState() {
         return {works: [], news: []};
     },
@@ -26,10 +26,13 @@ module.exports = React.createClass({
     componentWillReceiveProps() {
         this.getDetail();
     },
+    _onClickItem(path) {
+        this.transitionTo(`/post/${path}/`);
+    },
     render() {
         var works = this.state.works.map((work) => {
             return (
-                <div className="work-item" key={work.guid}>
+                <div className="work-item" key={work.guid} onClick={this._onClickItem.bind(this, work.slug)}>
                     <div className="image" style={{backgroundImage: `url(${work.featured_image.source})`}}>
                         <div className="border"/>
                     </div>
@@ -42,7 +45,7 @@ module.exports = React.createClass({
         });
         var news = this.state.news.map((news) => {
             return (
-                <tr key={news.guid}>
+                <tr key={news.guid} onClick={this._onClickItem.bind(this, news.slug)}>
                     <th>{moment(news.date).format('LL')}</th>
                     <td>{news.title}</td>
                 </tr>

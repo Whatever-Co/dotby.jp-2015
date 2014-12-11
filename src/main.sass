@@ -29,6 +29,20 @@ html, body
   font: normal 300 17px/30px 'Noto Sans Japanese', sans-serif
   letter-spacing: 0.04em
 
+a
+  color: $black
+  text-decoration: none
+  border-bottom: 1px solid $black
+  &:hover, &:visited, &:link, &:active
+    color: $black
+
+a[href^="http"]
+  padding: 3px 14px 3px 0
+  background-image: url(/assets/link.png)
+  background-repeat: no-repeat
+  background-position: right center
+  background-size: 11px 7px
+
 iframe
   border: none
 
@@ -65,6 +79,7 @@ hr.line
   display: block
   width: 100%
   margin-bottom: 20px
+  border: none
   img
     display: block
     margin: 0 auto
@@ -87,8 +102,9 @@ hr.line
       &.inactive
         visibility: hidden
     a
-      text-decoration: none
       color: $black
+      text-decoration: none
+      border: none
 
 #footer
   .copyright

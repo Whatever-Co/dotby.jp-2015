@@ -20,6 +20,20 @@ html, body {
   font: normal 300 17px/30px "Noto Sans Japanese", sans-serif;
   letter-spacing: 0.04em; }
 
+a {
+  color: #333333;
+  text-decoration: none;
+  border-bottom: 1px solid #333333; }
+  a:hover, a:visited, a:link, a:active {
+    color: #333333; }
+
+a[href^="http"] {
+  padding: 3px 14px 3px 0;
+  background-image: url(/assets/link.png);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 11px 7px; }
+
 iframe {
   border: none; }
 
@@ -53,7 +67,8 @@ hr.line {
 #logo {
   display: block;
   width: 100%;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  border: none; }
   #logo img {
     display: block;
     margin: 0 auto; }
@@ -77,8 +92,9 @@ hr.line {
       #menu li .dot.inactive {
         visibility: hidden; }
     #menu li a {
+      color: #333333;
       text-decoration: none;
-      color: #333333; }
+      border: none; }
 
 #footer .copyright {
   position: fixed;
@@ -131,13 +147,6 @@ hr.line {
   position: relative;
   z-index: auto;
   margin: 30px; }
-  .entry a {
-    padding: 3px 0;
-    color: #333333;
-    text-decoration: none;
-    border-bottom: 1px solid #333333; }
-    .entry a:hover, .entry a:visited, .entry a:link, .entry a:active {
-      color: #333333; }
   .entry .featured-image {
     position: relative;
     z-index: 100;
@@ -153,7 +162,7 @@ hr.line {
   .entry .inner {
     position: relative;
     z-index: auto;
-    padding: 30px 0;
+    padding: 30px 0 50px;
     background-color: transparent;
     border: 4px solid transparent;
     border-radius: 10px;
@@ -161,13 +170,13 @@ hr.line {
     -webkit-transform: translateZ(0);
             transform: translateZ(0); }
     .entry .inner h1.title {
-      margin: 30px auto 6px;
+      margin: 22px auto 6px;
       font-weight: 400;
       font-size: 22px;
       text-align: center; }
     .entry .inner .date {
       display: block;
-      margin-bottom: 20px;
+      margin-bottom: 28px;
       font: bold 15px "Netto OT";
       text-align: center; }
       .entry .inner .date a {
@@ -179,6 +188,18 @@ hr.line {
       font-weight: 300; }
       .entry .inner .body p {
         margin: 20px 0; }
+      .entry .inner .body table, .entry .inner .body th, .entry .inner .body td {
+        font-size: 15px;
+        vertical-align: baseline; }
+      .entry .inner .body th {
+        padding-right: 25px;
+        font: bold 15px "Netto OT"; }
+      .entry .inner .body .award th, .entry .inner .body .award td {
+        padding-bottom: 10px;
+        vertical-align: middle; }
+      .entry .inner .body .award img {
+        max-height: 40px;
+        margin-right: 20px; }
   .entry:hover {
     z-index: 2000; }
     .entry:hover .featured-image .border {
@@ -241,18 +262,10 @@ hr.line {
     .member .inner .links {
       padding: 0; }
       .member .inner .links li {
-        list-style: none;
         display: inline-block;
+        margin-right: 20px;
+        list-style: none;
         font-size: 15px; }
-        .member .inner .links li a {
-          padding: 3px 0;
-          color: #333333;
-          text-decoration: none;
-          border-bottom: 1px solid #333333; }
-        .member .inner .links li:after {
-          content: url(/assets/link.png);
-          vertical-align: 2px;
-          margin: 0 25px 0 10px; }
   .member .portrait {
     position: absolute;
     left: -30px;
@@ -297,7 +310,8 @@ hr.line {
     float: left;
     text-align: center;
     -webkit-transform: translateZ(0);
-            transform: translateZ(0); }
+            transform: translateZ(0);
+    cursor: pointer; }
     .member-detail .works-list .work-item .image {
       position: absolute;
       left: 0;
@@ -347,7 +361,8 @@ hr.line {
     vertical-align: baseline;
     background-color: rgba(255, 255, 255, 0.97);
     -webkit-transform: translateZ(0);
-            transform: translateZ(0); }
+            transform: translateZ(0);
+    cursor: pointer; }
     .member-detail .news-list tr:hover {
       z-index: 2000;
       border-color: #333333; }

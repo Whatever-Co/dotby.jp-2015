@@ -1,12 +1,14 @@
 var React = require('react');
 var Router = require('react-router');
-var {Link} = Router;
+var {Navigation, Link} = Router;
 var moment = require('moment');
 moment.locale('en');
+var $ = require('jquery');
 
 
 module.exports = React.createClass({
-    _originalHeight: 0,
+    mixins: [Navigation],
+    //_originalHeight: 0,
     //_onMouseEnter() {
     //    return;
     //    $(this.refs.entry.getDOMNode()).addClass('over');
@@ -41,31 +43,60 @@ module.exports = React.createClass({
     //        }
     //    });
     //},
+    _onClickMember(e) {
+        e.preventDefault();
+        //console.log($(e.currentTarget).attr('href'));
+        this.transitionTo($(e.currentTarget).attr('href'));
+    },
+    componentDidMount() {
+        $('a', this.refs.credit.getDOMNode()).not('[href^="http"]').click(this._onClickMember);
+    },
+    componentWillUnmount() {
+        $('a', this.refs.credit.getDOMNode()).off('click');
+    },
     render() {
         var entry = this.props.entry;
-        if (entry.featured_image) {
-            return (
-                <div className="entry" ref="entry" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
+        var content = $(entry.content);
+        $('a[href^="http"]', content).attr({target: '_blank'});
+        var award = content.filter('.award').text().trim();
+        var credit = content.filter('.credit');
+        var body = '';
+        content.not('.award, .credit').each((index, element) => {
+            var t = element.outerHTML;
+            if (t) body += t;
+        });
+        return (
+            <div className="entry" ref="entry" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
+                {entry.featured_image ? (
                     <div className="featured-image" style={{backgroundImage: `url(${entry.featured_image.source})`}}>
                         <div className="border"/>
                     </div>
-                    <div className="inner" ref="inner">
-                        <h1 className="title" dangerouslySetInnerHTML={{__html: entry.title}}/>
-                        <span className="date"><Link to={`/post/${entry.slug}/`}>{moment(entry.date_gmt).format('LL')}</Link></span>
-                        <div className="body" ref="body" dangerouslySetInnerHTML={{__html: entry.content}}></div>
+                ) : null}
+                <div className="inner" ref="inner">
+                    <h1 className="title" dangerouslySetInnerHTML={{__html: entry.title}}/>
+                    <span className="date"><Link to={`/post/${entry.slug}/`}>{moment(entry.date_gmt).format('LL')}</Link></span>
+                    <div className="body" ref="body">
+                        <div dangerouslySetInnerHTML={{__html: body}}/>
+                        <table>
+                            <tbody>
+                                {award ? (
+                                    <tr className="award">
+                                        <th>AWARD</th>
+                                        <td>
+                                            {award.split(',').map(item => item ? <img key={item} src={`/assets/${item}.png`}/> : false)}
+                                        </td>
+                                    </tr>
+                                ) : null}
+                                <tr className="credit">
+                                    <th>CREDIT</th>
+                                    <td ref="credit" dangerouslySetInnerHTML={{__html: credit.html()}}/>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            );
-        } else {
-            return (
-                <div className="entry" ref="entry" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
-                    <div className="inner" ref="inner">
-                        <h1 className="title" dangerouslySetInnerHTML={{__html: entry.title}}/>
-                        <span className="date"><Link to={`/post/${entry.slug}/`}>{moment(entry.date_gmt).format('LL')}</Link></span>
-                        <div className="body" ref="body" dangerouslySetInnerHTML={{__html: entry.content}}></div>
-                    </div>
-                </div>
-            );
-        }
+            </div>
+        );
     }
 });
+

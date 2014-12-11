@@ -3,14 +3,6 @@
   z-index: auto
   margin: 30px
 
-  a
-    padding: 3px 0
-    color: $black
-    text-decoration: none
-    border-bottom: 1px solid $black
-    &:hover, &:visited, &:link, &:active
-      color: $black
-
   .featured-image
     position: relative
     z-index: 100
@@ -28,7 +20,7 @@
   .inner
     position: relative
     z-index: auto
-    padding: 30px 0
+    padding: 30px 0 50px
     background-color: transparent
     border: 4px solid transparent
     border-radius: 10px
@@ -37,14 +29,14 @@
     //transition: all 0.1s linear
 
     h1.title
-      margin: 30px auto 6px
+      margin: 22px auto 6px
       font-weight: 400
       font-size: 22px
       text-align: center
 
     .date
       display: block
-      margin-bottom: 20px
+      margin-bottom: 28px
       font: bold 15px 'Netto OT'
       text-align: center
       a
@@ -59,6 +51,20 @@
 
       p
         margin: 20px 0
+      table, th, td
+        font-size: 15px
+        vertical-align: baseline
+      th
+        padding-right: 25px
+        font: bold 15px 'Netto OT'
+      .award
+        th, td
+          padding-bottom: 10px
+          vertical-align: middle
+        img
+          max-height: 40px
+          margin-right: 20px
+
 
   &:hover
     z-index: 2000
