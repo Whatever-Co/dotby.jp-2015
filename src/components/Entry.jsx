@@ -48,10 +48,14 @@ module.exports = React.createClass({
         this.transitionTo($(e.currentTarget).attr('href'));
     },
     componentDidMount() {
-        $('a', this.refs.credit.getDOMNode()).not('[href^="http"]').click(this._onClickMember);
+        if (this.refs.credit) {
+            $('a', this.refs.credit.getDOMNode()).not('[href^="http"]').click(this._onClickMember);
+        }
     },
     componentWillUnmount() {
-        $('a', this.refs.credit.getDOMNode()).off('click');
+        if (this.refs.credit) {
+            $('a', this.refs.credit.getDOMNode()).off('click');
+        }
     },
     render() {
         var entry = this.props.entry;
@@ -76,8 +80,9 @@ module.exports = React.createClass({
                     <span className="date"><Link to={`/post/${entry.slug}/`}>{moment(entry.date_gmt).format('LL')}</Link></span>
                     <div className="body" ref="body">
                         <div dangerouslySetInnerHTML={{__html: body}}/>
-                        <table>
-                            <tbody>
+                        {entry.terms.category[0].slug == 'works' ? (
+                            <table>
+                                <tbody>
                                 {award ? (
                                     <tr className="award">
                                         <th>AWARD</th>
@@ -86,12 +91,13 @@ module.exports = React.createClass({
                                         </td>
                                     </tr>
                                 ) : null}
-                                <tr className="credit">
-                                    <th>CREDIT</th>
-                                    <td ref="credit" dangerouslySetInnerHTML={{__html: credit.html()}}/>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    <tr className="credit">
+                                        <th>CREDIT</th>
+                                        <td ref="credit" dangerouslySetInnerHTML={{__html: credit.html()}}/>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        ) : null}
                     </div>
                 </div>
             </div>

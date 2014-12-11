@@ -162,7 +162,7 @@ hr.line {
   .entry .inner {
     position: relative;
     z-index: auto;
-    padding: 30px 0 50px;
+    padding: 30px 0;
     background-color: transparent;
     border: 4px solid transparent;
     border-radius: 10px;
@@ -186,7 +186,7 @@ hr.line {
       margin: 0 auto;
       padding: 0;
       font-weight: 300; }
-      .entry .inner .body p {
+      .entry .inner .body p, .entry .inner .body table {
         margin: 20px 0; }
       .entry .inner .body .award th, .entry .inner .body .award td, .entry .inner .body .credit th, .entry .inner .body .credit td {
         font-size: 15px;
