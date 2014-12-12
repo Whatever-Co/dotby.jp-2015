@@ -4,6 +4,8 @@ var Router = require('react-router');
 var {Link, State} = Router;
 var $ = require('jquery');
 var _ = require('underscore');
+require('browsernizr/test/touchevents');
+var Modernizr= require('browsernizr');
 
 var DotEvents = require('./Dots/Events');
 var MenuData = require('../data').menu;
@@ -15,7 +17,7 @@ var MenuButton = React.createClass({
     },
     render() {
         return (
-            <div id="menu-button" className={cx({enable: this.props.isEnable, close: this.props.isOpen})} onClick={this.props.onClick}>
+            <div id="menu-button" className={cx({enable: this.props.isEnable, close: this.props.isOpen})} onClick={Modernizr.touchevents ? null : this.props.onClick} onTouchStart={Modernizr.touchevents ? this.props.onClick : null}>
                 <div className="upper-left"/>
                 <div className="upper-right"/>
                 <div className="middle"/>

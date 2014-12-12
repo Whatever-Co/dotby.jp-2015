@@ -19,6 +19,8 @@ if (mb.mobile()) {
     $('body').addClass('mobile');
 }
 
+React.initializeTouchEvents(true);
+
 
 var routes = (
     <Route name="Application" path="/" handler={Application}>
