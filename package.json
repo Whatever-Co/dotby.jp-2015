@@ -23,7 +23,8 @@
     "gl-matrix": "~2.1.0",
     "request": "~2.50.0",
     "grunt-ssh": "~0.12.0",
-    "moment": "~2.8.4"
+    "moment": "~2.8.4",
+    "mobile-detect": "~0.4.3"
   },
   "browserify-shim": {
     "./src/components/Dots/quadtree.js": "QUAD"

@@ -3,6 +3,7 @@ var Router = require('react-router');
 var {Route, DefaultRoute, NotFoundRoute} = Router;
 var $ = require('jquery');
 require('jquery.transit');
+var MobileDetect = require('mobile-detect');
 
 var EntryList = require('./components/EntryList');
 var Single = require('./components/Single');
@@ -11,6 +12,12 @@ var NotFound = require('./components/NotFound');
 var MemberList = require('./components/MemberList');
 var MemberDetail = require('./components/MemberDetail');
 var Application = require('./components/Application');
+
+
+var mb = new MobileDetect(navigator.userAgent);
+if (mb.mobile()) {
+    $('body').addClass('mobile');
+}
 
 
 var routes = (
@@ -28,6 +35,5 @@ var routes = (
 
 
 Router.run(routes, Router.HistoryLocation, (Handler, state) => {
-    //console.log(state);
     React.render(<Handler/>, document.body);
 });
