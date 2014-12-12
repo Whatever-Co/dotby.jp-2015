@@ -21,7 +21,7 @@ body {
   margin: 0;
   padding: 40px;
   color: #333333;
-  font: normal 300 17px/30px "Noto Sans Japanese", sans-serif;
+  font: normal 300 17px/1.7 "Noto Sans Japanese", sans-serif;
   letter-spacing: 0.04em; }
 
 a {
@@ -63,6 +63,19 @@ hr.line {
   position: relative;
   max-width: 960px;
   margin: 0 auto; }
+
+.notfound {
+  display: block;
+  text-align: center;
+  margin: 200px 0; }
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table; }
+
+.clearfix:after {
+  clear: both; }
 
 #header {
   position: relative;
@@ -154,6 +167,7 @@ hr.line {
     z-index: 100;
     height: 430px;
     background-size: cover;
+    background-position: center;
     overflow: hidden;
     margin: 0 -30px -30px; }
     .entry .featured-image .border {
@@ -202,7 +216,7 @@ hr.line {
         max-height: 40px;
         margin-right: 20px; }
     .entry .inner iframe {
-      max-width: 100%; }
+      min-width: 100%; }
   .entry:hover {
     z-index: 2000; }
     .entry:hover .featured-image .border {
@@ -377,15 +391,57 @@ hr.line {
     text-align: right;
     vertical-align: baseline; }
 
-.notfound {
-  display: block;
-  text-align: center;
-  margin: 200px 0; }
+@media only screen and (max-width: 960px) {
+  body {
+    padding: 15px;
+    font-size: 14px;
+    -webkit-text-size-adjust: 100%; }
 
-.clearfix:before,
-.clearfix:after {
-  content: " ";
-  display: table; }
+  hr.line {
+    margin: 15px 0;
+    height: 1px;
+    background-size: 480px 1px; }
 
-.clearfix:after {
-  clear: both; }
+  #header {
+    margin: 40px 0 50px; }
+
+  #logo img {
+    width: 125px;
+    height: 22.4px; }
+
+  #menu {
+    display: none; }
+
+  .entry {
+    margin: 15px 0 10px; }
+    .entry .featured-image {
+      margin: 0 -15px -8px; }
+      .entry .featured-image .border {
+        margin: 15px;
+        border-width: 3px;
+        border-radius: 6px; }
+    .entry .inner {
+      border-width: 3px;
+      border-radius: 6px;
+      padding: 10px 20px; }
+      .entry .inner h1.title {
+        margin-top: 10px;
+        margin-bottom: 3px;
+        font-size: 15px; }
+      .entry .inner .date {
+        margin-bottom: 12px;
+        font-size: 11px; }
+      .entry .inner .body p, .entry .inner .body table {
+        margin: 15px 0; }
+      .entry .inner .body .award th, .entry .inner .body .award td, .entry .inner .body .credit th, .entry .inner .body .credit td {
+        display: block;
+        text-align: left; }
+      .entry .inner .body .award th, .entry .inner .body .credit th {
+        margin-top: 10px;
+        margin-bottom: 3px;
+        font-size: 14px; }
+      .entry .inner .body .award td, .entry .inner .body .credit td {
+        font-size: 12px; }
+      .entry .inner .body .award img, .entry .inner .body .credit img {
+        max-height: 30px;
+        margin-right: 15px; } }

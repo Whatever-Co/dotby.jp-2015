@@ -47,15 +47,44 @@ module.exports = React.createClass({
         e.preventDefault();
         this.transitionTo($(e.currentTarget).attr('href'));
     },
+    _onResize() {
+        this._image.height(this._image.width() / 960 * 430);
+        if (this._iframes) {
+            var width = $(this.refs.body.getDOMNode()).width();
+            this._iframes.each((index, element) => {
+                var el = $(element);
+                el.attr({width: width, height: width / el.data('aspect')});
+            });
+        }
+    },
     componentDidMount() {
         if (this.refs.credit) {
-            $('a', this.refs.credit.getDOMNode()).not('[href^="http"]').click(this._onClickMember);
+            this._memberLink = $('a', this.refs.credit.getDOMNode()).not('[href^="http"]').click(this._onClickMember);
+        }
+        var needResize = false;
+        if (this.refs.image) {
+            this._image = $(this.refs.image.getDOMNode());
+            needResize = true;
+        }
+        var iframes = $('iframe', this.getDOMNode());
+        if (iframes.size() > 0) {
+            iframes.each((index, element) => {
+                var el = $(element);
+                el.data({aspect: el.attr('width') / el.attr('height')});
+            });
+            this._iframes = iframes;
+            needResize = true;
+        }
+        if (needResize) {
+            $(window).on('resize', this._onResize);
+            this._onResize();
         }
     },
     componentWillUnmount() {
-        if (this.refs.credit) {
-            $('a', this.refs.credit.getDOMNode()).off('click');
+        if (this._memberLink) {
+            this._memberLink.off();
         }
+        $(window).off('resize', this._onResize);
     },
     render() {
         var entry = this.props.entry;
@@ -71,7 +100,7 @@ module.exports = React.createClass({
         return (
             <div className="entry" ref="entry" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
                 {entry.featured_image ? (
-                    <div className="featured-image" style={{backgroundImage: `url(${entry.featured_image.source})`}}>
+                    <div className="featured-image" ref="image" style={{backgroundImage: `url(${entry.featured_image.source})`}}>
                         <div className="border"/>
                     </div>
                 ) : null}

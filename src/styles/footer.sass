@@ -1,0 +1,39 @@
+#footer
+  .copyright
+    position: fixed
+    left: 20px
+    bottom: 20px
+    transform-origin: left bottom
+    transform: scale(0.5, 0.5)
+  .buttons
+    position: fixed
+    z-index: auto
+    right: 20px
+    bottom: 20px
+    text-align: right
+    font-size: 0
+    transform-origin: right bottom
+    transform: scale(0.5, 0.5)
+    &:hover
+      z-index: 2000
+    button
+      display: block
+      width: 68px
+      height: 68px
+      background: none
+      border: none
+      cursor: pointer
+    .facebook
+      margin-bottom: 20px
+      background-image: url(/assets/facebook.png)
+      &:hover
+        background-image: url(/assets/facebook-hover.png)
+    .twitter
+      margin-bottom: 100px
+      background-image: url(/assets/twitter.png)
+      &:hover
+        background-image: url(/assets/twitter-hover.png)
+    .top
+      background-image: url(/assets/top.png)
+      &:hover
+        background-image: url(/assets/top-hover.png)
