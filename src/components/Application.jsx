@@ -4,7 +4,9 @@ var {RouteHandler} = Router;
 
 var Dots = require('./Dots/Main');
 var Header = require('./Header');
+var Menu = require('./Menu');
 var Footer = require('./Footer');
+
 
 module.exports = React.createClass({
     componentDidMount() {
@@ -18,6 +20,7 @@ module.exports = React.createClass({
                     <Header/>
                     <RouteHandler {...this.props}/>
                 </div>
+                <Menu/>
                 <Footer/>
             </div>
         );

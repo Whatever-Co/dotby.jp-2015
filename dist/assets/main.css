@@ -111,6 +111,119 @@ hr.line {
       text-decoration: none;
       border: none; }
 
+#floating-menu {
+  position: fixed;
+  display: table;
+  z-index: 3000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  text-align: center; }
+  #floating-menu ul {
+    display: table-cell;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    vertical-align: middle;
+    background-color: rgba(255, 255, 255, 0.9);
+    -webkit-transition: -webkit-transform 0.1s ease-out;
+            transition: transform 0.1s ease-out; }
+    #floating-menu ul.close {
+      -webkit-transform: translateY(-100%);
+          -ms-transform: translateY(-100%);
+              transform: translateY(-100%); }
+  #floating-menu li {
+    display: inline-block;
+    list-style: none;
+    font: bold 20px "Netto OT";
+    margin: 0 30px; }
+    #floating-menu li .dot {
+      vertical-align: 13px;
+      font-size: 14px;
+      opacity: 0.8; }
+      #floating-menu li .dot.inactive {
+        visibility: hidden; }
+    #floating-menu li a {
+      color: #333333;
+      text-decoration: none;
+      border: none; }
+
+#menu-button {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 26px;
+  height: 20px;
+  cursor: pointer;
+  -webkit-transform: translateY(-60px);
+      -ms-transform: translateY(-60px);
+          transform: translateY(-60px);
+  -webkit-transition: -webkit-transform 0.2s ease-out;
+          transition: transform 0.2s ease-out; }
+  #menu-button.enable {
+    -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+            transform: translateY(0); }
+  #menu-button div {
+    position: absolute;
+    border: 2px solid #333333;
+    border-radius: 4px;
+    width: 16px;
+    -webkit-transition: all 0.1s ease-out;
+            transition: all 0.1s ease-out; }
+    #menu-button div.upper-left {
+      left: 0;
+      top: 0;
+      -webkit-transform-origin: left top;
+          -ms-transform-origin: left top;
+              transform-origin: left top; }
+    #menu-button div.upper-right {
+      right: 0;
+      top: 0;
+      -webkit-transform-origin: right top;
+          -ms-transform-origin: right top;
+              transform-origin: right top; }
+    #menu-button div.middle {
+      width: 26px;
+      left: 0;
+      top: 8px; }
+    #menu-button div.lower-left {
+      left: 0;
+      bottom: 0;
+      -webkit-transform-origin: left bottom;
+          -ms-transform-origin: left bottom;
+              transform-origin: left bottom; }
+    #menu-button div.lower-right {
+      right: 0;
+      bottom: 0;
+      -webkit-transform-origin: right bottom;
+          -ms-transform-origin: right bottom;
+              transform-origin: right bottom; }
+  #menu-button.close div {
+    -webkit-transition: all 0.1s ease-out;
+            transition: all 0.1s ease-out; }
+  #menu-button.close .upper-left {
+    -webkit-transform: translateX(6px) rotate(45deg);
+        -ms-transform: translateX(6px) rotate(45deg);
+            transform: translateX(6px) rotate(45deg); }
+  #menu-button.close .upper-right {
+    -webkit-transform: translateX(-6px) rotate(-45deg);
+        -ms-transform: translateX(-6px) rotate(-45deg);
+            transform: translateX(-6px) rotate(-45deg); }
+  #menu-button.close .middle {
+    -webkit-transform: scaleX(0);
+        -ms-transform: scaleX(0);
+            transform: scaleX(0); }
+  #menu-button.close .lower-left {
+    -webkit-transform: translateX(6px) rotate(-45deg);
+        -ms-transform: translateX(6px) rotate(-45deg);
+            transform: translateX(6px) rotate(-45deg); }
+  #menu-button.close .lower-right {
+    -webkit-transform: translateX(-6px) rotate(45deg);
+        -ms-transform: translateX(-6px) rotate(45deg);
+            transform: translateX(-6px) rotate(45deg); }
+
 #footer .copyright {
   position: fixed;
   left: 20px;

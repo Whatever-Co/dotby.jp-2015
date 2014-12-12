@@ -8,7 +8,7 @@ var assign = require('object-assign');
 var MobileDetect = require('mobile-detect');
 var isMobile = !!new MobileDetect(navigator.userAgent).mobile();
 
-var MEMBER_DATA = require('../data');
+var MEMBER_DATA = require('../data').members;
 
 
 var Member = React.createClass({

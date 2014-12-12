@@ -52,7 +52,7 @@ class Dots
     @t = 0
 
     patterns = new ShuffledArray([Saqoosha, Yusuke, Sfman, Heri, Seki])
-    colors = new ShuffledArray(_.values(Data).map((item) => item.color.substr(1)))
+    colors = new ShuffledArray(_.values(Data.members).map((item) => item.color.substr(1)))
     tr = =>
       @transitionTo(patterns.next(), colors.next()).done ->
         setTimeout(tr, 800)

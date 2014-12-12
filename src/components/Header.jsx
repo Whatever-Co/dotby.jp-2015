@@ -3,19 +3,20 @@ var cx = React.addons.classSet;
 var Router = require('react-router');
 var {Link, State} = Router;
 var $ = require('jquery');
+var _ = require('underscore');
 
 var DotEvents = require('./Dots/Events');
+var MenuData = require('../data').menu;
 
 
 module.exports = React.createClass({
     mixins: [State],
     getInitialState() {
-        return {items: [
-            {name: 'ABOUT', path: '/about/', active: false},
-            {name: 'MEMBERS', path: '/members/', active: false},
-            {name: 'WORKS', path: '/category/works/', active: false},
-            {name: 'NEWS', path: '/category/news/', active: false}
-        ]};
+        return {items: MenuData.map((item) => {
+            var copy = _.clone(item);
+            copy.active = false;
+            return copy;
+        })};
     },
     _setActive() {
         var current = this.getPathname();
