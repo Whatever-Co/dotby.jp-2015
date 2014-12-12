@@ -13,9 +13,13 @@
   box-sizing: border-box;
   outline: none; }
 
-html, body {
+html {
   margin: 0;
-  padding: 0;
+  padding: 0; }
+
+body {
+  margin: 0;
+  padding: 40px;
   color: #333333;
   font: normal 300 17px/30px "Noto Sans Japanese", sans-serif;
   letter-spacing: 0.04em; }
@@ -57,21 +61,19 @@ hr.line {
 
 #container {
   position: relative;
-  width: 960px;
-  margin: 60px auto; }
+  max-width: 960px;
+  margin: 0 auto; }
 
 #header {
   position: relative;
-  z-index: 2000; }
+  z-index: 2000;
+  margin-top: 20px; }
 
 #logo {
-  display: block;
-  width: 100%;
-  margin-bottom: 20px;
-  border: none; }
-  #logo img {
-    display: block;
-    margin: 0 auto; }
+  margin: 0 auto 20px;
+  text-align: center; }
+  #logo a {
+    border: none; }
 
 #menu {
   display: block;
@@ -162,7 +164,7 @@ hr.line {
   .entry .inner {
     position: relative;
     z-index: auto;
-    padding: 30px 0;
+    padding: 40px 62px;
     background-color: transparent;
     border: 4px solid transparent;
     border-radius: 10px;
@@ -182,7 +184,6 @@ hr.line {
       .entry .inner .date a {
         border: none; }
     .entry .inner .body {
-      width: 768px;
       margin: 0 auto;
       padding: 0;
       font-weight: 300; }
@@ -200,6 +201,8 @@ hr.line {
       .entry .inner .body .award img {
         max-height: 40px;
         margin-right: 20px; }
+    .entry .inner iframe {
+      max-width: 100%; }
   .entry:hover {
     z-index: 2000; }
     .entry:hover .featured-image .border {

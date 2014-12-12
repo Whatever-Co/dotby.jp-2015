@@ -42,9 +42,9 @@ module.exports = React.createClass({
     render() {
         return (
             <div id="header">
-                <Link to="/" id="logo">
-                    <img src="/assets/logo.svg" width="190"/>
-                </Link>
+                <div id="logo">
+                    <Link to="/"><img src="/assets/logo.svg" width="190"/></Link>
+                </div>
                 <ul id="menu">
                 {this.state.items.map((item) => {
                     return (
