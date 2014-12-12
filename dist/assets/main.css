@@ -229,6 +229,9 @@ hr.line {
       -webkit-transition: all 0.1s ease-out;
               transition: all 0.1s ease-out; }
 
+.member-list > div:not(:first-child) > hr.line {
+  display: none; }
+
 .member {
   display: none;
   position: relative;
@@ -290,6 +293,7 @@ hr.line {
     width: 350px;
     height: 262px;
     background-size: cover;
+    background-position: center 20%;
     overflow: hidden;
     padding: 30px 0; }
     .member .portrait .border {
@@ -444,4 +448,40 @@ hr.line {
         font-size: 12px; }
       .entry .inner .body .award img, .entry .inner .body .credit img {
         max-height: 30px;
-        margin-right: 15px; } }
+        margin-right: 15px; }
+
+  .member-list > div > hr.line {
+    display: block !important; }
+
+  .member {
+    margin: 15px 0 -15px; }
+    .member .inner {
+      padding: 270px 10px 20px;
+      border-width: 2px;
+      border-radius: 6px;
+      margin: 30px 0; }
+      .member .inner .name-title {
+        height: auto;
+        padding: 0; }
+        .member .inner .name-title .title {
+          margin-bottom: 3px;
+          font-size: 13px; }
+        .member .inner .name-title .name-ja {
+          display: block;
+          margin-bottom: -8px;
+          font-size: 20px; }
+        .member .inner .name-title .name-en {
+          font-size: 11px;
+          margin: 0; }
+    .member .portrait {
+      left: -15px;
+      top: -15px;
+      width: 100%;
+      padding: 15px 15px 0; }
+      .member .portrait .border {
+        left: 0;
+        top: 0;
+        height: 100%;
+        border-width: 2px;
+        border-radius: 6px 6px 0 0;
+        border-bottom: none; } }
