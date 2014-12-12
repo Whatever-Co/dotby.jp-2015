@@ -1,1 +1,526 @@
-@import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);@font-face{font-family:"Netto OT";font-style:normal;font-weight:400;src:url(/assets/NettoWeb.woff) format("woff")}@font-face{font-family:"Netto OT";font-style:normal;font-weight:700;src:url(/assets/NettoWeb.woff) format("woff")}*{box-sizing:border-box;outline:0}html{margin:0;padding:0}body{margin:0;padding:40px;color:#333;font:normal 300 17px/1.7 "Noto Sans Japanese",sans-serif;letter-spacing:.04em}a{color:#333;text-decoration:none;border-bottom:1px solid #333}a:active,a:hover,a:link,a:visited{color:#333}a[href^=http]{padding:3px 14px 3px 0;background-image:url(/assets/link.png);background-repeat:no-repeat;background-position:right center;background-size:11px 7px}iframe{border:none}hr.line{margin:30px 0;border:none;width:100%;height:2px;background-image:url(/assets/line.png)}#dots{position:fixed;left:0;top:0;width:100%;height:100%;overflow:hidden;opacity:.8;z-index:1000;pointer-events:none}#container{position:relative;max-width:960px;margin:0 auto}.notfound{display:block;text-align:center;margin:200px 0}.clearfix:after,.clearfix:before{content:" ";display:table}.clearfix:after{clear:both}#header{position:relative;z-index:2000;margin-top:20px}#logo{margin:0 auto 20px;text-align:center}#logo a{border:none}#menu{display:block;margin:45px 0;padding:0;text-align:center;-webkit-transform:translateZ(0);transform:translateZ(0)}#menu li{display:inline-block;list-style:none;font:700 20px "Netto OT";margin:0 30px}#menu li .dot{vertical-align:13px;font-size:14px;opacity:.8}#menu li .dot.inactive{visibility:hidden}#menu li a{color:#333;text-decoration:none;border:none}#footer .copyright{position:fixed;left:20px;bottom:20px;-webkit-transform-origin:left bottom;-ms-transform-origin:left bottom;transform-origin:left bottom;-webkit-transform:scale(0.5,.5);-ms-transform:scale(0.5,.5);transform:scale(0.5,.5)}#footer .buttons{position:fixed;z-index:auto;right:20px;bottom:20px;text-align:right;font-size:0;-webkit-transform-origin:right bottom;-ms-transform-origin:right bottom;transform-origin:right bottom;-webkit-transform:scale(0.5,.5);-ms-transform:scale(0.5,.5);transform:scale(0.5,.5)}#footer .buttons:hover{z-index:2000}#footer .buttons button{display:block;width:68px;height:68px;background:0 0;border:none;cursor:pointer}#footer .buttons .facebook{margin-bottom:20px;background-image:url(/assets/facebook.png)}#footer .buttons .facebook:hover{background-image:url(/assets/facebook-hover.png)}#footer .buttons .twitter{margin-bottom:100px;background-image:url(/assets/twitter.png)}#footer .buttons .twitter:hover{background-image:url(/assets/twitter-hover.png)}#footer .buttons .top{background-image:url(/assets/top.png)}#footer .buttons .top:hover{background-image:url(/assets/top-hover.png)}.entry{position:relative;z-index:auto;margin:30px}.entry .featured-image{position:relative;z-index:100;height:430px;background-size:cover;background-position:center;overflow:hidden;margin:0 -30px -30px}.entry .featured-image .border{height:100%;margin:30px 30px 0;border:4px solid transparent;border-radius:10px}.entry .inner{position:relative;z-index:auto;padding:40px 62px;background-color:transparent;border:4px solid transparent;border-radius:10px;overflow:hidden;-webkit-transform:translateZ(0);transform:translateZ(0)}.entry .inner h1.title{margin:22px auto 6px;font-weight:400;font-size:22px;text-align:center}.entry .inner .date{display:block;margin-bottom:28px;font:700 15px "Netto OT";text-align:center}.entry .inner .date a{border:none}.entry .inner .body{margin:0 auto;padding:0;font-weight:300}.entry .inner .body p,.entry .inner .body table{margin:20px 0}.entry .inner .body .award td,.entry .inner .body .award th,.entry .inner .body .credit td,.entry .inner .body .credit th{font-size:15px;vertical-align:baseline}.entry .inner .body .award th,.entry .inner .body .credit th{padding-right:25px;font:700 15px "Netto OT"}.entry .inner .body .award td,.entry .inner .body .award th{padding-bottom:10px;vertical-align:middle}.entry .inner .body .award img{max-height:40px;margin-right:20px}.entry .inner iframe{min-width:100%}.entry:hover{z-index:2000}.entry:hover .featured-image .border{border-color:#333;-webkit-transition:all .1s ease-out;transition:all .1s ease-out}.entry:hover .inner{background-color:rgba(255,255,255,.97);border-color:#333;-webkit-transition:all .1s ease-out;transition:all .1s ease-out}.member-list>div:not(:first-child)>hr.line{display:none}.member{display:none;position:relative;z-index:auto;margin:30px 30px 90px}.member.list{display:block;cursor:pointer}.member .inner{position:relative;z-index:auto;margin:60px 0;padding:30px 60px;background-color:transparent;border:4px solid transparent;border-radius:10px;overflow:hidden;-webkit-transform:translateZ(0);transform:translateZ(0)}.member .inner .name-title{display:table;width:100%;height:132px;padding-left:326px}.member .inner .name-title>div{display:table-cell;text-align:center;vertical-align:middle}.member .inner .name-title .title{display:block;font:700 18px "Netto OT";margin-bottom:10px}.member .inner .name-title .name-ja{font-size:26px}.member .inner .name-title .name-en{font:400 15px "Netto OT";margin-left:10px}.member .inner .more{display:none}.member .inner .more.detailed{display:block}.member .inner hr.line{margin-left:316px;width:452px}.member .inner .body{margin-top:80px}.member .inner .links{padding:0}.member .inner .links li{display:inline-block;margin-right:20px;list-style:none;font-size:15px}.member .portrait{position:absolute;left:-30px;top:-30px;width:350px;height:262px;background-size:cover;background-position:center 20%;overflow:hidden;padding:30px 0}.member .portrait .border{position:relative;left:30px;width:100%;height:200px;border:4px solid transparent;border-radius:10px}.member .portrait .border.focusing{height:300px}.member:hover{z-index:2000}.member:hover .inner{background-color:rgba(255,255,255,.97);border-color:#333;-webkit-transition:all .1s ease-out;transition:all .1s ease-out}.member:hover .portrait .border{border-color:#333;-webkit-transition:all .1s ease-out;transition:all .1s ease-out}.member-detail h2{font:700 20px "Netto OT";text-align:center;margin-bottom:0}.member-detail .works-list{margin:0 -30px}.member-detail .works-list .work-item{position:relative;width:280px;height:202px;margin:0 30px 30px;float:left;text-align:center;-webkit-transform:translateZ(0);transform:translateZ(0);cursor:pointer}.member-detail .works-list .work-item .image{position:absolute;left:0;top:0;width:280px;height:126px;background-size:cover;overflow:hidden}.member-detail .works-list .work-item .image .border{display:none;position:relative;margin:10px;height:100%;border:4px solid #333;border-radius:10px}.member-detail .works-list .work-item .inner{margin:10px;padding:122px 10px 15px;border:4px solid transparent;border-radius:10px;background-color:rgba(255,255,255,.97)}.member-detail .works-list .work-item .title{font-size:15px;line-height:1.5em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.member-detail .works-list .work-item .date{font:700 12px "Netto OT"}.member-detail .works-list .work-item:hover{z-index:2000}.member-detail .works-list .work-item:hover .image .border{display:block}.member-detail .works-list .work-item:hover .inner{border-color:#333}.member-detail .news-list{padding:0 30px;border:none;width:100%}.member-detail .news-list tr{position:relative;display:block;border:4px solid transparent;border-radius:10px;margin-bottom:10px;padding:20px;vertical-align:baseline;background-color:rgba(255,255,255,.97);-webkit-transform:translateZ(0);transform:translateZ(0);cursor:pointer}.member-detail .news-list tr:hover{z-index:2000;border-color:#333}.member-detail .news-list th{width:150px;padding-right:30px;font:700 12px "Netto OT";white-space:nowrap;text-align:right;vertical-align:baseline}@media only screen and (max-width:960px){body{padding:15px;font-size:14px;-webkit-text-size-adjust:100%}hr.line{margin:15px 0;height:1px;background-size:480px 1px}#header{margin:40px 0 50px}#logo img{width:125px;height:22.4px}#menu{display:none}.entry{margin:15px 0 10px}.entry .featured-image{margin:0 -15px -8px}.entry .featured-image .border{margin:15px;border-width:3px;border-radius:6px}.entry .inner{border-width:3px;border-radius:6px;padding:10px 20px}.entry .inner h1.title{margin-top:10px;margin-bottom:3px;font-size:15px}.entry .inner .date{margin-bottom:12px;font-size:11px}.entry .inner .body p,.entry .inner .body table{margin:15px 0}.entry .inner .body .award td,.entry .inner .body .award th,.entry .inner .body .credit td,.entry .inner .body .credit th{display:block;text-align:left}.entry .inner .body .award th,.entry .inner .body .credit th{margin-top:10px;margin-bottom:3px;font-size:14px}.entry .inner .body .award td,.entry .inner .body .credit td{font-size:12px}.entry .inner .body .award img,.entry .inner .body .credit img{max-height:30px;margin-right:15px}.member-list>div>hr.line{display:block!important}.member{margin:15px 0 -15px}.member .inner{padding:270px 10px 20px;border-width:2px;border-radius:6px;margin:30px 0}.member .inner .name-title{height:auto;padding:0}.member .inner .name-title .title{margin-bottom:3px;font-size:13px}.member .inner .name-title .name-ja{display:block;margin-bottom:-8px;font-size:20px}.member .inner .name-title .name-en{font-size:11px;margin:0}.member .portrait{left:-15px;top:-15px;width:100%;padding:15px 15px 0}.member .portrait .border{left:0;top:0;height:100%;border-width:2px;border-radius:6px 6px 0 0;border-bottom:none}}
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+@font-face {
+  font-family: "Netto OT";
+  font-style: normal;
+  font-weight: normal;
+  src: url(/assets/NettoWeb.woff) format("woff"); }
+@font-face {
+  font-family: "Netto OT";
+  font-style: normal;
+  font-weight: bold;
+  src: url(/assets/NettoWeb.woff) format("woff"); }
+* {
+  box-sizing: border-box;
+  outline: none; }
+
+html {
+  margin: 0;
+  padding: 0; }
+
+body {
+  margin: 0;
+  padding: 40px;
+  color: #333333;
+  font: normal 300 17px/1.7 "Noto Sans Japanese", sans-serif;
+  letter-spacing: 0.04em; }
+
+a {
+  color: #333333;
+  text-decoration: none;
+  border-bottom: 1px solid #333333; }
+  a:hover, a:visited, a:link, a:active {
+    color: #333333; }
+
+a[href^="http"] {
+  padding: 3px 14px 3px 0;
+  background-image: url(/assets/link.png);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 11px 7px; }
+
+iframe {
+  border: none; }
+
+hr.line {
+  margin: 30px 0;
+  border: none;
+  width: 100%;
+  height: 2px;
+  background-image: url(/assets/line.png); }
+
+#dots {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0.8;
+  z-index: 1000;
+  pointer-events: none; }
+
+#container {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto; }
+
+.notfound {
+  display: block;
+  text-align: center;
+  margin: 200px 0; }
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table; }
+
+.clearfix:after {
+  clear: both; }
+
+#header {
+  position: relative;
+  z-index: 2000;
+  margin-top: 20px; }
+
+#logo {
+  margin: 0 auto 20px;
+  text-align: center; }
+  #logo a {
+    border: none; }
+
+#menu {
+  display: block;
+  margin: 45px 0;
+  padding: 0;
+  text-align: center;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0); }
+  #menu li {
+    display: inline-block;
+    list-style: none;
+    font: bold 20px "Netto OT";
+    margin: 0 30px; }
+    #menu li .dot {
+      vertical-align: 13px;
+      font-size: 14px;
+      opacity: 0.8; }
+      #menu li .dot.inactive {
+        visibility: hidden; }
+    #menu li a {
+      color: #333333;
+      text-decoration: none;
+      border: none; }
+
+#footer .copyright {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  -webkit-transform-origin: left bottom;
+      -ms-transform-origin: left bottom;
+          transform-origin: left bottom;
+  -webkit-transform: scale(0.5, 0.5);
+      -ms-transform: scale(0.5, 0.5);
+          transform: scale(0.5, 0.5); }
+#footer .buttons {
+  position: fixed;
+  z-index: auto;
+  right: 20px;
+  bottom: 20px;
+  text-align: right;
+  font-size: 0;
+  -webkit-transform-origin: right bottom;
+      -ms-transform-origin: right bottom;
+          transform-origin: right bottom;
+  -webkit-transform: scale(0.5, 0.5);
+      -ms-transform: scale(0.5, 0.5);
+          transform: scale(0.5, 0.5); }
+  #footer .buttons:hover {
+    z-index: 2000; }
+  #footer .buttons button {
+    display: block;
+    width: 68px;
+    height: 68px;
+    background: none;
+    border: none;
+    cursor: pointer; }
+  #footer .buttons .facebook {
+    margin-bottom: 20px;
+    background-image: url(/assets/facebook.png); }
+    #footer .buttons .facebook:hover {
+      background-image: url(/assets/facebook-hover.png); }
+  #footer .buttons .twitter {
+    margin-bottom: 100px;
+    background-image: url(/assets/twitter.png); }
+    #footer .buttons .twitter:hover {
+      background-image: url(/assets/twitter-hover.png); }
+  #footer .buttons .top {
+    background-image: url(/assets/top.png); }
+    #footer .buttons .top:hover {
+      background-image: url(/assets/top-hover.png); }
+
+.entry {
+  position: relative;
+  z-index: auto;
+  margin: 30px; }
+  .entry .featured-image {
+    position: relative;
+    z-index: 100;
+    height: 430px;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    margin: 0 -30px -30px; }
+    .entry .featured-image .border {
+      height: 100%;
+      margin: 30px 30px 0;
+      border: 4px solid transparent;
+      border-radius: 10px; }
+  .entry .inner {
+    position: relative;
+    z-index: auto;
+    padding: 40px 62px;
+    background-color: transparent;
+    border: 4px solid transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0); }
+    .entry .inner h1.title {
+      margin: 22px auto 6px;
+      font-weight: 400;
+      font-size: 22px;
+      text-align: center; }
+    .entry .inner .date {
+      display: block;
+      margin-bottom: 28px;
+      font: bold 15px "Netto OT";
+      text-align: center; }
+      .entry .inner .date a {
+        border: none; }
+    .entry .inner .body {
+      margin: 0 auto;
+      padding: 0;
+      font-weight: 300; }
+      .entry .inner .body p, .entry .inner .body table {
+        margin: 20px 0; }
+      .entry .inner .body .award th, .entry .inner .body .award td, .entry .inner .body .credit th, .entry .inner .body .credit td {
+        font-size: 15px;
+        vertical-align: baseline; }
+      .entry .inner .body .award th, .entry .inner .body .credit th {
+        padding-right: 25px;
+        font: bold 15px "Netto OT"; }
+      .entry .inner .body .award th, .entry .inner .body .award td {
+        padding-bottom: 10px;
+        vertical-align: middle; }
+      .entry .inner .body .award img {
+        max-height: 40px;
+        margin-right: 20px; }
+    .entry .inner iframe {
+      min-width: 100%; }
+  .entry:hover {
+    z-index: 2000; }
+    .entry:hover .featured-image .border {
+      border-color: #333333;
+      -webkit-transition: all 0.1s ease-out;
+              transition: all 0.1s ease-out; }
+    .entry:hover .inner {
+      background-color: rgba(255, 255, 255, 0.97);
+      border-color: #333333;
+      -webkit-transition: all 0.1s ease-out;
+              transition: all 0.1s ease-out; }
+
+.member-list > div:not(:first-child) > hr.line {
+  display: none; }
+
+.member {
+  display: none;
+  position: relative;
+  z-index: auto;
+  margin: 30px;
+  margin-bottom: 90px; }
+  .member.list {
+    display: block;
+    cursor: pointer; }
+  .member .inner {
+    position: relative;
+    z-index: auto;
+    margin: 60px 0;
+    padding: 30px 60px;
+    background-color: transparent;
+    border: 4px solid transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0); }
+    .member .inner .name-title {
+      display: table;
+      width: 100%;
+      height: 132px;
+      padding-left: 326px; }
+      .member .inner .name-title > div {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle; }
+      .member .inner .name-title .title {
+        display: block;
+        font: bold 18px "Netto OT";
+        margin-bottom: 10px; }
+      .member .inner .name-title .name-ja {
+        font-size: 26px; }
+      .member .inner .name-title .name-en {
+        font: normal 15px "Netto OT";
+        margin-left: 10px; }
+    .member .inner .more {
+      display: none; }
+      .member .inner .more.detailed {
+        display: block; }
+    .member .inner hr.line {
+      margin-left: 316px;
+      width: 452px; }
+    .member .inner .body {
+      margin-top: 80px; }
+    .member .inner .links {
+      padding: 0; }
+      .member .inner .links li {
+        display: inline-block;
+        margin-right: 20px;
+        list-style: none;
+        font-size: 15px; }
+  .member .portrait {
+    position: absolute;
+    left: -30px;
+    top: -30px;
+    width: 350px;
+    height: 262px;
+    background-size: cover;
+    background-position: center 20%;
+    overflow: hidden;
+    padding: 30px 0; }
+    .member .portrait .border {
+      position: relative;
+      left: 30px;
+      width: 100%;
+      height: 200px;
+      border: 4px solid transparent;
+      border-radius: 10px; }
+      .member .portrait .border.focusing {
+        height: 300px; }
+  .member:hover {
+    z-index: 2000; }
+    .member:hover .inner {
+      background-color: rgba(255, 255, 255, 0.97);
+      border-color: #333333;
+      -webkit-transition: all 0.1s ease-out;
+              transition: all 0.1s ease-out; }
+    .member:hover .portrait .border {
+      border-color: #333333;
+      -webkit-transition: all 0.1s ease-out;
+              transition: all 0.1s ease-out; }
+
+.member-detail h2 {
+  font: bold 20px "Netto OT";
+  text-align: center;
+  margin-bottom: 0; }
+.member-detail .works-list {
+  margin: 0 -30px; }
+  .member-detail .works-list .work-item {
+    position: relative;
+    width: 280px;
+    height: 202px;
+    margin: 0 30px 30px;
+    float: left;
+    text-align: center;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    cursor: pointer; }
+    .member-detail .works-list .work-item .image {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 280px;
+      height: 126px;
+      background-size: cover;
+      overflow: hidden; }
+      .member-detail .works-list .work-item .image .border {
+        display: none;
+        position: relative;
+        margin: 10px;
+        height: 100%;
+        border: 4px solid #333333;
+        border-radius: 10px; }
+    .member-detail .works-list .work-item .inner {
+      margin: 10px;
+      padding: 122px 10px 15px;
+      border: 4px solid transparent;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.97); }
+    .member-detail .works-list .work-item .title {
+      font-size: 15px;
+      line-height: 1.5em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+    .member-detail .works-list .work-item .date {
+      font: bold 12px "Netto OT"; }
+    .member-detail .works-list .work-item:hover {
+      z-index: 2000; }
+      .member-detail .works-list .work-item:hover .image .border {
+        display: block; }
+      .member-detail .works-list .work-item:hover .inner {
+        border-color: #333333; }
+.member-detail .news-list {
+  padding: 0 30px;
+  border: none;
+  width: 100%; }
+  .member-detail .news-list tr {
+    position: relative;
+    display: block;
+    border: 4px solid transparent;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 20px;
+    vertical-align: baseline;
+    background-color: rgba(255, 255, 255, 0.97);
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    cursor: pointer; }
+    .member-detail .news-list tr:hover {
+      z-index: 2000;
+      border-color: #333333; }
+  .member-detail .news-list th {
+    width: 150px;
+    padding-right: 30px;
+    font: bold 12px "Netto OT";
+    white-space: nowrap;
+    text-align: right;
+    vertical-align: baseline; }
+
+@media only screen and (max-width: 960px) {
+  body {
+    padding: 15px 15px 50px;
+    font-size: 14px;
+    -webkit-text-size-adjust: 100%; }
+
+  hr.line {
+    margin: 15px 0;
+    height: 1px;
+    background-size: 480px 1px; }
+
+  #header {
+    margin: 40px 0 50px; }
+
+  #logo img {
+    width: 125px;
+    height: 22.4px; }
+
+  #menu {
+    display: none; }
+
+  .entry {
+    margin: 15px 0 10px; }
+    .entry .featured-image {
+      margin: 0 -15px -8px; }
+      .entry .featured-image .border {
+        margin: 15px;
+        border-width: 3px;
+        border-radius: 6px; }
+    .entry .inner {
+      border-width: 3px;
+      border-radius: 6px;
+      padding: 10px 20px; }
+      .entry .inner h1.title {
+        margin-top: 10px;
+        margin-bottom: 3px;
+        font-size: 15px; }
+      .entry .inner .date {
+        margin-bottom: 12px;
+        font-size: 11px; }
+      .entry .inner .body p, .entry .inner .body table {
+        margin: 15px 0; }
+      .entry .inner .body .award th, .entry .inner .body .award td, .entry .inner .body .credit th, .entry .inner .body .credit td {
+        display: block;
+        text-align: left; }
+      .entry .inner .body .award th, .entry .inner .body .credit th {
+        margin-top: 10px;
+        margin-bottom: 3px;
+        font-size: 14px; }
+      .entry .inner .body .award td, .entry .inner .body .credit td {
+        font-size: 12px; }
+      .entry .inner .body .award img, .entry .inner .body .credit img {
+        max-height: 30px;
+        margin-right: 15px; }
+
+  .member-list > div > hr.line {
+    display: block !important; }
+
+  .member {
+    margin: 15px 0 -15px; }
+    .member .inner {
+      padding: 270px 10px 20px;
+      border-width: 2px;
+      border-radius: 6px;
+      margin: 30px 0; }
+      .member .inner .name-title {
+        height: auto;
+        padding: 0; }
+        .member .inner .name-title .title {
+          margin-bottom: 3px;
+          font-size: 13px; }
+        .member .inner .name-title .name-ja {
+          display: block;
+          margin-bottom: -8px;
+          font-size: 20px; }
+        .member .inner .name-title .name-en {
+          font-size: 11px;
+          margin: 0; }
+    .member .portrait {
+      left: -15px;
+      top: -15px;
+      width: 100%;
+      padding: 15px 15px 0; }
+      .member .portrait .border {
+        left: 0;
+        top: 0;
+        height: 100%;
+        border-width: 2px;
+        border-radius: 6px 6px 0 0;
+        border-bottom: none; }
+
+  #footer .copyright {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    -webkit-transform-origin: left top;
+        -ms-transform-origin: left top;
+            transform-origin: left top; }
+  #footer .buttons {
+    z-index: 3000;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding: 13px;
+    -webkit-transform: none;
+        -ms-transform: none;
+            transform: none; }
+    #footer .buttons button {
+      float: left;
+      width: 31px;
+      height: 31px;
+      background-size: 31px 31px; }
+    #footer .buttons .facebook {
+      margin-bottom: 0;
+      margin-right: 10px;
+      background-image: url(/assets/facebook-sp.png); }
+      #footer .buttons .facebook:hover {
+        background-image: url(/assets/facebook-sp.png); }
+    #footer .buttons .twitter {
+      margin-bottom: 0;
+      background-image: url(/assets/twitter-sp.png); }
+      #footer .buttons .twitter:hover {
+        background-image: url(/assets/twitter-sp.png); }
+    #footer .buttons .top {
+      position: absolute;
+      right: 13px;
+      background-image: url(/assets/top-sp.png); }
+      #footer .buttons .top:hover {
+        background-image: url(/assets/top-sp.png); } }

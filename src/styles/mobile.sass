@@ -1,5 +1,5 @@
 body
-  padding: 15px
+  padding: 15px 15px 50px
   font-size: 14px
   -webkit-text-size-adjust: 100%
 
@@ -102,3 +102,41 @@ hr.line
       border-width: 2px
       border-radius: 6px 6px 0 0
       border-bottom: none
+
+
+#footer
+  .copyright
+    position: absolute
+    left: 15px
+    top: 15px
+    transform-origin: left top
+  .buttons
+    z-index: 3000
+    width: 100%
+    left: 0
+    bottom: 0
+    padding: 13px
+    transform: none
+    button
+      float: left
+      width: 31px
+      height: 31px
+      background-size: 31px 31px
+    .facebook
+      margin-bottom: 0
+      margin-right: 10px
+      background-image: url(/assets/facebook-sp.png)
+      &:hover
+        background-image: url(/assets/facebook-sp.png)
+    .twitter
+      margin-bottom: 0
+      background-image: url(/assets/twitter-sp.png)
+      &:hover
+        background-image: url(/assets/twitter-sp.png)
+    .top
+      position: absolute
+      right: 13px
+      background-image: url(/assets/top-sp.png)
+      &:hover
+        background-image: url(/assets/top-sp.png)
+
