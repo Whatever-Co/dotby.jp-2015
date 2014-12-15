@@ -3,7 +3,7 @@ module.exports =
   menu: [
     {name: 'ABOUT', path: '/about/'},
     {name: 'MEMBERS', path: '/members/'},
-    {name: 'WORKS', path: '/category/works/'},
+    {name: 'WORK', path: '/category/work/'},
     {name: 'NEWS', path: '/category/news/'},
   ]
 
