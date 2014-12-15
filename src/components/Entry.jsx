@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react/addons');
+var cx = React.addons.classSet;
 var Router = require('react-router');
 var {Navigation, Link} = Router;
 var $ = require('jquery');
@@ -71,7 +72,7 @@ module.exports = React.createClass({
             });
         }
         return (
-            <div className="entry" ref="entry" style={style}>
+            <div className={cx({entry: true, 'with-image': entry.featured_image})} ref="entry" style={style}>
                 <div className="inner" ref="inner" style={style}>
                     <h1 className="title" dangerouslySetInnerHTML={{__html: entry.title}}/>
                     <span className="date"><Link to={`/post/${entry.slug}/`}>{moment(entry.date_gmt).format('LL')}</Link></span>
