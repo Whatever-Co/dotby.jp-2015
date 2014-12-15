@@ -89,13 +89,21 @@ hr.line
   display: block !important
 
 .member
-  margin: 15px 0 -15px
+  margin: 15px -15px 0
+  &.list
+    margin-bottom: 0
+  &.open
+    margin-bottom: 35px
 
-  .inner
-    padding: 270px 15px 20px
-    border-width: 2px
-    border-radius: 6px
-    margin: 30px 0
+  > div
+    padding: 15px
+    padding-bottom: 0
+
+    .inner
+      padding: 270px 15px 20px
+      border-width: 2px
+      border-radius: 6px
+      background-position: -17px -17px
 
     .name-title
       height: auto
@@ -120,20 +128,6 @@ hr.line
       .links
         margin-bottom: 0
 
-
-  .portrait
-    left: -15px
-    top: -15px
-    width: 100%
-    padding: 15px 15px 0
-
-    .border
-      left: 0
-      top: 0
-      height: 100%
-      border-width: 2px
-      border-radius: 6px 6px 0 0
-      border-bottom: none
 
 
 .member-detail

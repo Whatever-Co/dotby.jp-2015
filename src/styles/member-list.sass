@@ -1,27 +1,37 @@
 .member-list > div:not(:first-child) > hr.line
   display: none
 
-
 .member
-  display: none
   position: relative
-  z-index: auto
-  margin: 30px
-  margin-bottom: 90px
+  display: none
   &.list
     display: block
+    margin-bottom: 30px
     cursor: pointer
+  &.open
+    display: block
+    margin-bottom: 28px
+    >div .more
+      display: block
 
-  .inner
-    position: relative
-    z-index: auto
-    margin: 60px 0
-    padding: 30px 60px
-    background-color: transparent
-    border: 4px solid transparent
-    border-radius: 10px
-    overflow: hidden
-    transform: translateZ(0)
+  > div
+    padding: 30px
+    background-position: left top
+    background-repeat: no-repeat
+    background-size: 350px 262px
+
+    .inner
+      position: relative
+      z-index: auto
+      padding: 30px 60px
+      background-position: -34px -34px
+      background-repeat: no-repeat
+      background-size: 350px 262px
+      background-color: transparent
+      border: 4px solid transparent
+      border-radius: 10px
+      overflow: hidden
+      transform: translateZ(0)
 
     .name-title
       display: table
@@ -45,8 +55,6 @@
 
     .more
       display: none
-      &.detailed
-        display: block
     hr.line
       margin-left: 316px
       width: 452px
@@ -60,34 +68,14 @@
         list-style: none
         font-size: 15px
 
-  .portrait
-    position: absolute
-    left: -30px
-    top: -30px
-    width: 350px
-    height: 262px
-    background-size: cover
-    background-position: center 20%
-    overflow: hidden
-    padding: 30px 0
-
-    .border
-      position: relative
-      left: 30px
-      width: 100%
-      height: 200px
-      border: 4px solid transparent
-      border-radius: 10px
-      &.focusing
-        height: 300px
-
-  &:hover
-    z-index: 2000
-    .inner
-      background-color: $white
-      border-color: $black
-      transition: all 0.1s ease-out
-    .portrait
-      .border
+    &:hover
+      .inner
+        z-index: 2000
+        background-color: $white
         border-color: $black
         transition: all 0.1s ease-out
+      .portrait
+        .border
+          border-color: $black
+          transition: all 0.1s ease-out
+

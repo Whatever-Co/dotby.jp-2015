@@ -17,10 +17,13 @@ var Member = React.createClass({
         this.transitionTo(`/members/${this.props.member.slug}/`);
     },
     _onResize() {
-        var w = window.innerWidth - 30;
+        var w = window.innerWidth;
         var h = w / 4 * 3;
-        $(this.refs.portrait.getDOMNode()).width(w).height(h);
-        $(this.refs.inner.getDOMNode()).css('padding-top', h + 25);
+        $(this.refs.portrait.getDOMNode()).css('background-size', `${w}px ${h}px`);
+        $(this.refs.inner.getDOMNode()).css({
+            'padding-top': h + 10,
+            'background-size': `${w}px ${h}px`
+        });
     },
     componentDidMount() {
         if (isMobile) {
@@ -35,23 +38,23 @@ var Member = React.createClass({
         var member = this.props.member;
         var content = $(member.content);
         return (
-            <div className={cx({member: true, list: member.isListMode | member.isFocusing})} onClick={!member.isFocusing ? this._onClick : null}>
-                <div className="inner" ref="inner">
-                    <div className="name-title">
-                        <div>
-                            <span className="title"><span style={{color: member.color}}>●</span> {member.job_title}</span>
-                            <span className="name-ja">{member.title}</span>
-                            {member.name_en ? <span className="name-en">{member.name_en}</span> : ''}
+            <div className={'member ' + member.mode} onClick={member.mode == 'list' ? this._onClick : null}>
+                <hr className="line"/>
+                <div ref="portrait" style={{backgroundImage: `url(${member.featured_image.source})`}}>
+                    <div className="inner" ref="inner" style={{backgroundImage: `url(${member.featured_image.source})`}}>
+                        <div className="name-title">
+                            <div>
+                                <span className="title"><span style={{color: member.color}}>●</span> {member.job_title}</span>
+                                <span className="name-ja">{member.title}</span>
+                                {member.name_en ? <span className="name-en">{member.name_en}</span> : ''}
+                            </div>
+                        </div>
+                        <div className="more">
+                            <hr className="line"/>
+                            <div className="body" dangerouslySetInnerHTML={{__html: content.filter('.body').html()}}></div>
+                            <ul className="links" dangerouslySetInnerHTML={{__html: content.filter('.links').html()}}/>
                         </div>
                     </div>
-                    <div className={cx({more: true, detailed: member.isFocusing})}>
-                        <hr className="line"/>
-                        <div className="body" dangerouslySetInnerHTML={{__html: content.filter('.body').html()}}></div>
-                        <ul className="links" dangerouslySetInnerHTML={{__html: content.filter('.links').html()}}/>
-                    </div>
-                </div>
-                <div className="portrait" ref="portrait" style={{backgroundImage: `url(${member.featured_image.source})`}}>
-                    <div className={cx({border: true, focusing: member.isFocusing})}/>
                 </div>
             </div>
         );
@@ -69,6 +72,11 @@ module.exports = React.createClass({
         state.members.map((member) => {
             member.isListMode = !current;
             member.isFocusing = member.slug == current;
+            if (current) {
+                member.mode = member.slug == current ? 'open' : 'close';
+            } else {
+                member.mode = 'list';
+            }
         });
         return state;
     },
@@ -87,14 +95,7 @@ module.exports = React.createClass({
     render() {
         return (
             <div className="member-list">
-                {this.state.members.map((member) => {
-                    return (
-                        <div key={member.guid}>
-                            <hr className="line"/>
-                            <Member member={assign(member, MEMBER_DATA[member.slug])}/>
-                        </div>
-                    );
-                })}
+                {this.state.members.map(member => <Member key={member.guid} member={assign(member, MEMBER_DATA[member.slug])}/>)}
                 <RouteHandler/>
             </div>
         );
