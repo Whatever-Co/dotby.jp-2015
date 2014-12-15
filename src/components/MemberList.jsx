@@ -36,7 +36,14 @@ var Member = React.createClass({
     },
     render() {
         var member = this.props.member;
-        var content = $(member.content);
+        if (member.meta.rel_links) {
+            var links = member.meta.rel_links.split(/\n/).map((link) => {
+                var info = link.split(',');
+                var name = info[0].trim();
+                var href = info[1].trim();
+                return <li key={href}><a href={href} target="_blank">{name}</a></li>;
+            });
+        }
         return (
             <div className={'member ' + member.mode} onClick={member.mode == 'list' ? this._onClick : null}>
                 <hr className="line"/>
@@ -44,15 +51,15 @@ var Member = React.createClass({
                     <div className="inner" ref="inner" style={{backgroundImage: `url(${member.featured_image.source})`}}>
                         <div className="name-title">
                             <div>
-                                <span className="title"><span style={{color: member.color}}>●</span> {member.job_title}</span>
+                                <span className="title"><span style={{color: member.color}}>●</span> {member.meta.title}</span>
                                 <span className="name-ja">{member.title}</span>
                                 {member.name_en ? <span className="name-en">{member.name_en}</span> : ''}
                             </div>
                         </div>
                         <div className="more">
                             <hr className="line"/>
-                            <div className="body" dangerouslySetInnerHTML={{__html: content.filter('.body').html()}}></div>
-                            <ul className="links" dangerouslySetInnerHTML={{__html: content.filter('.links').html()}}/>
+                            <div className="body" dangerouslySetInnerHTML={{__html: member.content}}></div>
+                            <ul className="links">{links}</ul>
                         </div>
                     </div>
                 </div>
@@ -70,8 +77,6 @@ module.exports = React.createClass({
     _setFlags(state) {
         var current= this.getParams().member;
         state.members.map((member) => {
-            member.isListMode = !current;
-            member.isFocusing = member.slug == current;
             if (current) {
                 member.mode = member.slug == current ? 'open' : 'close';
             } else {
