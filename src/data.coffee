@@ -1,6 +1,7 @@
 module.exports =
 
   menu: [
+    {name: 'TOP', path: '/'},
     {name: 'ABOUT', path: '/about/'},
     {name: 'MEMBERS', path: '/members/'},
     {name: 'WORK', path: '/category/work/'},

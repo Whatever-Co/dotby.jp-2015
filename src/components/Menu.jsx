@@ -48,7 +48,11 @@ module.exports = React.createClass({
     _setActive() {
         var current = this.getPathname();
         var items = this.state.items.map((item) => {
-            item.active = current.indexOf(item.path) == 0;
+            if (item.path == '/') {
+                item.active = current == item.path;
+            } else {
+                item.active = current.indexOf(item.path) == 0;
+            }
             return item;
         });
         this.setState({items: items});

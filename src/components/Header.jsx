@@ -12,11 +12,12 @@ var MenuData = require('../data').menu;
 module.exports = React.createClass({
     mixins: [State],
     getInitialState() {
-        return {items: MenuData.map((item) => {
+        return {items: _.without(MenuData.map((item) => {
+            if (item.name == 'TOP') return false;
             var copy = _.clone(item);
             copy.active = false;
             return copy;
-        })};
+        }), false)};
     },
     _setActive() {
         var current = this.getPathname();
