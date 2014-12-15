@@ -47,13 +47,17 @@ var WorkItem = React.createClass({
 module.exports = React.createClass({
     mixins: [State, Navigation],
     getInitialState() {
-        return {works: [], news: []};
+        return {member: null, work: [], news: []};
     },
     getDetail() {
-        $.getJSON('/wp-json/posts', {'filter[tag]': this.getParams().member}).done((result) => {
-            var state = {works: [], news: []};
+        var member = this.getParams().member;
+        if (member == this.state.member) return;
+        $.getJSON('/wp-json/posts', {'filter[tag]': member}).done((result) => {
+            var state = {member: member, work: [], news: []};
             result.map((entry) => {
-                state[entry.terms.category[0].slug].push(entry);
+                if (state[entry.terms.category[0].slug]) {
+                    state[entry.terms.category[0].slug].push(entry);
+                }
             });
             this.setState(state);
         });
@@ -68,7 +72,7 @@ module.exports = React.createClass({
         this.transitionTo(`/post/${path}/`);
     },
     render() {
-        var works = this.state.works.map(work => <WorkItem key={work.guid} {...work}/>);
+        var work = this.state.work.map(work => <WorkItem key={work.guid} {...work}/>);
         var news = this.state.news.map((news) => {
             var date = moment(news.date).format('LL');
             if (isMobile) {
@@ -89,11 +93,11 @@ module.exports = React.createClass({
         });
         return (
             <div className="member-detail">
-                {works.length ? (
+                {work.length ? (
                     <div>
-                        <h2>WORKS</h2>
+                        <h2>WORK</h2>
                         <hr className = "line" />
-                        <div className="works-list clearfix">{works}</div>
+                        <div className="works-list clearfix">{work}</div>
                     </div>
                 ) : ''}
                 {news.length ? (
