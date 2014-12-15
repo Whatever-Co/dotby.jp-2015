@@ -88,15 +88,19 @@ module.exports = React.createClass({
     },
     render() {
         var entry = this.props.entry;
-        var content = $(entry.content);
-        $('a[href^="http"]', content).attr({target: '_blank'});
-        var award = content.filter('.award').text().trim();
-        var credit = content.filter('.credit');
-        var body = '';
-        content.not('.award, .credit').each((index, element) => {
-            var t = element.outerHTML;
-            if (t) body += t;
-        });
+        if (entry.meta.credit) {
+            var credit = entry.meta.credit.split('\n').map((item) => {
+                [title, name, link] = item.split(',');
+                title = title.trim();
+                name = name.trim();
+                if (link) link = link.trim();
+                if (link) {
+                    return <span key={title + name + link}>{title}: <a href={link} target="_blank">{name}</a></span>;
+                } else {
+                    return <span key={title + name + link}>{title}: {name}</span>
+                }
+            });
+        }
         return (
             <div className="entry" ref="entry" onMouseEnter={this._onMouseEnter} onMouseLeave={this._onMouseLeave}>
                 {entry.featured_image ? (
@@ -108,21 +112,21 @@ module.exports = React.createClass({
                     <h1 className="title" dangerouslySetInnerHTML={{__html: entry.title}}/>
                     <span className="date"><Link to={`/post/${entry.slug}/`}>{moment(entry.date_gmt).format('LL')}</Link></span>
                     <div className="body" ref="body">
-                        <div dangerouslySetInnerHTML={{__html: body}}/>
-                        {entry.terms.category[0].slug == 'works' ? (
+                        <div dangerouslySetInnerHTML={{__html: entry.content}}/>
+                        {entry.terms.category[0].slug == 'work' ? (
                             <table>
                                 <tbody>
-                                {award ? (
+                                {entry.meta.awards ? (
                                     <tr className="award">
                                         <th>AWARD</th>
                                         <td>
-                                            {award.split(',').map(item => item ? <img key={item} src={`/assets/${item}.png`}/> : false)}
+                                            {entry.meta.awards.map(item => item ? <img key={item} src={`/assets/${item}.png`}/> : false)}
                                         </td>
                                     </tr>
                                 ) : null}
                                     <tr className="credit">
                                         <th>CREDIT</th>
-                                        <td ref="credit" dangerouslySetInnerHTML={{__html: credit.html()}}/>
+                                        <td ref="credit">{credit}</td>
                                     </tr>
                                 </tbody>
                             </table>
