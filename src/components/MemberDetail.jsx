@@ -15,9 +15,10 @@ var WorkItem = React.createClass({
     },
     _onResize() {
         var width = $(window).width();
-        var h = width / 960 * 430;
-        $(this.refs.image.getDOMNode()).width(width).height(h);
-        $(this.refs.inner.getDOMNode()).css('padding-top', h + 10);
+        var h = ~~(width / 960 * 430);
+        var style = {backgroundSize: `${width}px ${h}px`};
+        $(this.refs.work.getDOMNode()).css(style);
+        $(this.refs.inner.getDOMNode()).css(style).css('padding-top', h - 17);
     },
     componentDidMount() {
         if (isMobile) {
@@ -29,12 +30,10 @@ var WorkItem = React.createClass({
         $(window).off('resize', this._onResize);
     },
     render() {
+        var style = {backgroundImage: `url(${this.props.featured_image.source})`};
         return (
-            <div className="work-item" onClick={this._onClick}>
-                <div className="image" ref="image" style={{backgroundImage: `url(${this.props.featured_image.source})`}}>
-                    <div className="border"/>
-                </div>
-                <div className="inner" ref="inner">
+            <div className="work-item" ref="work" onClick={this._onClick} style={style}>
+                <div className="inner" ref="inner" style={style}>
                     <div className="title">{this.props.title}</div>
                     <div className="date">{moment(this.props.date).format('LL')}</div>
                 </div>
