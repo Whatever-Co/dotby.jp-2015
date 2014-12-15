@@ -150,7 +150,6 @@ class Dots
 
     # console.log('added', added.length, 'moved', moved.length, 'willRemoved', willRemoved.length)
     dots = @currentDots = @currentDots.concat(added, moved, willRemoved)
-    # console.log('current', @currentDots.length)
 
     @runningPatterns = [@currentPattern, nextPattern]
 
@@ -159,7 +158,6 @@ class Dots
         if willRemoved.length
           willRemoved.unshift(@currentDots)
           @currentDots = _.without.apply(null, willRemoved)
-        # console.log('current', @currentDots.length)
         @currentPattern = nextPattern
         deferred.resolve()
       ).start()

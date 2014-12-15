@@ -82,17 +82,19 @@ module.exports = React.createClass({
     },
     render() {
         return (
-            <div id="floating-menu">
-                <ul className={cx({close: !this.state.isOpen})}>
-                {this.state.items.map((item) => {
-                    return (
-                        <li key={item.path}>
-                            <span className={cx({dot: true, inactive: !item.active})}>●</span>
-                            <Link to={item.path}>{item.name}</Link>
-                        </li>
-                    );
-                })}
-                </ul>
+            <div>
+                <div id="floating-menu" className={cx({close: !this.state.isOpen})}>
+                    <ul>
+                    {this.state.items.map((item) => {
+                        return (
+                            <li key={item.path}>
+                                <span className={cx({dot: true, inactive: !item.active})}>●</span>
+                                <Link to={item.path}>{item.name}</Link>
+                            </li>
+                        );
+                    })}
+                    </ul>
+                </div>
                 <MenuButton isEnable={this.state.isEnable} isOpen={this.state.isOpen} onClick={this._toggleMenu}/>
             </div>
         );
