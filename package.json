@@ -27,7 +27,8 @@
     "mobile-detect": "~0.4.3",
     "grunt-rsync": "~0.6.2",
     "grunt-contrib-cssmin": "~0.10.0",
-    "browsernizr": "~1.0.2"
+    "browsernizr": "~1.0.2",
+    "google-maps": "~2.1.1"
   },
   "browserify-shim": {
     "./src/components/Dots/quadtree.js": "QUAD"
