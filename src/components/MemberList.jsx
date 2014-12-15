@@ -52,14 +52,14 @@ var Member = React.createClass({
                         <div className="name-title">
                             <div>
                                 <span className="title"><span style={{color: member.color}}>●</span> {member.meta.title}</span>
-                                <span className="name-ja">{member.title}</span>
+                                <span className="name-ja">{member.name_ja}</span>
                                 {member.name_en ? <span className="name-en">{member.name_en}</span> : ''}
                             </div>
                         </div>
                         <div className="more">
                             <hr className="line"/>
                             <div className="body" dangerouslySetInnerHTML={{__html: member.content}}></div>
-                            <ul className="links">{links}</ul>
+                            {links ? (<ul className="links">{links}</ul>) : ''}
                         </div>
                     </div>
                 </div>
