@@ -2,8 +2,46 @@ var React = require('react');
 var Router = require('react-router');
 var {State, Navigation, Link} = Router;
 var $ = require('jquery');
+var MobileDetect = require('mobile-detect');
+var isMobile = !!new MobileDetect(navigator.userAgent).mobile();
 var moment = require('moment');
 moment.locale('en');
+
+
+var WorkItem = React.createClass({
+    mixins: [Navigation],
+    _onClick() {
+        this.transitionTo(`/post/${this.props.slug}/`);
+    },
+    _onResize() {
+        var width = $(window).width();
+        var h = width / 960 * 430;
+        $(this.refs.image.getDOMNode()).width(width).height(h);
+        $(this.refs.inner.getDOMNode()).css('padding-top', h + 10);
+    },
+    componentDidMount() {
+        if (isMobile) {
+            $(window).on('resize', this._onResize);
+            this._onResize();
+        }
+    },
+    componentWillUnmount() {
+        $(window).off('resize', this._onResize);
+    },
+    render() {
+        return (
+            <div className="work-item" onClick={this._onClick}>
+                <div className="image" ref="image" style={{backgroundImage: `url(${this.props.featured_image.source})`}}>
+                    <div className="border"/>
+                </div>
+                <div className="inner" ref="inner">
+                    <div className="title">{this.props.title}</div>
+                    <div className="date">{moment(this.props.date).format('LL')}</div>
+                </div>
+            </div>
+        );
+    }
+});
 
 
 module.exports = React.createClass({
@@ -30,26 +68,24 @@ module.exports = React.createClass({
         this.transitionTo(`/post/${path}/`);
     },
     render() {
-        var works = this.state.works.map((work) => {
-            return (
-                <div className="work-item" key={work.guid} onClick={this._onClickItem.bind(this, work.slug)}>
-                    <div className="image" style={{backgroundImage: `url(${work.featured_image.source})`}}>
-                        <div className="border"/>
-                    </div>
-                    <div className="inner">
-                        <div className="title">{work.title}</div>
-                        <div className="date">{moment(work.date).format('LL')}</div>
-                    </div>
-                </div>
-            );
-        });
+        var works = this.state.works.map(work => <WorkItem key={work.guid} {...work}/>);
         var news = this.state.news.map((news) => {
-            return (
-                <tr key={news.guid} onClick={this._onClickItem.bind(this, news.slug)}>
-                    <th>{moment(news.date).format('LL')}</th>
-                    <td>{news.title}</td>
-                </tr>
-            );
+            var date = moment(news.date).format('LL');
+            if (isMobile) {
+                return (
+                    <tr key={news.guid} onClick={this._onClickItem.bind(this, news.slug)}>
+                        <td>{news.title}</td>
+                        <th>{date}</th>
+                    </tr>
+                );
+            } else {
+                return (
+                    <tr key={news.guid} onClick={this._onClickItem.bind(this, news.slug)}>
+                        <th>{date}</th>
+                        <td>{news.title}</td>
+                    </tr>
+                );
+            }
         });
         return (
             <div className="member-detail">
