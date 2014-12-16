@@ -5,6 +5,7 @@ THREE = require('three')
 QUAD = require('./quadtree')
 TWEEN = require('tween.js')
 #Stats = require('stats-js')
+Detector = require('./Detector')
 
 SVGRenderer = require('./renderers/SVGRenderer')
 WebGLRenderer = require('./renderers/WebGLRenderer')
@@ -43,8 +44,10 @@ class Dots
 
 
   constructor: (container) ->
-#    @renderer = new SVGRenderer(container)
-    @renderer = new WebGLRenderer(container)
+    if Detector.webgl
+      @renderer = new WebGLRenderer(container)
+    else
+      @renderer = new SVGRenderer(container)
     @quadtree = QUAD.init(x: 0, y: 0, w: window.innerWidth, h: innerHeight)
     @currentDots = []
     @currentPattern = null
