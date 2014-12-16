@@ -36,12 +36,13 @@ body
 a
   color: $black
   text-decoration: none
+  padding: 3px 0
   border-bottom: 1px solid $black
   &:hover, &:visited, &:link, &:active
     color: $black
 
-a[href^="http"]
-  padding: 3px 14px 3px 0
+a[href^="http"], a[href^="skype"]
+  padding-right: 14px
   background-image: url(/assets/link.png)
   background-repeat: no-repeat
   background-position: right center

@@ -8,35 +8,44 @@ var GoogleMapsLoader = require('google-maps');
 
 var DotEvents = require('./Dots/Events');
 var NotFound = require('./NotFound');
+var Lang = require('./Lang');
 
 var mapStyle = [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":40}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-10},{"lightness":30}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":10}]},{"featureType":"landscape.natural","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":60}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]}];
 
 
 module.exports = React.createClass({
-    mixins: [State, Navigation],
+
+    mixins: [State, Navigation, Lang],
+
     getInitialState() {
         return {entry: null};
     },
+
     getEntry() {
         var params = this.getParams();
-        $.getJSON(`/wp-json/pages/${params.page}`).done((result) => {
+        $.getJSON(`/wp-json/pages/${params.page}`, {lang: this.context.lang}).done((result) => {
             this.setState({entry: result});
         });
     },
+
     componentDidMount() {
         this.getEntry();
     },
+
     componentWillUnmount() {
         DotEvents.removeListener('colorChanged', this._onChangeColor);
         $(window).off('resize', this._onResize);
     },
+
     componentWillReceiveProps() {
         this.getEntries();
     },
+
     _onResize() {
         var map = $('.map', this.getDOMNode());
         map.height(map.width());
     },
+
     _setMap() {
         GoogleMapsLoader.load((google) => {
             var el = $('.map', this.getDOMNode())[0];
@@ -72,20 +81,23 @@ module.exports = React.createClass({
             }
         });
     },
+
     _onChangeColor(color) {
         var icon = this._marker.getIcon();
         icon.fillColor = color;
         this._marker.setIcon(icon);
     },
+
     componentDidUpdate() {
-        if (this.getPathname() == '/about/') {
+        if (this.getPathname() == this.context.langPrefix + '/about/') {
             this._setMap();
         }
     },
+
     render() {
         if (!this.state.entry) return <NotFound/>;
         var entry = this.state.entry;
-        var clsName = 'page-' + this.getPathname().replace(/[^\w]/g, '');
+        var clsName = 'page-' + this.getPathname().substr(this.context.langPrefix.length).replace(/[^\w]/g, '');
         return (
             <div>
                 <div key={entry.guid}>

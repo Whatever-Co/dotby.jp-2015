@@ -7,7 +7,8 @@
   &.list
     display: block
     margin-bottom: 30px
-    cursor: pointer
+    .inner
+      cursor: pointer
   &.open
     display: block
     margin-bottom: 28px
@@ -32,6 +33,11 @@
       border-radius: 10px
       overflow: hidden
       transform: translateZ(0)
+      &:hover
+        z-index: 2000
+        background-color: $white
+        border-color: $black
+        transition: all 0.1s ease-out
 
     .name-title
       display: table
@@ -67,15 +73,4 @@
         margin-right: 20px
         list-style: none
         font-size: 15px
-
-    &:hover
-      .inner
-        z-index: 2000
-        background-color: $white
-        border-color: $black
-        transition: all 0.1s ease-out
-      .portrait
-        .border
-          border-color: $black
-          transition: all 0.1s ease-out
 

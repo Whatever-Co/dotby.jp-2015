@@ -1,14 +1,16 @@
 var React = require('react/addons');
 var cx = React.addons.classSet;
 var Router = require('react-router');
-var {Link, State} = Router;
+var {State} = Router;
 var $ = require('jquery');
 var _ = require('underscore');
 require('browsernizr/test/touchevents');
 var Modernizr= require('browsernizr');
 
+var Link = require('./Link');
 var DotEvents = require('./Dots/Events');
 var MenuData = require('../data').menu;
+var Lang = require('./Lang');
 
 
 var MenuButton = React.createClass({
@@ -30,69 +32,68 @@ var MenuButton = React.createClass({
 
 
 module.exports = React.createClass({
-    mixins: [State],
+
+    mixins: [State, Lang],
+
     getInitialState() {
         return {
             isEnable: false,
             isOpen: false,
-            items: MenuData.map((item) => {
-                var copy = _.clone(item);
-                copy.active = false;
-                return copy;
-            })
+            items: MenuData.map(item => _.clone(item))
         };
     },
+
     _toggleMenu() {
         this.setState({isOpen: !this.state.isOpen});
     },
-    _setActive() {
-        var current = this.getPathname();
-        var items = this.state.items.map((item) => {
-            if (item.path == '/') {
-                item.active = current == item.path;
-            } else {
-                item.active = current.indexOf(item.path) == 0;
-            }
-            return item;
-        });
-        this.setState({items: items});
-    },
+
     _onChangeColor(color) {
         this.dots.css({color: color});
     },
+
     _onScroll() {
         var state = {isEnable: $(window).scrollTop() > 170};
         if (!state.isEnable) state.isOpen = false;
         this.setState(state);
     },
+
     _onClick(e) {
         if (!$.contains(this.getDOMNode(), e.target)) {
             this.setState({isOpen: false});
         }
     },
+
     componentDidMount() {
-        this._setActive();
         this.dots = $('.dot', this.getDOMNode());
         DotEvents.addListener('colorChanged', this._onChangeColor);
         $(window).on('scroll', this._onScroll).on('click', this._onClick);
     },
+
     componentWillUnmount() {
         DotEvents.removeListener('colorChanged', this._onChangeColor);
         $(window).off('scroll', this._onScroll)
     },
+
     componentWillReceiveProps() {
-        this._setActive();
         this.setState({isOpen: false});
     },
+
     render() {
         return (
             <div>
                 <div id="floating-menu" className={cx({close: !this.state.isOpen})}>
                     <div>
                     {this.state.items.map((item) => {
+                        var current = this.getPathname();
+                        var active = false;
+                        if (item.path == '/') {
+                            active = current == this.context.langPrefix + item.path;
+                        } else {
+                            active = current.indexOf(this.context.langPrefix + item.path) == 0;
+                        }
                         return (
                             <Link to={item.path} key={item.path}>
-                                <span className={cx({dot: true, inactive: !item.active})}>●</span>
+                                <span className={cx({dot: true, inactive: !active})}>●</span>
                                 <span>{item.name}</span>
                             </Link>
                         );

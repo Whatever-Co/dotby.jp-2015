@@ -1,18 +1,23 @@
 var React = require('react');
 var Router = require('react-router');
-var {State, Navigation, Link} = Router;
+var {State, Navigation} = Router;
 var $ = require('jquery');
 var MobileDetect = require('mobile-detect');
 var isMobile = !!new MobileDetect(navigator.userAgent).mobile();
 var moment = require('moment');
 moment.locale('en');
 
+var Lang = require('./Lang');
+
 
 var WorkItem = React.createClass({
-    mixins: [Navigation],
+
+    mixins: [Navigation, Lang],
+
     _onClick() {
-        this.transitionTo(`/post/${this.props.slug}/`);
+        this.transitionTo(`${this.context.langPrefix}/post/${this.props.slug}/`);
     },
+
     _onResize() {
         var width = $(window).width();
         var h = ~~(width / 960 * 430);
@@ -20,15 +25,18 @@ var WorkItem = React.createClass({
         $(this.refs.work.getDOMNode()).css(style);
         $(this.refs.inner.getDOMNode()).css(style).css('padding-top', h - 17);
     },
+
     componentDidMount() {
         if (isMobile) {
             $(window).on('resize', this._onResize);
             this._onResize();
         }
     },
+
     componentWillUnmount() {
         $(window).off('resize', this._onResize);
     },
+
     render() {
         var style = {backgroundImage: `url(${this.props.featured_image.source})`};
         return (
@@ -44,14 +52,17 @@ var WorkItem = React.createClass({
 
 
 module.exports = React.createClass({
-    mixins: [State, Navigation],
+
+    mixins: [State, Navigation, Lang],
+
     getInitialState() {
         return {member: null, work: [], news: []};
     },
+
     getDetail() {
         var member = this.getParams().member;
         if (member == this.state.member) return;
-        $.getJSON('/wp-json/posts', {'filter[tag]': member}).done((result) => {
+        $.getJSON('/wp-json/posts', {'filter[tag]': member, lang: this.context.lang}).done((result) => {
             var state = {member: member, work: [], news: []};
             result.map((entry) => {
                 if (state[entry.terms.category[0].slug]) {
@@ -61,15 +72,19 @@ module.exports = React.createClass({
             this.setState(state);
         });
     },
+
     componentDidMount() {
         this.getDetail();
     },
+
     componentWillReceiveProps() {
         this.getDetail();
     },
+
     _onClickItem(path) {
-        this.transitionTo(`/post/${path}/`);
+        this.transitionTo(`${this.context.langPrefix}/post/${path}/`);
     },
+
     render() {
         var work = this.state.work.map(work => <WorkItem key={work.guid} {...work}/>);
         var news = this.state.news.map((news) => {

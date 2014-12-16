@@ -4,16 +4,20 @@ var {State} = Route;
 var $ = require('jquery');
 
 var Entry = require('./Entry');
+var Lang = require('./Lang');
 
 
 module.exports = React.createClass({
-    mixins: [State],
+
+    mixins: [State, Lang],
+
     getInitialState() {
         return {entries: []}
     },
+
     getEntries() {
         var params = this.getParams();
-        var data = {};
+        var data = {lang: this.context.lang};
         if (params.category) {
             data['filter[category_name]'] = params.category;
         }
@@ -21,12 +25,15 @@ module.exports = React.createClass({
             this.setState({entries: result});
         });
     },
+
     componentDidMount() {
         this.getEntries();
     },
+
     componentWillReceiveProps() {
         this.getEntries();
     },
+
     render() {
         return (
             <div>

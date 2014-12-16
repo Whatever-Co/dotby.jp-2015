@@ -1,20 +1,25 @@
 var React = require('react/addons');
 var cx = React.addons.classSet;
 var Router = require('react-router');
-var {Navigation, Link} = Router;
+var {Navigation} = Router;
 var $ = require('jquery');
 var MobileDetect = require('mobile-detect');
 var isMobile = !!new MobileDetect(navigator.userAgent).mobile();
 var moment = require('moment');
 moment.locale('en');
 
+var Link = require('./Link');
+
 
 module.exports = React.createClass({
+
     mixins: [Navigation],
+
     _onClickMember(e) {
         e.preventDefault();
         this.transitionTo($(e.currentTarget).attr('href'));
     },
+
     _onResize() {
         var width = $(this.refs.entry.getDOMNode()).outerWidth();
         var height = Math.floor(width / 960 * 430);
@@ -30,6 +35,7 @@ module.exports = React.createClass({
             });
         }
     },
+
     componentDidMount() {
         if (this.refs.credit) {
             this._memberLink = $('a', this.refs.credit.getDOMNode()).not('[href^="http"]').click(this._onClickMember);
@@ -49,12 +55,14 @@ module.exports = React.createClass({
             this._onResize();
         }
     },
+
     componentWillUnmount() {
         if (this._memberLink) {
             this._memberLink.off();
         }
         $(window).off('resize', this._onResize);
     },
+
     render() {
         var entry = this.props.entry;
         var style = {backgroundImage: entry.featured_image ? `url(${entry.featured_image.source})` : ''};

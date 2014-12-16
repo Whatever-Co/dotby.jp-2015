@@ -1,16 +1,22 @@
 var React = require('react/addons');
 var cx = React.addons.classSet;
 var Router = require('react-router');
-var {Link, State} = Router;
+var {State} = Router;
 var $ = require('jquery');
 var _ = require('underscore');
 
+var Link = require('./Link');
 var DotEvents = require('./Dots/Events');
 var MenuData = require('../data').menu;
+var Lang = require('./Lang');
 
 
 module.exports = React.createClass({
-    mixins: [State],
+
+    displayName: 'Header',
+
+    mixins: [State, Lang],
+
     getInitialState() {
         return {items: _.without(MenuData.map((item) => {
             if (item.name == 'TOP') return false;
@@ -19,28 +25,34 @@ module.exports = React.createClass({
             return copy;
         }), false)};
     },
+
     _setActive() {
         var current = this.getPathname();
         var items = this.state.items.map((item) => {
-            item.active = current.indexOf(item.path) == 0;
+            item.active = current.indexOf(this.context.langPrefix + item.path) == 0;
             return item;
         });
         this.setState({items: items});
     },
+
     _onChangeColor(color) {
         this.dots.css({color: color});
     },
+
     componentDidMount() {
         this._setActive();
         this.dots = $('.dot', this.getDOMNode());
         DotEvents.addListener('colorChanged', this._onChangeColor);
     },
+
     componentWillUnmount() {
         DotEvents.removeListener('colorChanged', this._onChangeColor);
     },
+
     componentWillReceiveProps() {
         this._setActive();
     },
+
     render() {
         return (
             <div id="header">
