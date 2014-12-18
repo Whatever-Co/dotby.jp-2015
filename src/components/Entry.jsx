@@ -76,9 +76,9 @@ module.exports = React.createClass({
                 name = name.trim();
                 if (link) link = link.trim();
                 if (link) {
-                    return <span key={title + name + link}>{title}: <a href={link} target="_blank">{name}</a></span>;
+                    return <span key={title + name + link}>{title}: <a href={link} target="_blank" dangerouslySetInnerHTML={{__html: name}}/></span>;
                 } else {
-                    return <span key={title + name + link}>{title}: {name}</span>
+                    return <span key={title + name + link}>{title}: <span dangerouslySetInnerHTML={{__html: name}}/></span>
                 }
             });
         }
