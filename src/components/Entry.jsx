@@ -50,6 +50,9 @@ module.exports = React.createClass({
             this._iframes = iframes;
             needResize = true;
         }
+        $('img', this.refs.body.getDOMNode()).each((index, element) => {
+            $(element).attr({width: null, height: null});
+        });
         if (needResize) {
             $(window).on('resize', this._onResize);
             this._onResize();

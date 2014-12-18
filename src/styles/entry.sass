@@ -1,6 +1,4 @@
 .entry
-  position: relative
-  z-index: auto
   padding: 0 30px
   background-repeat: no-repeat
   background-position: center top
@@ -37,14 +35,15 @@
         border: none
 
     .body
-      //width: 768px
       margin: 0 auto
       padding: 0
       font-weight: 300
-      //display: none
 
+      img, iframe
+        width: 100%
       p, table
         margin: 20px 0
+        word-wrap: break-word
       .award, .credit
         th, td
           font-size: 15px
@@ -62,13 +61,9 @@
       .credit td > span
         display: block
 
-    iframe
-      min-width: 100%
 
-
-    &:hover
+    &:hover, &.hover
       z-index: 2000
       background-color: $white
       border-color: $black
       transition: all 0.1s ease-out
-
