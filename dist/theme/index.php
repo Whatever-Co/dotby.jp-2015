@@ -7,6 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="/assets/main.css" rel="stylesheet" type="text/css"/>
+        <link rel="shortcut icon" href="/assets/favicon.ico" type="image/vnd.microsoft.ico"/>
     </head>
     <body>
         <script type="text/javascript" src="/assets/bundle.js"></script>
