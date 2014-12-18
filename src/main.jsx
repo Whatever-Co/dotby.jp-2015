@@ -13,10 +13,14 @@ var MemberList = require('./components/MemberList');
 var MemberDetail = require('./components/MemberDetail');
 var Application = require('./components/Application');
 
+var FaviconAnimator = require('./FaviconAnimator');
+
 
 var mb = new MobileDetect(navigator.userAgent);
 if (mb.mobile()) {
     $('body').addClass('mobile');
+} else if (!mb.match('safari')) {
+    new FaviconAnimator();
 }
 
 React.initializeTouchEvents(true);
@@ -65,3 +69,4 @@ Router.run(routes, Router.HistoryLocation, (Handler, state) => {
         React.render(<Handler/>, document.body);
     });
 });
+
