@@ -20,6 +20,7 @@ Seki = require('./patterns/Seki')
 Sfman = require('./patterns/Sfman')
 Hige = require('./patterns/Hige')
 Taichi = require('./patterns/Taichi')
+Jaguar = require('./patterns/Jaguar')
 
 Data = require('../../data')
 
@@ -55,8 +56,8 @@ class Dots
     @currentColor = r: 255, g: 255, b: 255
     @t = 0
 
-    patterns = new ShuffledArray([Saqoosha, Yusuke, Sfman, Heri, Seki, Hige, Taichi])
-#    patterns = new ShuffledArray([Heri, Taichi])
+    patterns = new ShuffledArray([Saqoosha, Yusuke, Sfman, Heri, Seki, Hige, Taichi, Jaguar])
+#    patterns = new ShuffledArray([Jaguar, Taichi])
     colors = new ShuffledArray(_.values(Data.members).map((item) => item.color.substr(1)))
     tr = =>
       @transitionTo(patterns.next(), colors.next()).done ->
