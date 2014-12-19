@@ -18,11 +18,11 @@ Heri = require('./patterns/Heri')
 Saqoosha = require('./patterns/Saqoosha')
 Seki = require('./patterns/Seki')
 Sfman = require('./patterns/Sfman')
+Hige = require('./patterns/Hige')
 
 Data = require('../../data')
 
 # window.requestAnimationFrame = Modernizr.prefixed('requestAnimationFrame') or (c) -> window.setTimeout(c, 1000 / 60)
-
 
 
 class ShuffledArray
@@ -54,7 +54,8 @@ class Dots
     @currentColor = r: 255, g: 255, b: 255
     @t = 0
 
-    patterns = new ShuffledArray([Saqoosha, Yusuke, Sfman, Heri, Seki])
+    patterns = new ShuffledArray([Saqoosha, Yusuke, Sfman, Heri, Seki, Hige])
+#    patterns = new ShuffledArray([Heri, Hige])
     colors = new ShuffledArray(_.values(Data.members).map((item) => item.color.substr(1)))
     tr = =>
       @transitionTo(patterns.next(), colors.next()).done ->
