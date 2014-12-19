@@ -19,13 +19,18 @@ module.exports = React.createClass({
     mixins: [State, Navigation, Lang],
 
     getInitialState() {
-        return {entry: null};
+        return {
+            loading: true,
+            entry: null
+        };
     },
 
     getEntry() {
         var params = this.getParams();
         $.getJSON(`/wp-json/pages/${params.page}`, {lang: this.context.lang}).done((result) => {
-            this.setState({entry: result});
+            this.setState({loading: false, entry: result});
+        }).fail(() => {
+            this.setState({loading: false});
         });
     },
 
@@ -96,6 +101,7 @@ module.exports = React.createClass({
     },
 
     render() {
+        if (this.state.loading) return <div/>;
         if (!this.state.entry) return <NotFound/>;
         var entry = this.state.entry;
         var clsName = 'page-' + this.getPathname().substr(this.context.langPrefix.length).replace(/[^\w]/g, '');

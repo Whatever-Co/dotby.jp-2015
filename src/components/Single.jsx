@@ -2,6 +2,8 @@ var React = require('react');
 var Router = require('react-router');
 var {State} = Router;
 var $ = require('jquery');
+var MobileDetect = require('mobile-detect');
+var isMobile = !!new MobileDetect(navigator.userAgent).mobile();
 
 var Entry = require('./Entry');
 var NotFound = require('./NotFound');
@@ -13,12 +15,21 @@ module.exports = React.createClass({
     mixins: [State, Lang],
 
     getInitialState() {
-        return {entry: null}
+        return {
+            loading: true,
+            entry: null
+        }
     },
 
     getEntry() {
-        $.getJSON('/wp-json/posts', {'filter[name]': this.getParams().post, lang: this.context.lang}).done((result) => {
-            this.setState({entry: result[0]});
+        var data = {
+            'filter[name]': this.getParams().post,
+            lang: this.context.lang
+        };
+        $.getJSON('/wp-json/posts', data).done(result => {
+            this.setState({loading: false, entry: result[0]});
+        }).fail(() => {
+            this.setState({loading: false});
         });
     },
 
@@ -34,7 +45,8 @@ module.exports = React.createClass({
         return (
             <div>
                 <hr className="line"/>
-                {this.state.entry ? <Entry entry={this.state.entry} single={true}/> : <NotFound/>}
+                {this.state.loading ? '' :
+                    this.state.entry ? <Entry entry={this.state.entry} single={isMobile}/> : <NotFound/>}
             </div>
         );
     }

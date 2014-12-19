@@ -82,7 +82,6 @@ module.exports = React.createClass({
                 }
             });
         }
-        console.log(this.props);
         return (
             <div className={cx({entry: true, 'with-image': entry.featured_image})} ref="entry" style={style}>
                 <div className={cx({inner: true, hover: this.props.single})} ref="inner" style={style}>
