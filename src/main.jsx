@@ -19,7 +19,7 @@ var FaviconAnimator = require('./FaviconAnimator');
 var mb = new MobileDetect(navigator.userAgent);
 if (mb.mobile()) {
     $('body').addClass('mobile');
-} else if (!mb.match('safari')) {
+} else if (mb.match('chrome') || !mb.match('safari')) {
     new FaviconAnimator();
 }
 
@@ -69,4 +69,3 @@ Router.run(routes, Router.HistoryLocation, (Handler, state) => {
         React.render(<Handler/>, document.body);
     });
 });
-
