@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react/addons');
+var cx = React.addons.classSet;
 var Router = require('react-router');
 var {State, Navigation} = Router;
 var MobileDetect = require('mobile-detect');
@@ -103,7 +104,7 @@ module.exports = React.createClass({
                 <div key={entry.guid}>
                     <hr className="line"/>
                     <div className={'entry ' + clsName}>
-                        <div className="inner" ref="inner">
+                        <div className={cx({inner: true, hover: isMobile})} ref="inner">
                             <div className="body" ref="body" dangerouslySetInnerHTML={{__html: entry.content}}></div>
                         </div>
                     </div>

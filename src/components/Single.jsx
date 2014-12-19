@@ -34,7 +34,7 @@ module.exports = React.createClass({
         return (
             <div>
                 <hr className="line"/>
-                {this.state.entry ? <Entry entry={this.state.entry} /> : <NotFound/>}
+                {this.state.entry ? <Entry entry={this.state.entry} single={true}/> : <NotFound/>}
             </div>
         );
     }

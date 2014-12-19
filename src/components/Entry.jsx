@@ -82,9 +82,10 @@ module.exports = React.createClass({
                 }
             });
         }
+        console.log(this.props);
         return (
             <div className={cx({entry: true, 'with-image': entry.featured_image})} ref="entry" style={style}>
-                <div className="inner" ref="inner" style={style}>
+                <div className={cx({inner: true, hover: this.props.single})} ref="inner" style={style}>
                     <h1 className="title" dangerouslySetInnerHTML={{__html: entry.title}}/>
                     <span className="date"><Link to={`/post/${entry.slug}/`}>{moment(entry.date_gmt).format('LL')}</Link></span>
                     <div className="body" ref="body">
