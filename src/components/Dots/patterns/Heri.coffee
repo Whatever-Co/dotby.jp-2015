@@ -6,16 +6,13 @@ module.exports = class Heri
 
 
   getDots: (width, height) =>
-    scale = Math.min(width, height) / 1024
-
     @dots = []
-    d = 100 * scale
-    id = 0
+    d = Math.max(width, height, 800) / 12
     for y in [0..(height / d) + 1]
       for x in [0..(width / d) + 1]
+        dot = new Dot(x * d + utils.rr(d * 1.5), y * d + utils.rr(d * 1.5), d * utils.rnr(0.1, 0.8))
         a = Math.random() * Math.PI * 2
-        s = utils.rnr(0.1, 0.5) * 0.5 * scale
-        dot = new Dot(x * d + utils.rr(d * 1.5), y * d + utils.rr(d * 1.5), utils.rnr(5, 80) * scale)
+        s = d * 0.003 * utils.rnr(0.1, 0.5)
         dot.vx = Math.cos(a) * s
         dot.vy = Math.sin(a) * s
         @dots.push(dot)

@@ -78,7 +78,7 @@ class Background extends THREE.Mesh
     @position.set(width / 2, height / 2, 100)
     @scale.set(width, height, 1)
 
-    @step = Math.max(width, height) / 14
+    @step = Math.max(width, height, 800) / 14
     @material.uniforms.spacing.value = @step / 1.4
     @material.uniforms.radius.value = @step * 0.2
     @material.uniforms.screenSize.value.set(width, height)

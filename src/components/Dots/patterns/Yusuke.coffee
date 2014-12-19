@@ -1,23 +1,28 @@
 Dot = require('../Dot')
 utils = require('../utils.coffee')
 
+
 module.exports = class Yusuke
 
 
   getDots: (width, height) =>
-    scale = Math.min(width, height) / 1024
-
     @dots = []
-    d = 100 * scale
-    id = 0
-    for y in [0..(height / d) + 1]
-      for x in [0..(width / d) + 1]
+    dx = Math.max(width, height, 800) / 8
+    dy = dx / 2 / Math.tan(30 * Math.PI / 180)
+    y = 0
+    even = false
+    while y < height + dy
+      x = if even then -dx / 2 else 0
+      while x < width + dx
+        dot = new Dot(x + utils.rr(dx * 0.5), y + utils.rr(dx * 0.5), dx * utils.rnr(0.2, 0.35))
         a = Math.random() * Math.PI * 2
-        s = utils.rnr(0.1, 0.3) * 0.5 * scale
-        dot = new Dot(x * d + utils.rr(d * 0.7), y * d + utils.rr(d * 0.7), utils.rnr(25, 45) * scale)
+        s = dx * 0.003 * utils.rnr(0.1, 0.5)
         dot.vx = Math.cos(a) * s
         dot.vy = Math.sin(a) * s
         @dots.push(dot)
+        x += dx
+      y += dy
+      even = not even
     return @dots
 
 

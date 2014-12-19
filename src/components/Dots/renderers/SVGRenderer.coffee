@@ -14,7 +14,7 @@ class Background
     @pat?.remove()
 
     g = @paper.g().attr(class: 'base', stroke: 'none', fill: 'rgba(0, 0, 0, 0.05)')
-    w = Math.max(innerWidth, innerHeight) / 14
+    w = Math.max(innerWidth, innerHeight, 800) / 14
     @step = w
     hw = w * 0.5
     r = w * 0.2

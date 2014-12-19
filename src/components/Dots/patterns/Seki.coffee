@@ -6,13 +6,6 @@ module.exports = class Seki
 
 
   getDots: (width, height) ->
-    scale = Math.min(width, height) / 1024
-
-    a = Math.random() * Math.PI * 2
-    s = 0.2 * scale
-    @vx = Math.cos(a) * s
-    @vy = Math.sin(a) * s
-
     m = matrix.mat2d.create()
     matrix.mat2d.rotate(m, m, 10 * Math.PI / 180)
     minX = Number.MAX_VALUE
@@ -28,7 +21,7 @@ module.exports = class Seki
     matrix.mat2d.invert(m, m)
 
     @dots = []
-    dx = Math.max(width, height) / 16
+    dx = Math.max(width, height, 800) / 16
     dy = dx / 2 / Math.tan(30 * Math.PI / 180)
     minX -= dx
     maxX += dx
@@ -49,6 +42,12 @@ module.exports = class Seki
         x += dx
       y += dy
       even = not even
+
+    a = Math.random() * Math.PI * 2
+    s = dx * 0.002
+    @vx = Math.cos(a) * s
+    @vy = Math.sin(a) * s
+
     return @dots
 
 

@@ -5,20 +5,12 @@ module.exports = class Saqoosha
 
 
   getDots: (width, height) ->
-    scale = Math.min(width, height) / 1024
-
-    a = Math.random() * Math.PI * 2
-    s = 0.2 * scale
-    @vx = Math.cos(a) * s
-    @vy = Math.sin(a) * s
-
     @dots = []
-    dx = 150 * scale
+    dx = Math.max(width, height, 800) / 10
     dy = dx / 2
-    r = dx * 0.1667
+    r = dx * 0.21
     y = 0
     even = false
-    id = 0
     while y < height + dy
       x = if even then -dx / 2 else 0
       while x < width + dx
@@ -36,6 +28,11 @@ module.exports = class Saqoosha
         @dots.push(new Dot(d.x - ex, d.y - ey, er))
         @dots.push(new Dot(d.x + ex, d.y - ey, er))
         break
+
+    a = Math.random() * Math.PI * 2
+    s = dx * 0.0015
+    @vx = Math.cos(a) * s
+    @vy = Math.sin(a) * s
 
     return @dots
 
