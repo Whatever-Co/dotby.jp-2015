@@ -9,11 +9,12 @@ var moment = require('moment');
 moment.locale('en');
 
 var Link = require('./Link');
+var Lang = require('./Lang');
 
 
 module.exports = React.createClass({
 
-    mixins: [Navigation],
+    mixins: [Navigation, Lang],
 
     _onClickMember(e) {
         e.preventDefault();
@@ -69,16 +70,50 @@ module.exports = React.createClass({
     render() {
         var entry = this.props.entry;
         var style = {backgroundImage: entry.featured_image ? `url(${entry.featured_image.source})` : ''};
+        if (this.context.lang == 'en') {
+            entry.meta.credit = entry.meta.credit_en;
+        }
         if (entry.meta.credit) {
             var credit = entry.meta.credit.split('\n').map((item) => {
-                [title, name, link] = item.split(',');
-                title = title.trim();
-                name = name.trim();
-                if (link) link = link.trim();
-                if (link) {
-                    return <span key={title + name + link}>{title}: <a href={link} target="_blank" dangerouslySetInnerHTML={{__html: name}}/></span>;
+                var tokens = item.split(',');
+                if (tokens.length == 0) {
+                    return <span/>;
+                } else if (tokens.length == 1) {
+                    return <h2 dangerouslySetInnerHTML={{__html: tokens[0]}}/>;
                 } else {
-                    return <span key={title + name + link}>{title}: <span dangerouslySetInnerHTML={{__html: name}}/></span>
+                    var elements = [];
+                    var title = tokens.shift().trim();
+                    if (title) {
+                        elements.push(<span dangerouslySetInnerHTML={{__html: title + ': '}}/>);
+                    }
+                    while (tokens.length) {
+                        var name = null;
+                        var company = null;
+                        var link = null;
+                        try {
+                            name = tokens.shift().trim();
+                            company = tokens.shift().trim();
+                            link = tokens.shift().trim();
+                        } catch (e) {
+                        }
+                        if (company && company.match(/^\/|http/i)) {
+                            link = company;
+                            company = null;
+                        }
+                        if (elements.length > 1) {
+                            elements.push(<span> / </span>);
+                        }
+                        if (company && link) {
+                            elements.push(<span>{name} (<a href={link} dangerouslySetInnerHTML={{__html: company}}/>)</span>);
+                        } else if (company) {
+                            elements.push(<span>{`${name} (${company})`}</span>);
+                        } else if (link) {
+                            elements.push(<span><a href={link} dangerouslySetInnerHTML={{__html: name}}/></span>);
+                        } else {
+                            elements.push(<span dangerouslySetInnerHTML={{__html: name}}/>);
+                        }
+                    }
+                    return <span>{elements}</span>;
                 }
             });
         }
