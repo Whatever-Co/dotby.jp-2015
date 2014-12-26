@@ -1,6 +1,7 @@
 var React = require('react');
 var Route = require('react-router');
 var {State} = Route;
+var DocumentTitle = require('react-document-title');
 var $ = require('jquery');
 var MobileDetect = require('mobile-detect');
 var isMobile = !!new MobileDetect(navigator.userAgent).mobile();
@@ -46,7 +47,6 @@ module.exports = React.createClass({
     },
 
     componentWillReceiveProps() {
-        console.log('EntryList::componentWillReceiveProp()');
         this._currentPage = 1;
         this.setState({entries: []});
         this.getEntries();
@@ -102,17 +102,24 @@ module.exports = React.createClass({
     },
 
     render() {
+        var title = 'dot by dot inc.';
+        var params = this.getParams();
+        if (params.category) {
+            title = params.category.toUpperCase() + ' ● dot by dot inc.';
+        }
         return (
-            <div>
-                {this.state.entries.map((entry) => {
-                    return (
-                        <div key={entry.guid}>
-                            <hr className="line"/>
-                            <Entry entry={entry} />
-                        </div>
-                    );
-                })}
-            </div>
+            <DocumentTitle title={title}>
+                <div>
+                    {this.state.entries.map((entry) => {
+                        return (
+                            <div key={entry.guid}>
+                                <hr className="line"/>
+                                <Entry entry={entry} />
+                            </div>
+                        );
+                    })}
+                </div>
+            </DocumentTitle>
         );
     }
 });

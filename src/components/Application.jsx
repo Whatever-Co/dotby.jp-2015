@@ -1,6 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 var {RouteHandler} = Router;
+var DocumentTitle = require('react-document-title');
 
 var Dots = require('./Dots/Main');
 var Header = require('./Header');
@@ -14,15 +15,17 @@ module.exports = React.createClass({
     },
     render() {
         return (
-            <div>
-                <div id="dots" ref="dots"/>
-                <div id="container" className="clearfix">
-                    <Header/>
-                    <RouteHandler {...this.props}/>
+            <DocumentTitle title="dot by dot inc.">
+                <div>
+                    <div id="dots" ref="dots"/>
+                    <div id="container" className="clearfix">
+                        <Header/>
+                        <RouteHandler {...this.props}/>
+                    </div>
+                    <Menu/>
+                    <Footer/>
                 </div>
-                <Menu/>
-                <Footer/>
-            </div>
+            </DocumentTitle>
         );
     }
 });

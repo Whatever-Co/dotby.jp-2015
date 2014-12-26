@@ -2,6 +2,7 @@ var React = require('react/addons');
 var cx = React.addons.classSet;
 var Router = require('react-router');
 var {RouteHandler, Navigation, State} = Router;
+var DocumentTitle = require('react-document-title');
 var $ = require('jquery');
 var _ = require('underscore');
 var assign = require('object-assign');
@@ -112,10 +113,12 @@ module.exports = React.createClass({
 
     render() {
         return (
-            <div className="member-list">
-                {this.state.members.map(member => <Member key={member.guid} member={assign(member, MEMBER_DATA[member.slug])}/>)}
-                <RouteHandler/>
-            </div>
+            <DocumentTitle title="MEMBERS ● dot by dot inc.">
+                <div className="member-list">
+                    {this.state.members.map(member => <Member key={member.guid} member={assign(member, MEMBER_DATA[member.slug])}/>)}
+                    <RouteHandler/>
+                </div>
+            </DocumentTitle>
         );
     }
 });

@@ -1,12 +1,14 @@
 var React = require('react');
 var Router = require('react-router');
 var {State, Navigation} = Router;
+var DocumentTitle = require('react-document-title');
 var $ = require('jquery');
 var MobileDetect = require('mobile-detect');
 var isMobile = !!new MobileDetect(navigator.userAgent).mobile();
 var moment = require('moment');
 moment.locale('en');
 
+var MEMBER_DATA = require('../data').members;
 var Lang = require('./Lang');
 
 
@@ -86,6 +88,14 @@ module.exports = React.createClass({
     },
 
     render() {
+        var title = 'dot by dot inc.';
+        if (this.state.member) {
+            if (this.context.lang == 'en' && MEMBER_DATA[this.state.member].name_en) {
+                title = MEMBER_DATA[this.state.member].name_en + ' ● dot by dot inc.';
+            } else {
+                title = MEMBER_DATA[this.state.member].name_ja + ' ● dot by dot inc.';
+            }
+        }
         var work = this.state.work.map(work => <WorkItem key={work.guid} {...work}/>);
         var news = this.state.news.map((news) => {
             var date = moment(news.date).format('LL');
@@ -106,22 +116,24 @@ module.exports = React.createClass({
             }
         });
         return (
-            <div className="member-detail">
-                {work.length ? (
-                    <div>
-                        <h2>WORK</h2>
-                        <hr className = "line" />
-                        <div className="works-list clearfix">{work}</div>
-                    </div>
-                ) : ''}
-                {news.length ? (
-                    <div>
-                        <h2>NEWS</h2>
-                        <hr className="line"/>
-                        <table className="news-list"><tbody>{news}</tbody></table>
-                    </div>
-                ) : ''}
-            </div>
+            <DocumentTitle title={title}>
+                <div className="member-detail">
+                    {work.length ? (
+                        <div>
+                            <h2>WORK</h2>
+                            <hr className = "line" />
+                            <div className="works-list clearfix">{work}</div>
+                        </div>
+                    ) : ''}
+                    {news.length ? (
+                        <div>
+                            <h2>NEWS</h2>
+                            <hr className="line"/>
+                            <table className="news-list"><tbody>{news}</tbody></table>
+                        </div>
+                    ) : ''}
+                </div>
+            </DocumentTitle>
         );
     }
 });

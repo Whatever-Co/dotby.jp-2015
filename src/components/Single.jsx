@@ -1,6 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 var {State} = Router;
+var DocumentTitle = require('react-document-title');
 var $ = require('jquery');
 var MobileDetect = require('mobile-detect');
 var isMobile = !!new MobileDetect(navigator.userAgent).mobile();
@@ -43,11 +44,14 @@ module.exports = React.createClass({
 
     render() {
         return (
-            <div>
-                <hr className="line"/>
-                {this.state.loading ? '' :
-                    this.state.entry ? <Entry entry={this.state.entry} single={isMobile}/> : <NotFound/>}
-            </div>
+            <DocumentTitle title={(this.state.loading ? '' :
+                this.state.entry ? this.state.entry.title + ' ● ' : 'Page Not Found ● ') + 'dot by dot inc.'}>
+                <div>
+                    <hr className="line"/>
+                    {this.state.loading ? '' :
+                        this.state.entry ? <Entry entry={this.state.entry} single={isMobile}/> : <NotFound/>}
+                </div>
+            </DocumentTitle>
         );
     }
 });

@@ -2,6 +2,7 @@ var React = require('react/addons');
 var cx = React.addons.classSet;
 var Router = require('react-router');
 var {State, Navigation} = Router;
+var DocumentTitle = require('react-document-title');
 var MobileDetect = require('mobile-detect');
 var isMobile = !!new MobileDetect(navigator.userAgent).mobile();
 var $ = require('jquery');
@@ -106,16 +107,18 @@ module.exports = React.createClass({
         var entry = this.state.entry;
         var clsName = 'page-' + this.getPathname().substr(this.context.langPrefix.length).replace(/[^\w]/g, '');
         return (
-            <div>
-                <div key={entry.guid}>
-                    <hr className="line"/>
-                    <div className={'entry ' + clsName}>
-                        <div className={cx({inner: true, hover: isMobile})} ref="inner">
-                            <div className="body" ref="body" dangerouslySetInnerHTML={{__html: entry.content}}></div>
+            <DocumentTitle title={entry.title + ' ● dot by dot inc.'}>
+                <div>
+                    <div key={entry.guid}>
+                        <hr className="line"/>
+                        <div className={'entry ' + clsName}>
+                            <div className={cx({inner: true, hover: isMobile})} ref="inner">
+                                <div className="body" ref="body" dangerouslySetInnerHTML={{__html: entry.content}}></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </DocumentTitle>
         );
     }
 });
