@@ -92,7 +92,7 @@ module.exports = React.createClass({
             if (isMobile) {
                 return (
                     <tr key={news.guid} onClick={this._onClickItem.bind(this, news.slug)}>
-                        <td>{news.title}</td>
+                        <td dangerouslySetInnerHTML={{__html: news.title}}/>
                         <th>{date}</th>
                     </tr>
                 );
@@ -100,7 +100,7 @@ module.exports = React.createClass({
                 return (
                     <tr key={news.guid} onClick={this._onClickItem.bind(this, news.slug)}>
                         <th>{date}</th>
-                        <td>{news.title}</td>
+                        <td dangerouslySetInnerHTML={{__html: news.title}}/>
                     </tr>
                 );
             }
