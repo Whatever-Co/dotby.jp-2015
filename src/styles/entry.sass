@@ -64,7 +64,12 @@
         h2
           font: bold 15px 'Netto OT'
           margin: 25px 0 3px
-
+        a[href^="http"]
+          padding-right: 0
+          background-image: none
+          border: none
+          &:hover
+            border-bottom: 1px solid $black
 
     &:hover, &.hover
       z-index: 2000
