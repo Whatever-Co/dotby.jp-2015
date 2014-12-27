@@ -7,9 +7,11 @@ var MobileDetect = require('mobile-detect');
 var isMobile = !!new MobileDetect(navigator.userAgent).mobile();
 var moment = require('moment');
 moment.locale('en');
+var Baby = require('babyparse');
 
 var Link = require('./Link');
 var Lang = require('./Lang');
+var MEMBER_DATA = require('../data').members;
 
 
 module.exports = React.createClass({
@@ -67,15 +69,18 @@ module.exports = React.createClass({
         $(window).off('resize', this._onResize);
     },
 
+    decodeHtml(html) {
+        var txt = document.createElement("textarea");
+        txt.innerHTML = html;
+        return txt.value;
+    },
+
     render() {
         var entry = this.props.entry;
         var style = {backgroundImage: entry.featured_image ? `url(${entry.featured_image.source})` : ''};
-        if (this.context.lang == 'en') {
-            entry.meta.credit = entry.meta.credit_en;
-        }
-        if (entry.meta.credit) {
-            var credit = entry.meta.credit.split('\n').map((item) => {
-                var tokens = item.split(',');
+        var raw_credit = this.context.lang == 'en' ? entry.meta.credit_en : entry.meta.credit;
+        if (raw_credit) {
+            var credit = Baby.parse(this.decodeHtml(raw_credit)).data.map((tokens) => {
                 if (tokens.length == 0) {
                     return <span/>;
                 } else if (tokens.length == 1) {
@@ -99,6 +104,9 @@ module.exports = React.createClass({
                         if (company && company.match(/^\/|http/i)) {
                             link = company;
                             company = null;
+                        }
+                        if (MEMBER_DATA.hasOwnProperty(link)) {
+                            link = this.context.langPrefix + '/members/' + link + '/';
                         }
                         if (elements.length > 1) {
                             elements.push(<span> / </span>);
