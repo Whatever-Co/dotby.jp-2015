@@ -67,5 +67,6 @@ Router.run(routes, Router.HistoryLocation, (Handler, state) => {
     }
     React.withContext(context, () => {
         React.render(<Handler/>, document.body);
+        ga('send', 'pageview', {page: state.pathname});
     });
 });
