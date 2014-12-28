@@ -42,10 +42,16 @@ module.exports = React.createClass({
         this.getEntry();
     },
 
+    decodeHtml(html) {
+        var txt = document.createElement('textarea');
+        txt.innerHTML = html;
+        return txt.value;
+    },
+
     render() {
         return (
             <DocumentTitle title={(this.state.loading ? '' :
-                this.state.entry ? this.state.entry.title + ' ● ' : 'Page Not Found ● ') + 'dot by dot inc.'}>
+                this.state.entry ? this.decodeHtml(this.state.entry.title) + ' ● ' : 'Page Not Found ● ') + 'dot by dot inc.'}>
                 <div>
                     <hr className="line"/>
                     {this.state.loading ? '' :
