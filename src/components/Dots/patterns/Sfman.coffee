@@ -6,7 +6,7 @@ module.exports = class Sfman
 
   getDots: (width, height) ->
     a = Math.random() * Math.PI * 2
-    s = Math.max(width, height) * 0.00015
+    s = Math.max(width, height, 800) * 0.0002
     @vx = Math.cos(a) * s
     @vy = Math.sin(a) * s
 

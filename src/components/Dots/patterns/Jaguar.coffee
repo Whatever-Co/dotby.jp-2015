@@ -34,7 +34,7 @@ module.exports = class Jaguar
     @_fill(width, height, 3, w / 8, 0.22)
 
     a = Math.random() * Math.PI * 2
-    s = 0 #dx * 0.0015
+    s = Math.max(width, height, 800) * 0.0002
     @vx = Math.cos(a) * s
     @vy = Math.sin(a) * s
 

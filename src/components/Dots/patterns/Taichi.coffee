@@ -44,7 +44,7 @@ module.exports = class Taichi
       even = not even
 
     a = Math.random() * Math.PI * 2
-    s = dx * 0.0008
+    s = Math.max(width, height, 800) * 0.0002
     @vx = Math.cos(a) * s
     @vy = Math.sin(a) * s
 

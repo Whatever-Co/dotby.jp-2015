@@ -19,7 +19,7 @@ module.exports = class Hige
       y += d
 
     a = Math.random() * Math.PI * 2
-    s = d * 0.0025
+    s = Math.max(width, height, 800) * 0.0002
     @vx = Math.cos(a) * s
     @vy = Math.sin(a) * s
 
