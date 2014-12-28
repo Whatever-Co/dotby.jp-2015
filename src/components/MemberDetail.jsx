@@ -44,7 +44,7 @@ var WorkItem = React.createClass({
         return (
             <div className="work-item" ref="work" onClick={this._onClick} style={style}>
                 <div className="inner" ref="inner" style={style}>
-                    <div className="title">{this.props.title}</div>
+                    <div className="title" dangerouslySetInnerHTML={{__html: this.props.title}}/>
                     <div className="date">{moment(this.props.date).format('LL')}</div>
                 </div>
             </div>
