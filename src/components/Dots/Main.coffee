@@ -78,6 +78,8 @@ class Dots
     setInterval(@_onResize, 1000)
     @_onResize()
 
+    DotEvents.addListener('saveAsPNG', @saveAsPNG)
+
     @epoc = Date.now()
     @animate()
 
@@ -197,13 +199,52 @@ class Dots
     # @stats.update()
 
 
-  windowWidth = windowHeight = -1
+  windowWidth = -1
+  windowHeight = -1
 
   _onResize: =>
     if windowWidth isnt innerWidth or windowHeight isnt innerHeight
       windowWidth = innerWidth
       windowHeight = innerHeight
       @renderer.setSize(innerWidth, innerHeight)
+
+
+  saveAsPNG: =>
+    canvas = document.createElement('canvas')
+    dpr = devicePixelRatio or 1
+    canvas.width = screen.width * dpr
+    canvas.height = screen.height * dpr
+    ctx = canvas.getContext('2d')
+    ctx.fillStyle = 'white'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+    s = Math.max(canvas.width / windowWidth, canvas.height / windowHeight)
+    ctx.translate(-(windowWidth * s - canvas.width) / 2, -(windowHeight * s - canvas.height) / 2)
+    ctx.scale(s, s)
+    ctx.fillStyle = Snap.rgb(@currentColor.r, @currentColor.g, @currentColor.b)
+    for dot in @currentDots
+      ctx.beginPath()
+      ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2, false)
+      ctx.closePath()
+      ctx.fill()
+
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
+    dx = Math.max(windowWidth, windowHeight, 800) / 14
+    dy = dx / 2
+    r = dx * 0.2
+    y = 0
+    even = false
+    while y < windowHeight + dy
+      x = if even then -dx / 2 else 0
+      while x < windowWidth + dx
+        ctx.beginPath()
+        ctx.arc(x, y, r, 0, Math.PI * 2, false)
+        ctx.closePath()
+        ctx.fill()
+        x += dx
+      y += dy
+      even = not even
+
+    window.open(canvas.toDataURL('image/png'))
 
 
 module.exports = Dots
