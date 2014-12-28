@@ -18,9 +18,14 @@ module.exports = React.createClass({
 
     mixins: [Navigation, Lang],
 
-    _onClickMember(e) {
+    _onClick(e) {
         e.preventDefault();
-        this.transitionTo($(e.currentTarget).attr('href'));
+        var href = $(e.currentTarget).attr('href');
+        if (href.match(/^\w+:/i)) {
+            window.open(href);
+        } else {
+            this.transitionTo(this.context.langPrefix + href);
+        }
     },
 
     _onResize() {
@@ -40,9 +45,8 @@ module.exports = React.createClass({
     },
 
     componentDidMount() {
-        if (this.refs.credit) {
-            this._memberLink = $('a', this.refs.credit.getDOMNode()).not('[href^="http"]').click(this._onClickMember);
-        }
+        $('a', this.getDOMNode()).on('click', this._onClick);
+
         var needResize = !!this.props.entry.featured_image;
         var iframes = $('iframe', this.getDOMNode());
         if (iframes.size() > 0) {
@@ -63,67 +67,70 @@ module.exports = React.createClass({
     },
 
     componentWillUnmount() {
-        if (this._memberLink) {
-            this._memberLink.off();
-        }
+        $('a', this.getDOMNode()).off('click', this._onClick);
         $(window).off('resize', this._onResize);
     },
 
     decodeHtml(html) {
-        var txt = document.createElement("textarea");
+        var txt = document.createElement('textarea');
         txt.innerHTML = html;
         return txt.value;
+    },
+
+    _buildCredit(data) {
+        return Baby.parse(this.decodeHtml(data)).data.map((tokens) => {
+            if (tokens.length == 0) {
+                return null;
+            } else if (tokens.length == 1) {
+                return <h2 dangerouslySetInnerHTML={{__html: tokens[0]}}/>;
+            } else {
+                var elements = [];
+                var title = tokens.shift().trim();
+                if (title) {
+                    elements.push(<span dangerouslySetInnerHTML={{__html: title + ': '}}/>);
+                }
+                while (tokens.length) {
+                    var name = null;
+                    var company = null;
+                    var link = null;
+                    try {
+                        name = tokens.shift().trim();
+                        company = tokens.shift().trim();
+                        link = tokens.shift().trim();
+                    } catch (e) {
+                    }
+                    if (company && company.match(/^\/|http/i)) {
+                        link = company;
+                        company = null;
+                    }
+                    if (MEMBER_DATA.hasOwnProperty(link)) {
+                        link = `/members/${link}/`;
+                    }
+                    if (elements.length > 1) {
+                        elements.push(' / ');
+                    }
+                    if (company && link) {
+                        elements.push(<span>{name} (<a href={link} dangerouslySetInnerHTML={{__html: company}}/>)</span>);
+                    } else if (company) {
+                        elements.push(<span dangerouslySetInnerHTML={{__html: `${name} (${company})`}}/>);
+                    } else if (link) {
+                        elements.push(<span><a href={link} dangerouslySetInnerHTML={{__html: name}}/></span>);
+                    } else {
+                        elements.push(<span dangerouslySetInnerHTML={{__html: name}}/>);
+                    }
+                }
+                return <span>{elements}</span>;
+            }
+        });
     },
 
     render() {
         var entry = this.props.entry;
         var style = {backgroundImage: entry.featured_image ? `url(${entry.featured_image.source})` : ''};
+        var credit = null;
         var raw_credit = this.context.lang == 'en' ? entry.meta.credit_en : entry.meta.credit;
         if (raw_credit) {
-            var credit = Baby.parse(this.decodeHtml(raw_credit)).data.map((tokens) => {
-                if (tokens.length == 0) {
-                    return <span/>;
-                } else if (tokens.length == 1) {
-                    return <h2 dangerouslySetInnerHTML={{__html: tokens[0]}}/>;
-                } else {
-                    var elements = [];
-                    var title = tokens.shift().trim();
-                    if (title) {
-                        elements.push(<span dangerouslySetInnerHTML={{__html: title + ': '}}/>);
-                    }
-                    while (tokens.length) {
-                        var name = null;
-                        var company = null;
-                        var link = null;
-                        try {
-                            name = tokens.shift().trim();
-                            company = tokens.shift().trim();
-                            link = tokens.shift().trim();
-                        } catch (e) {
-                        }
-                        if (company && company.match(/^\/|http/i)) {
-                            link = company;
-                            company = null;
-                        }
-                        if (MEMBER_DATA.hasOwnProperty(link)) {
-                            link = this.context.langPrefix + '/members/' + link + '/';
-                        }
-                        if (elements.length > 1) {
-                            elements.push(<span> / </span>);
-                        }
-                        if (company && link) {
-                            elements.push(<span>{name} (<a href={link} dangerouslySetInnerHTML={{__html: company}}/>)</span>);
-                        } else if (company) {
-                            elements.push(<span>{`${name} (${company})`}</span>);
-                        } else if (link) {
-                            elements.push(<span><a href={link} dangerouslySetInnerHTML={{__html: name}}/></span>);
-                        } else {
-                            elements.push(<span dangerouslySetInnerHTML={{__html: name}}/>);
-                        }
-                    }
-                    return <span>{elements}</span>;
-                }
-            });
+            credit = this._buildCredit(raw_credit);
         }
         return (
             <div className={cx({entry: true, 'with-image': entry.featured_image})} ref="entry" style={style}>

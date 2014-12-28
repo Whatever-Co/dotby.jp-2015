@@ -21,6 +21,16 @@ var Member = React.createClass({
         this.transitionTo(`${this.context.langPrefix}/members/${this.props.member.slug}/`);
     },
 
+    _onClickLink(e) {
+        e.preventDefault();
+        var href = $(e.currentTarget).attr('href');
+        if (href.match(/^\w+:/i)) {
+            window.open(href);
+        } else {
+            this.transitionTo(this.context.langPrefix + href);
+        }
+    },
+
     _onResize() {
         var w = window.innerWidth;
         var h = w / 4 * 3;
@@ -36,10 +46,12 @@ var Member = React.createClass({
             $(window).on('resize', this._onResize);
             this._onResize();
         }
+        $('a', this.refs.body.getDOMNode()).on('click', this._onClickLink);
     },
 
     componentWillUnmount() {
         $(window).off('resize', this._onResize);
+        $('a', this.refs.body.getDOMNode()).off('click', this._onClickLink);
     },
 
     render() {
@@ -66,7 +78,7 @@ var Member = React.createClass({
                         </div>
                         <div className="more">
                             <hr className="line"/>
-                            <div className="body" dangerouslySetInnerHTML={{__html: member.content}}></div>
+                            <div ref="body" className="body" dangerouslySetInnerHTML={{__html: member.content}}></div>
                             {links ? (<ul className="links">{links}</ul>) : ''}
                         </div>
                     </div>
