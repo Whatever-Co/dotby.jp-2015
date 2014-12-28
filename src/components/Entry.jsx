@@ -24,7 +24,10 @@ module.exports = React.createClass({
         if (href.match(/^\w+:/i)) {
             window.open(href);
         } else {
-            this.transitionTo(this.context.langPrefix + href);
+            if (this.context.langPrefix && href.indexOf(this.context.langPrefix) != 0) {
+                href = this.context.langPrefix + href;
+            }
+            this.transitionTo(href);
         }
     },
 
