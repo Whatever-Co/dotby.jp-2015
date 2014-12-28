@@ -65,6 +65,7 @@ module.exports = React.createClass({
                 zoomControlOptions: {
                     style: google.maps.ZoomControlStyle.SMALL
                 },
+                scrollwheel: false,
                 mapTypeId: 'custom'
             };
             this._map = new google.maps.Map(el, options);
