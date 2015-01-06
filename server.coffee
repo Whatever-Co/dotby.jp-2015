@@ -6,7 +6,7 @@ request = require('request')
 
 app.get /^\/wp-json.*$/, (req, res) ->
 #  console.log(req.originalUrl)
-  request('http://new.dev.dotby.jp' + req.originalUrl).pipe(res)
+  request('http://dotby.jp' + req.originalUrl).pipe(res)
 
 app.get /^[\w\-\/]*$/, (req, res) ->
   res.set('Content-Type', 'text/html')
