@@ -64,7 +64,7 @@ module.exports = React.createClass({
     getDetail() {
         var member = this.getParams().member;
         if (member == this.state.member) return;
-        $.getJSON('/wp-json/posts', {'filter[tag]': member, lang: this.context.lang}).done((result) => {
+        $.getJSON('/wp-json/posts', {'filter[tag]': member,  'filter[posts_per_page]': 200, lang: this.context.lang}).done((result) => {
             var state = {member: member, work: [], news: []};
             result.map((entry) => {
                 if (state[entry.terms.category[0].slug]) {
