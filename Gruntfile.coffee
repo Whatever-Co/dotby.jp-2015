@@ -56,12 +56,20 @@ module.exports = (grunt) ->
       options:
         report: 'gzip'
 
+    copy:
+      assets:
+        expand: true
+        cwd: 'dist'
+        src: 'assets/**'
+        dest: 'public'
+
     watch:
       sass:
         files: ['src/**/*.sass']
         tasks: ['sass', 'autoprefixer']
       dist:
         files: ['dist/**/*']
+        tasks: ['copy']
         options:
           livereload: true
 
@@ -101,8 +109,9 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-browserify')
   grunt.loadNpmTasks('grunt-contrib-uglify')
   grunt.loadNpmTasks('grunt-contrib-watch')
+  grunt.loadNpmTasks('grunt-contrib-copy')
   grunt.loadNpmTasks('grunt-rsync')
   grunt.loadNpmTasks('grunt-express')
-  grunt.registerTask('default', ['express', 'sass', 'autoprefixer', 'browserify:dev', 'watch'])
-  grunt.registerTask('build', ['sass', 'autoprefixer', 'cssmin', 'browserify:dist', 'uglify'])
+  grunt.registerTask('default', ['express', 'sass', 'autoprefixer', 'browserify:dev', 'copy', 'watch'])
+  grunt.registerTask('build', ['sass', 'autoprefixer', 'cssmin', 'browserify:dist', 'uglify', 'copy'])
   grunt.registerTask('deploy', ['build', 'rsync'])
