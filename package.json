@@ -1,4 +1,10 @@
 {
+  "name": "dotby.jp",
+  "version": "1.0.0",
+  "description": "dotby.jp",
+  "author": "Saqoosha",
+  "license": "BSD",
+  "homepage": "https://dotby.jp/",
   "devDependencies": {
     "babyparse": "~0.4.1",
     "browserify": "~7.0.0",
@@ -30,6 +36,13 @@
     "three": "~0.69.0",
     "tween.js": "~0.14.0",
     "underscore": "~1.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dot-by-dot-inc/dotby.jp-2015.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dot-by-dot-inc/dotby.jp-2015/issues"
   },
   "browserify-shim": {
     "./src/components/Dots/quadtree.js": "QUAD",
