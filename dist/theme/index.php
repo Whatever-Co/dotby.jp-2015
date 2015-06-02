@@ -19,6 +19,7 @@
             // ga('send', 'pageview');
         </script>
 
+        <script>window.nonce = '<?php echo(wp_create_nonce('wp_json')); ?>';</script>
         <script type="text/javascript" src="/assets/bundle.js"></script>
 
         <script>

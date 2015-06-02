@@ -22,7 +22,7 @@ module.exports = React.createClass({
 
     getEntries() {
         var params = this.getParams();
-        var data = {lang: this.context.lang, page: this._currentPage};
+        var data = {lang: this.context.lang, page: this._currentPage, _wp_json_nonce: window.nonce};
         if (params.category) {
             data['filter[category_name]'] = params.category;
         }

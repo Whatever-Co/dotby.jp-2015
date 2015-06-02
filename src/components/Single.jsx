@@ -25,7 +25,8 @@ module.exports = React.createClass({
     getEntry() {
         var data = {
             'filter[name]': this.getParams().post,
-            lang: this.context.lang
+            lang: this.context.lang,
+            _wp_json_nonce: window.nonce
         };
         $.getJSON('/wp-json/posts', data).done(result => {
             this.setState({loading: false, entry: result[0]});

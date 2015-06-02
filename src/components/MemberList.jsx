@@ -111,7 +111,7 @@ module.exports = React.createClass({
 
     componentDidMount() {
         var members = _.keys(MEMBER_DATA).map((name) => {
-            return $.getJSON(`/wp-json/pages/members/${name}`, {lang: this.context.lang});
+            return $.getJSON(`/wp-json/pages/members/${name}`, {lang: this.context.lang, _wp_json_nonce: window.nonce});
         });
         $.when.apply(null, members).done(()=> {
             var result = Array.prototype.map.call(arguments, (result) => result[0]);
