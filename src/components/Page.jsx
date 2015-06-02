@@ -28,7 +28,7 @@ module.exports = React.createClass({
 
     getEntry() {
         var params = this.getParams();
-        $.getJSON(`/wp-json/pages/${params.page}`, {lang: this.context.lang}).done((result) => {
+        $.getJSON(`/wp-json/pages/${params.page}`, {lang: this.context.lang, _wp_json_nonce: window.nonce}).done((result) => {
             this.setState({loading: false, entry: result});
         }).fail(() => {
             this.setState({loading: false});
