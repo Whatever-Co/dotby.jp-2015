@@ -62,6 +62,16 @@ module.exports = (grunt) ->
         cwd: 'dist'
         src: 'assets/**'
         dest: 'public'
+      theme:
+        expand: true
+        cwd: 'dist/theme/'
+        src: '**'
+        dest: 'public/wp/wp-content/themes/dotby.jp/'
+      bottheme:
+        expand: true
+        cwd: 'dist/bot-theme/'
+        src: '**'
+        dest: 'public/wp/wp-content/themes/twentyfifteen-bot/'
 
     watch:
       sass:
