@@ -88,7 +88,7 @@ module.exports = React.createClass({
                 return <h2 dangerouslySetInnerHTML={{__html: tokens[0]}}/>;
             } else {
                 var elements = [];
-                var title = tokens.shift().trim();
+                var title = tokens.shift().trim().replace(/\s*\+\s*/g, ', ');
                 if (title) {
                     elements.push(<span dangerouslySetInnerHTML={{__html: title + ': '}}/>);
                 }
