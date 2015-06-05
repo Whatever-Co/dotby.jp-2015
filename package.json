@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "dotby.jp",
   "author": "Saqoosha",
-  "license": "BSD",
+  "license": "MIT",
   "homepage": "https://dotby.jp/",
   "devDependencies": {
     "babyparse": "~0.4.1",
