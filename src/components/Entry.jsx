@@ -81,7 +81,30 @@ module.exports = React.createClass({
     },
 
     _buildCredit(data) {
-        return Baby.parse(this.decodeHtml(data)).data.map((tokens) => {
+        var lines = [];
+        Baby.parse(this.decodeHtml(data)).data.forEach((tokens) => {
+            if (tokens[0].toLowerCase() == 'title') return;
+            var flags = 0;
+            tokens.forEach((element, index, array) => {
+                flags |= !!(element.trim()) << index;
+            });
+            switch (flags) {
+                case 0: break;
+                case 1:
+                    lines.push([tokens[0]]);
+                    break;
+                default:
+                    if (flags & 1) {
+                        lines.push(tokens);
+                    } else {
+                        tokens.shift();
+                        var last = lines.length - 1;
+                        lines[last] = lines[last].concat(tokens);
+                    }
+                    break;
+            }
+        });
+        return lines.map((tokens) => {
             if (tokens.length == 0) {
                 return null;
             } else if (tokens.length == 1) {
@@ -89,6 +112,9 @@ module.exports = React.createClass({
             } else {
                 var elements = [];
                 var title = tokens.shift().trim().replace(/\s*\+\s*/g, ', ');
+                if (title.toLowerCase() == 'title') {
+                    return null;
+                }
                 if (title) {
                     elements.push(<span dangerouslySetInnerHTML={{__html: title + ': '}}/>);
                 }
