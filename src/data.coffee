@@ -48,3 +48,8 @@ module.exports =
       name_ja: '伊藤 太一'
       name_en: 'Taichi Ito'
       color: '#003DA5'
+
+    ibukuro:
+      name_ja: '衣袋 宏輝'
+      name_en: 'Koki Ibukuro'
+      color: '#FF812C'

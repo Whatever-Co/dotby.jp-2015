@@ -21,6 +21,7 @@ Sfman = require('./patterns/Sfman')
 Hige = require('./patterns/Hige')
 Taichi = require('./patterns/Taichi')
 Jaguar = require('./patterns/Jaguar')
+Ibukuro = require('./patterns/Ibukuro')
 
 Data = require('../../data')
 
@@ -56,9 +57,10 @@ class Dots
     @currentColor = r: 255, g: 255, b: 255
     @t = 0
 
-    patterns = new ShuffledArray([Saqoosha, Yusuke, Sfman, Heri, Seki, Hige, Taichi, Jaguar])
-#    patterns = new ShuffledArray([Jaguar, Taichi])
+    patterns = new ShuffledArray([Saqoosha, Yusuke, Sfman, Heri, Seki, Hige, Taichi, Jaguar, Ibukuro])
+    # patterns = new ShuffledArray([Ibukuro, Taichi])
     colors = new ShuffledArray(_.values(Data.members).map((item) => item.color.substr(1)))
+    # colors = new ShuffledArray(['FF812C', 'FF812C'])
     tr = =>
       @transitionTo(patterns.next(), colors.next()).done ->
         setTimeout(tr, 800)
@@ -100,7 +102,7 @@ class Dots
 
     @quadtree.clear()
     for dot in nextDots
-      obj = 
+      obj =
         x: dot.x - dot.radius
         y: dot.y - dot.radius
         w: dot.radius * 2
