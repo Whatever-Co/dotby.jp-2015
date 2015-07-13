@@ -6,6 +6,7 @@ module.exports =
     {name: 'MEMBERS', path: '/members/'},
     {name: 'WORK', path: '/category/work/'},
     {name: 'NEWS', path: '/category/news/'},
+    {name: 'AWARDS', path: '/awards/'},
   ]
 
   members:
