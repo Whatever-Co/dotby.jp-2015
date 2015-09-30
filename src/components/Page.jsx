@@ -45,7 +45,7 @@ module.exports = React.createClass({
     },
 
     componentWillReceiveProps() {
-        this.getEntries();
+        this.getEntry();
     },
 
     _onResize() {
