@@ -58,7 +58,7 @@ module.exports =
     minori:
       name_ja: 'ながしま みのり'
       name_en: 'Minori Nagashima'
-      color: '#C14D61'
+      color: '#B2203A'
 
     shizuho:
       name_ja: '佐藤 志都穂'
