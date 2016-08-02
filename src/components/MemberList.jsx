@@ -33,7 +33,7 @@ var Member = React.createClass({
 
     _onResize() {
         var w = window.innerWidth;
-        var h = w / 4 * 3;
+        var h = w;
         $(this.refs.portrait.getDOMNode()).css('background-size', `${w}px ${h}px`);
         $(this.refs.inner.getDOMNode()).css({
             'padding-top': h + 10,
