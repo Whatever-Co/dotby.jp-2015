@@ -54,3 +54,13 @@ module.exports =
       name_ja: '衣袋 宏輝'
       name_en: 'Koki Ibukuro'
       color: '#FF812C'
+
+    minori:
+      name_ja: 'ながしま みのり'
+      name_en: 'Minori Nagashima'
+      color: '#C14D61'
+
+    shizuho:
+      name_ja: '佐藤 志都穂'
+      name_en: 'Shizuho Sato'
+      color: '#B8A9D6'
