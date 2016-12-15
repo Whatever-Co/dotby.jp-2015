@@ -140,7 +140,7 @@ module.exports = React.createClass({
         if (!this.state.entry) return <NotFound/>;
         var entry = this.state.entry;
         var style = {backgroundImage: entry.featured_image ? `url(${entry.featured_image.source})` : ''};
-        var clsName = 'page-' + this.getPathname().substr(this.context.langPrefix.length).replace(/[^\w]/g, '');
+        var pageClass = 'page-' + this.getPathname().substr(this.context.langPrefix.length).replace(/[^\w]/g, '');
         var parent = this.getParams().parent
         var title = entry.title
         var content = entry.content
@@ -153,7 +153,7 @@ module.exports = React.createClass({
                 <div>
                     <div key={entry.guid}>
                         <hr className="line"/>
-                        <div className={cx({entry: true, [clsName]: true, [parent]: true, 'with-image': entry.featured_image})} ref='entry' style={style}>
+                        <div className={cx({entry: true, 'with-image': entry.featured_image}) + ` ${parent} ${pageClass}`} ref='entry' style={style}>
                             <div className={cx({inner: true, hover: isMobile})} ref="inner" style={style}>
                                 {parent == 'case-study'? <div><h1 className="title" dangerouslySetInnerHTML={{__html: title}}/><span className="date">{moment(entry.date_gmt).format('LL')}</span></div> : null}
                                 <div className="body" ref="body" dangerouslySetInnerHTML={{__html: content}}></div>
