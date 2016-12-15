@@ -11,6 +11,7 @@ var Page = require('./components/Page');
 var NotFound = require('./components/NotFound');
 var MemberList = require('./components/MemberList');
 var MemberDetail = require('./components/MemberDetail');
+var CaseStudyList = require('./components/CaseStudyList');
 var Application = require('./components/Application');
 
 var FaviconAnimator = require('./FaviconAnimator');
@@ -51,8 +52,12 @@ var routes = (
         <Route name="MemberList" path="members/" handler={MemberList}>
             <Route name="MemberDetail" path=":member/" handler={MemberDetail}/>
         </Route>
-        <Route name="Page" path=":page/" handler={Page}/>
+        <Route name="CaseStudyList" path="case-study/" handler={CaseStudyList}/>
+
         <Route name="Post" path="post/:post/" handler={Single}/>
+
+        <Route name="Page" path=":page/" handler={Page}/>
+        <Route name="SubPage" path=":parent/:page/" handler={Page}/>
 
         <NotFoundRoute handler={NotFound}/>
     </Route>
