@@ -5,30 +5,18 @@ var {RouteHandler, Navigation, State} = Router;
 var DocumentTitle = require('react-document-title');
 var $ = require('jquery');
 var _ = require('underscore');
-var assign = require('object-assign');
 var MobileDetect = require('mobile-detect');
 var isMobile = !!new MobileDetect(navigator.userAgent).mobile();
 
-var MEMBER_DATA = require('../data').members;
 var Lang = require('./Lang');
 
 
-var Member = React.createClass({
+var Item = React.createClass({
 
     mixins: [Navigation, State, Lang],
 
     _onClick() {
-        this.transitionTo(`${this.context.langPrefix}/members/${this.props.member.slug}/`);
-    },
-
-    _onClickLink(e) {
-        e.preventDefault();
-        var href = $(e.currentTarget).attr('href');
-        if (href.match(/^\w+:/i)) {
-            window.open(href);
-        } else {
-            this.transitionTo(this.context.langPrefix + href);
-        }
+        this.transitionTo(`${this.context.langPrefix}/case-study/${this.props.item.slug}/`);
     },
 
     _onResize() {
@@ -46,40 +34,23 @@ var Member = React.createClass({
             $(window).on('resize', this._onResize);
             this._onResize();
         }
-        $('a', this.refs.body.getDOMNode()).on('click', this._onClickLink);
     },
 
     componentWillUnmount() {
         $(window).off('resize', this._onResize);
-        $('a', this.refs.body.getDOMNode()).off('click', this._onClickLink);
     },
 
     render() {
-        var member = this.props.member;
-        if (member.meta.rel_links) {
-            var links = member.meta.rel_links.split(/\n/).map((link) => {
-                var info = link.split(',');
-                var name = info[0].trim();
-                var href = info[1].trim();
-                return <li key={href}><a href={href} target="_blank">{name}</a></li>;
-            });
-        }
+        var item = this.props.item;
         return (
-            <div className={'member ' + member.mode} onClick={member.mode == 'list' ? this._onClick : null}>
-                <hr className="line"/>
-                <div ref="portrait" style={{backgroundImage: `url(${member.featured_image.source})`}}>
-                    <div className="inner" ref="inner" style={{backgroundImage: `url(${member.featured_image.source})`}}>
-                        <div className="name-title">
+            <div className={'case-study-list'} onClick={this._onClick}>
+                <div ref="portrait" style={{backgroundImage: `url(${item.featured_image})`}}>
+                    <div className="inner" ref="inner" style={{backgroundImage: `url(${item.featured_image})`}}>
+                        <div className="date-title">
                             <div>
-                                <span className="title"><span style={{color: member.color}}>●</span> {member.meta.title}</span>
-                                <span className="name-ja">{member.name_ja}</span>
-                                {member.name_en ? <span className="name-en">{member.name_en}</span> : ''}
+                                <span className="date">{item.date}</span>
+                                <span className="title" dangerouslySetInnerHTML={{__html: item.title.replace(/Case study #\d+/i, '$&<br/>')}}></span>
                             </div>
-                        </div>
-                        <div className="more">
-                            <hr className="line"/>
-                            <div ref="body" className="body" dangerouslySetInnerHTML={{__html: member.content}}></div>
-                            {links ? (<ul className="links">{links}</ul>) : ''}
                         </div>
                     </div>
                 </div>
@@ -94,40 +65,22 @@ module.exports = React.createClass({
     mixins: [State, Lang],
 
     getInitialState() {
-        return {members: []};
-    },
-
-    _setFlags(state) {
-        var current= this.getParams().member;
-        state.members.map((member) => {
-            if (current) {
-                member.mode = member.slug == current ? 'open' : 'close';
-            } else {
-                member.mode = 'list';
-            }
-        });
-        return state;
-    },
-
-    componentDidMount() {
-        var members = _.keys(MEMBER_DATA).map((name) => {
-            return $.getJSON(`/wp-json/pages/members/${name}`, {lang: this.context.lang, _wp_json_nonce: window.nonce});
-        });
-        $.when.apply(null, members).done(()=> {
-            var result = Array.prototype.map.call(arguments, (result) => result[0]);
-            this.setState(this._setFlags({members: result}));
-        });
-    },
-
-    componentWillReceiveProps() {
-        this.setState(this._setFlags(this.state));
+        return {items: [
+            {
+                guid: 'http://dotby.jp/?page_id=760',
+                slug: '01-muji-10000-shapes-of-tokyo',
+                date: 'Aug 30, 2016',
+                title: 'Case study #01「MUJI 10,000 shapes of TOKYO」',
+                featured_image: 'http://dotby.jp/wordpress/wp-content/uploads/2016/12/cs1-th.jpg',
+            }]};
     },
 
     render() {
         return (
-            <DocumentTitle title="MEMBERS ● dot by dot inc.">
-                <div className="member-list">
-                    {this.state.members.map(member => <Member key={member.guid} member={assign(member, MEMBER_DATA[member.slug])}/>)}
+            <DocumentTitle title="CASE STUDY ● dot by dot inc.">
+                <div>
+                    <hr className='line'/>
+                    {this.state.items.map(item => <Item key={item.guid} item={item}/>)}
                     <RouteHandler/>
                 </div>
             </DocumentTitle>
