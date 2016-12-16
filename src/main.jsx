@@ -40,12 +40,15 @@ var routes = (
 
         <Route path="en/" handler={LangRoot}>
             <DefaultRoute handler={EntryList}/>
+
             <Route path="category/:category/" handler={EntryList}/>
             <Route path="members/" handler={MemberList}>
                 <Route path=":member/" handler={MemberDetail}/>
             </Route>
-            <Route path=":page/" handler={Page}/>
+            <Route path="case-study/" handler={CaseStudyList}/>
             <Route path="post/:post/" handler={Single}/>
+            <Route path=":page/" handler={Page}/>
+            <Route path=":parent/:page/" handler={Page}/>
         </Route>
 
         <Route name="Category" path="category/:category/" handler={EntryList}/>
@@ -53,9 +56,7 @@ var routes = (
             <Route name="MemberDetail" path=":member/" handler={MemberDetail}/>
         </Route>
         <Route name="CaseStudyList" path="case-study/" handler={CaseStudyList}/>
-
         <Route name="Post" path="post/:post/" handler={Single}/>
-
         <Route name="Page" path=":page/" handler={Page}/>
         <Route name="SubPage" path=":parent/:page/" handler={Page}/>
 
