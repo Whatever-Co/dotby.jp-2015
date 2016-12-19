@@ -5,6 +5,8 @@ var {State, Navigation} = Router;
 var DocumentTitle = require('react-document-title');
 var MobileDetect = require('mobile-detect');
 var isMobile = !!new MobileDetect(navigator.userAgent).mobile();
+var moment = require('moment');
+moment.locale('en');
 var $ = require('jquery');
 var GoogleMapsLoader = require('google-maps');
 
@@ -28,8 +30,21 @@ module.exports = React.createClass({
 
     getEntry() {
         var params = this.getParams();
-        $.getJSON(`/wp-json/pages/${params.page}`, {lang: this.context.lang, _wp_json_nonce: window.nonce}).done((result) => {
+        var path = [params.parent, params.page].filter((p) => !!p)
+        $.getJSON(`/wp-json/pages/${path.join('/')}`, {lang: this.context.lang, _wp_json_nonce: window.nonce}).done((result) => {
             this.setState({loading: false, entry: result});
+            var iframes = $('iframe', this.getDOMNode());
+            if (iframes.size() > 0) {
+                iframes.each((index, element) => {
+                    var el = $(element);
+                    el.data({aspect: el.attr('width') / el.attr('height')});
+                });
+                this._iframes = iframes;
+            }
+            if (result.featured_image) {
+                $(window).on('resize', this._onResize);
+                this._onResize();
+            }
         }).fail(() => {
             this.setState({loading: false});
         });
@@ -49,6 +64,20 @@ module.exports = React.createClass({
     },
 
     _onResize() {
+        var width = $(this.refs.entry.getDOMNode()).outerWidth();
+        var height = Math.floor(width / 960 * 430);
+        var size = {'background-size': `${width}px ${height}px`};
+        $(this.refs.entry.getDOMNode()).css(size);
+        $(this.refs.inner.getDOMNode()).css(size).css('padding-top', height - (isMobile ? 17 : 34));
+
+        if (this._iframes) {
+            width = $(this.refs.body.getDOMNode()).width();
+            this._iframes.each((index, element) => {
+                var el = $(element);
+                el.attr({width: width, height: width / el.data('aspect')});
+            });
+        }
+
         var map = $('.map', this.getDOMNode());
         map.height(map.width());
     },
@@ -110,15 +139,24 @@ module.exports = React.createClass({
         if (this.state.loading) return <div/>;
         if (!this.state.entry) return <NotFound/>;
         var entry = this.state.entry;
-        var clsName = 'page-' + this.getPathname().substr(this.context.langPrefix.length).replace(/[^\w]/g, '');
+        var style = {backgroundImage: entry.featured_image ? `url(${entry.featured_image.source})` : ''};
+        var pageClass = 'page-' + this.getPathname().substr(this.context.langPrefix.length).replace(/[^\w]/g, '');
+        var parent = this.getParams().parent
+        var title = entry.title
+        var content = entry.content
+        if (parent == 'case-study') {
+            title = title.replace(/Case study #\d+/i, '$&<br/>')
+            content = content.replace(/^<p><br \/>\n/, '<p>')
+        }
         return (
             <DocumentTitle title={entry.title + ' ● dot by dot inc.'}>
                 <div>
                     <div key={entry.guid}>
                         <hr className="line"/>
-                        <div className={'entry ' + clsName}>
-                            <div className={cx({inner: true, hover: isMobile})} ref="inner">
-                                <div className="body" ref="body" dangerouslySetInnerHTML={{__html: entry.content}}></div>
+                        <div className={cx({entry: true, 'with-image': entry.featured_image}) + ` ${parent} ${pageClass}`} ref='entry' style={style}>
+                            <div className={cx({inner: true, hover: isMobile})} ref="inner" style={style}>
+                                {parent == 'case-study'? <div><h1 className="title" dangerouslySetInnerHTML={{__html: title}}/><span className="date">{moment(entry.date_gmt).format('LL')}</span></div> : null}
+                                <div className="body" ref="body" dangerouslySetInnerHTML={{__html: content}}></div>
                             </div>
                         </div>
                     </div>

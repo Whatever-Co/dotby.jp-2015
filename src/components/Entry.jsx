@@ -115,7 +115,7 @@ module.exports = React.createClass({
                 if (title.toLowerCase() == 'title') {
                     return null;
                 }
-                if (title) {
+                if (title && title != '-') {
                     elements.push(<span dangerouslySetInnerHTML={{__html: title + ': '}}/>);
                 }
                 while (tokens.length) {
@@ -186,6 +186,8 @@ module.exports = React.createClass({
                                 </tbody>
                             </table>
                         ) : null}
+                        {entry.meta.footer ? <hr className="line"/> : null}
+                        <div dangerouslySetInnerHTML={{__html: entry.meta.footer}}/>
                     </div>
                 </div>
             </div>
