@@ -115,7 +115,7 @@ module.exports = React.createClass({
                 if (title.toLowerCase() == 'title') {
                     return null;
                 }
-                if (title) {
+                if (title && title != '-') {
                     elements.push(<span dangerouslySetInnerHTML={{__html: title + ': '}}/>);
                 }
                 while (tokens.length) {
