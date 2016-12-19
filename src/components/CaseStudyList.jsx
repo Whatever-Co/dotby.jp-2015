@@ -69,7 +69,7 @@ module.exports = React.createClass({
             {
                 guid: 'http://dotby.jp/?page_id=760',
                 slug: '01-muji-10000-shapes-of-tokyo',
-                date: 'Aug 30, 2016',
+                date: 'December 18, 2016',
                 title: 'Case study #01「MUJI 10,000 shapes of TOKYO」',
                 featured_image: 'http://dotby.jp/wordpress/wp-content/uploads/2016/12/cs1-th.jpg',
             }]};
