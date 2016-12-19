@@ -7,6 +7,7 @@ module.exports =
     {name: 'WORK', path: '/category/work/'},
     {name: 'NEWS', path: '/category/news/'},
     {name: 'AWARDS', path: '/awards/'},
+    {name: 'CASE STUDY', path: '/case-study/'},
   ]
 
   members:
