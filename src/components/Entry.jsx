@@ -186,6 +186,7 @@ module.exports = React.createClass({
                                 </tbody>
                             </table>
                         ) : null}
+                        <div dangerouslySetInnerHTML={{__html: entry.meta.footer}}/>
                     </div>
                 </div>
             </div>
