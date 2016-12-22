@@ -56,6 +56,7 @@ module.exports = React.createClass({
 
     componentWillUnmount() {
         DotEvents.removeListener('colorChanged', this._onChangeColor);
+        $('a', this.getDOMNode()).off('click', this._onClick);
         $(window).off('resize', this._onResize);
     },
 
@@ -80,6 +81,19 @@ module.exports = React.createClass({
 
         var map = $('.map', this.getDOMNode());
         map.height(map.width());
+    },
+
+    _onClick(e) {
+        e.preventDefault();
+        var href = $(e.currentTarget).attr('href');
+        if (href.match(/^\w+:/i)) {
+            window.open(href);
+        } else {
+            if (this.context.langPrefix && href.indexOf(this.context.langPrefix) != 0) {
+                href = this.context.langPrefix + href;
+            }
+            this.transitionTo(href);
+        }
     },
 
     _setMap() {
@@ -133,6 +147,7 @@ module.exports = React.createClass({
                 this.transitionTo(this.context.langPrefix + $(e.currentTarget).attr('href'));
             });
         }
+        $('a', this.getDOMNode()).on('click', this._onClick);
     },
 
     render() {
@@ -146,7 +161,7 @@ module.exports = React.createClass({
         var content = entry.content
         if (parent == 'case-study') {
             title = title.replace(/Case study #\d+/i, '$&<br/>')
-            content = content.replace(/^<p><br \/>\n/, '<p>')
+            content = content.replace(/^<p><br \/>\n/, '<p>').replace(/<p><\/p>/g, '')
         }
         return (
             <DocumentTitle title={entry.title + ' ● dot by dot inc.'}>
