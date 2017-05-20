@@ -65,3 +65,13 @@ module.exports =
       name_ja: '佐藤 志都穂'
       name_en: 'Shizuho Sato'
       color: '#B8A9D6'
+
+    makoto:
+      name_ja: '福地 諒'
+      name_en: 'Makoto Fukuchi'
+      color: '#81A98A'
+
+    kenta:
+      name_ja: '渡島 健太'
+      name_en: 'Kenta Watashima'
+      color: '#8F9294'
