@@ -66,7 +66,7 @@ module.exports =
       name_en: 'Shizuho Sato'
       color: '#B8A9D6'
 
-    makoto:
+    fukuchi:
       name_ja: '福地 諒'
       name_en: 'Makoto Fukuchi'
       color: '#81A98A'
