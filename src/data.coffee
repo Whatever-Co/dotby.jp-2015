@@ -75,3 +75,8 @@ module.exports =
       name_ja: '渡島 健太'
       name_en: 'Kenta Watashima'
       color: '#8F9294'
+
+    dice:
+      name_ja: '油木田 大祐'
+      name_en: 'Daisuke Yukita'
+      color: '#E6E3C5'

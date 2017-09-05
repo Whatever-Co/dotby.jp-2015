@@ -94,15 +94,15 @@ module.exports = (grunt) ->
       assets:
         options:
           src: './dist/assets/'
-          dest: 'dotby:/home/www/htdocs/assets/'
+          dest: 'dotby:/var/www/html/assets/'
       theme:
         options:
           src: './dist/theme/'
-          dest: 'dotby:/home/www/htdocs/wp/wp-content/themes/dotby.jp/'
+          dest: 'dotby:/var/www/html/wp/wp-content/themes/dotby.jp/'
       bottheme:
         options:
           src: './dist/bot-theme/'
-          dest: 'dotby:/home/www/htdocs/wp/wp-content/themes/twentyfifteen-bot/'
+          dest: 'dotby:/var/www/html/wp/wp-content/themes/twentyfifteen-bot/'
 
     express:
       server:
