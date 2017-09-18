@@ -249,8 +249,7 @@ class Dots
         x += dx
       y += dy
       even = not even
-
-    window.open(canvas.toDataURL('image/png'))
+    window.open().document.write('<img width="100%" src="' + canvas.toDataURL('image/png') + '"/>')
 
 
 module.exports = Dots
