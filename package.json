@@ -6,15 +6,18 @@
   "license": "MIT",
   "homepage": "https://dotby.jp/",
   "scripts": {
-    "start": "grunt"
+    "start": "grunt",
+    "serve": "coffee run.coffee"
   },
   "devDependencies": {
     "babyparse": "~0.4.1",
-    "browserify": "~7.0.0",
+    "browserify": "^14.5.0",
     "browserify-shim": "~3.8.1",
     "browsernizr": "~1.0.2",
     "classnames": "^2.2.5",
     "coffeeify": "^2.1.0",
+    "coffeescript": "^1.12.7",
+    "compression": "^1.7.1",
     "express": "~4.10.4",
     "gl-matrix": "~2.1.0",
     "google-maps": "~2.1.1",
@@ -25,7 +28,7 @@
     "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-cssmin": "~0.10.0",
     "grunt-contrib-sass": "~0.8.1",
-    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-uglify": "^3.1.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-express": "~1.4.1",
     "grunt-parallel": "^0.5.1",
