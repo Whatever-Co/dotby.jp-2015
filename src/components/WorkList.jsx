@@ -54,7 +54,7 @@ module.exports = React.createClass({
         this.updateEntries()
     },
 
-    updateTags(tags = null) {
+    updateTags(tags) {
         if (!tags) {
             tags = this.state.tags
         }
@@ -63,7 +63,7 @@ module.exports = React.createClass({
         this.setState({tags: tags})
     },
 
-    updateEntries(entries = null) {
+    updateEntries(entries) {
         if (!entries) {
             entries = this.state.entries
         }
