@@ -43,6 +43,9 @@ var routes = (
         <Route path="en/" handler={LangRoot}>
             <DefaultRoute handler={EntryList}/>
 
+            <Route path="category/work/" handler={WorkList}>
+                <Route path=":tag/" handler={WorkListSelected}/>
+            </Route>
             <Route path="category/:category/" handler={EntryList}/>
             <Route path="members/" handler={MemberList}>
                 <Route path=":member/" handler={MemberDetail}/>
