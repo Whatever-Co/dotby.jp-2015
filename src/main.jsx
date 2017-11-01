@@ -6,6 +6,7 @@ require('jquery.transit');
 var MobileDetect = require('mobile-detect');
 
 var EntryList = require('./components/EntryList');
+var WorkList = require('./components/WorkList');
 var Single = require('./components/Single');
 var Page = require('./components/Page');
 var NotFound = require('./components/NotFound');
@@ -51,6 +52,7 @@ var routes = (
             <Route path=":parent/:page/" handler={Page}/>
         </Route>
 
+        <Route name="WorkList" path="category/work/" handler={WorkList}/>
         <Route name="Category" path="category/:category/" handler={EntryList}/>
         <Route name="MemberList" path="members/" handler={MemberList}>
             <Route name="MemberDetail" path=":member/" handler={MemberDetail}/>
