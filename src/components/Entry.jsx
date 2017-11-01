@@ -153,6 +153,10 @@ module.exports = React.createClass({
         });
     },
 
+    _onClickTag(tag) {
+        this.transitionTo(`${this.context.langPrefix}/category/work/${tag.slug}/`);
+    },
+
     render() {
         var entry = this.props.entry;
         var style = {backgroundImage: entry.featured_image ? `url(${entry.featured_image.source})` : ''};
@@ -161,6 +165,7 @@ module.exports = React.createClass({
         if (raw_credit) {
             credit = this._buildCredit(raw_credit);
         }
+        var tags = entry.terms.post_tag.filter(tag => !(tag.slug in MEMBER_DATA))
         return (
             <div className={cx({entry: true, 'with-image': entry.featured_image})} ref="entry" style={style}>
                 <div className={cx({inner: true, hover: this.props.single})} ref="inner" style={style}>
@@ -171,6 +176,14 @@ module.exports = React.createClass({
                         {entry.terms.category[0].slug == 'work' ? (
                             <table>
                                 <tbody>
+                                    <tr className="tags">
+                                        <th>TAG</th>
+                                        <td className="work-list">
+                                            <ul className="tag-list">
+                                                {tags.map(tag => <li onClick={this._onClickTag.bind(this, tag)}>{tag.name}</li>)}
+                                            </ul>
+                                        </td>
+                                    </tr>
                                 {entry.meta.awards ? (
                                     <tr className="award">
                                         <th>AWARD</th>
