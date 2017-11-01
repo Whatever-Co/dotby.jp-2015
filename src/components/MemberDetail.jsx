@@ -8,49 +8,9 @@ var isMobile = !!new MobileDetect(navigator.userAgent).mobile();
 var moment = require('moment');
 moment.locale('en');
 
+var WorkItem = require('./WorkItem')
 var MEMBER_DATA = require('../data').members;
 var Lang = require('./Lang');
-
-
-var WorkItem = React.createClass({
-
-    mixins: [Navigation, Lang],
-
-    _onClick() {
-        this.transitionTo(`${this.context.langPrefix}/post/${this.props.slug}/`);
-    },
-
-    _onResize() {
-        var width = $(window).width();
-        var h = ~~(width / 960 * 430);
-        var style = {backgroundSize: `${width}px ${h}px`};
-        $(this.refs.work.getDOMNode()).css(style);
-        $(this.refs.inner.getDOMNode()).css(style).css('padding-top', h - 17);
-    },
-
-    componentDidMount() {
-        if (isMobile) {
-            $(window).on('resize', this._onResize);
-            this._onResize();
-        }
-    },
-
-    componentWillUnmount() {
-        $(window).off('resize', this._onResize);
-    },
-
-    render() {
-        var style = {backgroundImage: `url(${this.props.featured_image.source})`};
-        return (
-            <div className="work-item" ref="work" onClick={this._onClick} style={style}>
-                <div className="inner" ref="inner" style={style}>
-                    <div className="title" dangerouslySetInnerHTML={{__html: this.props.title}}/>
-                    <div className="date">{moment(this.props.date).format('LL')}</div>
-                </div>
-            </div>
-        );
-    }
-});
 
 
 module.exports = React.createClass({
