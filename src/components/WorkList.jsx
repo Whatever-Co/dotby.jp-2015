@@ -3,7 +3,7 @@ var request = require('request')
 var classnames = require('classnames')
 var React = require('react')
 var Route = require('react-router')
-var {State} = Route
+var {State, Navigation, RouteHandler} = Route
 var DocumentTitle = require('react-document-title')
 
 var WorkItem = require('./WorkItem')
@@ -16,14 +16,13 @@ module.exports = React.createClass({
 
     displayName: 'WorkList',
 
-    mixins: [State, Lang],
+    mixins: [State, Navigation, Lang],
 
     getInitialState() {
         return {tags: [], entries: []}
     },
 
     componentDidMount() {
-        this.selectedTag = null
         this.loadTags()
         this.loadEntries()
     },
@@ -34,8 +33,7 @@ module.exports = React.createClass({
             _wp_json_nonce: window.nonce,
         }
         request({url: location.origin + '/wp-json/taxonomies/post_tag/terms', qs: qs}, (error, response, body) => {
-            var tags = JSON.parse(body).filter(tag => !(tag.slug in MEMBER_DATA))
-            this.setState({tags: tags})
+            this.updateTags(JSON.parse(body).filter(tag => !(tag.slug in MEMBER_DATA)))
         })
     },
 
@@ -47,40 +45,44 @@ module.exports = React.createClass({
             _wp_json_nonce: window.nonce,
         }
         request({url: location.origin + '/wp-json/posts', qs: qs}, (error, response, body) => {
-            this.applyFilter(JSON.parse(body))
+            this.updateEntries(JSON.parse(body))
         })
     },
 
-    applyFilter(entries = null) {
+    componentWillReceiveProps() {
+        this.updateTags()
+        this.updateEntries()
+    },
+
+    updateTags(tags = null) {
+        if (!tags) {
+            tags = this.state.tags
+        }
+        var selected = this.getParams().tag
+        tags.forEach(tag => tag.selected = tag.slug == selected)
+        this.setState({tags: tags})
+    },
+
+    updateEntries(entries = null) {
         if (!entries) {
             entries = this.state.entries
         }
-        if (this.selectedTag) {
-            entries.forEach(entry => entry.match = _.find(entry.terms.post_tag, t => t.slug == this.selectedTag.slug))
-        } else {
-            entries.forEach(entry => entry.match = true)
-        }
+        var selected = this.getParams().tag
+        entries.forEach(entry => entry.match = selected ? !!_.find(entry.terms.post_tag, tag => tag.slug == selected) : true)
         this.setState({entries: entries})
     },
 
     _onClickTag(tag) {
-        if (tag == this.selectedTag) {
-            tag.selected = false
-            this.selectedTag = null
+        if (tag.selected) {
+            this.transitionTo(`${this.context.langPrefix}/category/work/`);
         } else {
-            if (this.selectedTag) {
-                this.selectedTag.selected = false
-            }
-            tag.selected = true
-            this.selectedTag = tag
+            this.transitionTo(`${this.context.langPrefix}/category/work/${tag.slug}/`);
         }
-        this.setState(this.state.tags)
-        this.applyFilter()
     },
 
     render() {
         return (
-            <DocumentTitle title="WORK">
+            <DocumentTitle title="WORK ● dot by dot inc.">
                 <div className="work-list">
                     <hr className="line"/>
                     <ul className="tag-list">

@@ -38,7 +38,7 @@ module.exports = React.createClass({
     },
 
     render() {
-        var style = {backgroundImage: `url(${this.props.featured_image.source})`, display: this.props.match ? 'block' : 'none'};
+        var style = {backgroundImage: `url(${this.props.featured_image.source})`, display: this.props.match === false ? 'none' : 'block'};
         return (
             <div className="work-item" ref="work" onClick={this._onClick} style={style}>
                 <div className="inner" ref="inner" style={style}>
