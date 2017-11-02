@@ -64,7 +64,7 @@ hr.line
     .body
       p, table
         margin: 15px 0
-      .award, .credit
+      .award, .credit, .tags
         th, td
           display: block
           text-align: left
@@ -86,6 +86,8 @@ hr.line
         margin: 0
         margin-bottom: 1.5em
         height: auto
+      .tags .work-list ul.tag-list
+        margin: 0 -3px 0
       >hr
         display: block
 
@@ -138,23 +140,24 @@ hr.line
 
 
 
+.work-item
+  float: none
+  width: 100%
+  height: auto
+  margin: 0 0 20px
+  padding: 15px
+  .inner
+    margin: 0
+    border-width: 2px
+    border-radius: 6px
+    background-position: -17px -17px
+  .title
+    margin-top: 18px
+
 .member-detail
   margin: 0
   .works-list
     margin: 0 -15px
-    .work-item
-      float: none
-      width: 100%
-      height: auto
-      margin: 0 0 20px
-      padding: 15px
-      .inner
-        margin: 0
-        border-width: 2px
-        border-radius: 6px
-        background-position: -17px -17px
-      .title
-        margin-top: 18px
 
   .news-list
     padding: 0
@@ -263,3 +266,12 @@ hr.line
     background-image: none !important
     padding: 0
     margin: 0 auto 2em
+
+.work-list
+  ul.tag-list
+    margin: 30px 15px 0
+    li
+      padding: 3px 6px
+      margin: 3px
+  .work-items
+    margin: 0 -15px
