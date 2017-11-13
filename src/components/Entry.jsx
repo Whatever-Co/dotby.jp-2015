@@ -165,7 +165,7 @@ module.exports = React.createClass({
         if (raw_credit) {
             credit = this._buildCredit(raw_credit);
         }
-        var tags = entry.terms.post_tag.filter(tag => !(tag.slug in MEMBER_DATA))
+        var tags = entry.terms.post_tag ? entry.terms.post_tag.filter(tag => !(tag.slug in MEMBER_DATA)) : [];
         return (
             <div className={cx({entry: true, 'with-image': entry.featured_image})} ref="entry" style={style}>
                 <div className={cx({inner: true, hover: this.props.single})} ref="inner" style={style}>
