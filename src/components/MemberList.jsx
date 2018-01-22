@@ -110,7 +110,7 @@ module.exports = React.createClass({
     },
 
     componentDidMount() {
-        var members = _.shuffle(_.keys(MEMBER_DATA)).map((name) => {
+        var members = _.shuffle(_.filter(_.keys(MEMBER_DATA), (key) => MEMBER_DATA[key].hidden !== true)).map((name) => {
             return $.getJSON(`/wp-json/pages/members/${name}`, {lang: this.context.lang, _wp_json_nonce: window.nonce});
         });
         $.when.apply(null, members).done(()=> {
