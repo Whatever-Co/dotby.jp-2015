@@ -24,7 +24,7 @@ module.exports = React.createClass({
 
     getDetail() {
         var member = this.getParams().member;
-        if (member == this.state.member || !this._memberExists()) return;
+        if (!member || member == this.state.member) return;
         $.getJSON('/wp-json/posts', {'filter[tag]': member,  'filter[posts_per_page]': 200, lang: this.context.lang, _wp_json_nonce: window.nonce}).done((result) => {
             var state = {member: member, work: [], news: []};
             result.map((entry) => {
@@ -48,13 +48,7 @@ module.exports = React.createClass({
         this.transitionTo(`${this.context.langPrefix}/post/${path}/`);
     },
 
-    _memberExists() {
-        return (this.state.member in MEMBER_DATA) && (MEMBER_DATA[this.state.member].hidden !== true)
-    },
-
     render() {
-        if (!this._memberExists()) return <NotFound/>;
-
         var title = 'dot by dot inc.';
         if (this.state.member) {
             if (this.context.lang == 'en' && MEMBER_DATA[this.state.member].name_en) {

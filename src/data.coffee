@@ -81,3 +81,18 @@ module.exports =
       name_ja: '油木田 大祐'
       name_en: 'Daisuke Yukita'
       color: '#E6E3C5'
+
+    masa:
+      name_ja: '川村 真司'
+      name_en: 'Masashi Kawamura'
+      color: '#837653'
+
+    sachie:
+      name_ja: '相原 幸絵'
+      name_en: 'Sachie Aihara'
+      color: '#253956'
+
+    onorika:
+      name_ja: '小野 里夏'
+      name_en: 'Rika Ono'
+      color: '#CADCE2'
