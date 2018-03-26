@@ -96,3 +96,8 @@ module.exports =
       name_ja: '小野 里夏'
       name_en: 'Rika Ono'
       color: '#CADCE2'
+
+    keiko:
+      name_ja: '織田 慶子'
+      name_en: 'Keiko Oda'
+      color: '#563D2A'
