@@ -34,7 +34,7 @@ module.exports = React.createClass({
         $.getJSON(`/wp-json/pages/${path.join('/')}`, {lang: this.context.lang, _wp_json_nonce: window.nonce}).done((result) => {
             this.setState({loading: false, entry: result});
             var iframes = $('iframe', this.getDOMNode());
-            if (iframes.size() > 0) {
+            if (iframes.length > 0) {
                 iframes.each((index, element) => {
                     var el = $(element);
                     el.data({aspect: el.attr('width') / el.attr('height')});

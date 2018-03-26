@@ -52,7 +52,7 @@ module.exports = React.createClass({
 
         var needResize = !!this.props.entry.featured_image;
         var iframes = $('iframe', this.getDOMNode());
-        if (iframes.size() > 0) {
+        if (iframes.length > 0) {
             iframes.each((index, element) => {
                 var el = $(element);
                 el.data({aspect: el.attr('width') / el.attr('height')});
