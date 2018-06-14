@@ -67,12 +67,20 @@ module.exports = React.createClass({
     getInitialState() {
         return {items: [
             {
+                guid: 'https://dotby.jp/?page_id=1062',
+                slug: '02-wear-you-are',
+                date: 'June 14, 2018',
+                title: 'Case study #02「WEAR YOU ARE」',
+                featured_image: 'https://dotby.jp/wordpress/wp-content/uploads/2018/06/main-min.jpg',
+            },
+            {
                 guid: 'http://dotby.jp/?page_id=760',
                 slug: '01-muji-10000-shapes-of-tokyo',
                 date: 'December 18, 2016',
                 title: 'Case study #01「MUJI 10,000 shapes of TOKYO」',
                 featured_image: 'http://dotby.jp/wordpress/wp-content/uploads/2016/12/cs1-th.jpg',
-            }]};
+            },
+        ]};
     },
 
     render() {
