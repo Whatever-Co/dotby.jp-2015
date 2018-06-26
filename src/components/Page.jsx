@@ -97,6 +97,7 @@ module.exports = React.createClass({
     },
 
     _setMap() {
+        GoogleMapsLoader.KEY = 'AIzaSyCJLWAylQKD04HvTNa4N0DNhFqxbCmCaPU'
         GoogleMapsLoader.load((google) => {
             var el = $('.map', this.getDOMNode())[0];
             var center = new google.maps.LatLng(35.66146, 139.7031013);
