@@ -26,6 +26,7 @@ Minori = require('./patterns/Minori')
 Shizuho = require('./patterns/Shizuho')
 Makoto = require('./patterns/Makoto')
 Kenta = require('./patterns/Kenta')
+Kida = require('./patterns/Kida')
 
 Data = require('../../data')
 
@@ -61,7 +62,7 @@ class Dots
     @currentColor = r: 255, g: 255, b: 255
     @t = 0
 
-    patterns = new ShuffledArray([Saqoosha, Yusuke, Sfman, Heri, Seki, Hige, Taichi, Jaguar, Ibukuro, Minori, Shizuho, Makoto, Kenta])
+    patterns = new ShuffledArray([Saqoosha, Yusuke, Sfman, Heri, Seki, Hige, Taichi, Jaguar, Ibukuro, Minori, Shizuho, Makoto, Kenta, Kida])
     # patterns = new ShuffledArray([Minori, Shizuho])
     colors = new ShuffledArray(_.values(Data.members).map((item) => item.color.substr(1)))
     # colors = new ShuffledArray(['FF812C', 'FF812C'])

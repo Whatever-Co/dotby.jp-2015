@@ -60,5 +60,9 @@
   "browserify-shim": {
     "./src/components/Dots/quadtree.js": "QUAD",
     "./src/components/Dots/Detector.js": "Detector"
+  },
+  "engines" : {
+    "node":"4.4.3",
+    "npm":"2.15.1"
   }
 }
