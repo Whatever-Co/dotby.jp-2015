@@ -77,10 +77,10 @@ module.exports =
       name_en: 'Kenta Watashima'
       color: '#8F9294'
 
-    dice:
-      name_ja: '油木田 大祐'
-      name_en: 'Daisuke Yukita'
-      color: '#E6E3C5'
+    # dice:
+    #   name_ja: '油木田 大祐'
+    #   name_en: 'Daisuke Yukita'
+    #   color: '#E6E3C5'
 
     masa:
       name_ja: '川村 真司'
